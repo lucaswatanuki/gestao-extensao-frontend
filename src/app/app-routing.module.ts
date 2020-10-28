@@ -1,7 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ActivityFormComponent } from './formulario/activity-form.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RelatorioComponent } from './relatorio/relatorio.component';
+import { TabelaComponent } from './tabela/tabela.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+  },
+  {
+    path: 'dashboard', component: DashboardComponent
+  },
+  {
+    path: 'criar-atividade', component: ActivityFormComponent
+  },
+  {
+    path: 'docentes', component: TabelaComponent
+  },
+  {
+    path: 'relatorio', component: RelatorioComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
