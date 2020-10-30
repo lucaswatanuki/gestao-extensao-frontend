@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ActivityFormComponent } from './formulario/activity-form.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RelatorioComponent } from './relatorio/relatorio.component';
-import { TabelaComponent } from './tabela/tabela.component';
+import { ActivityFormComponent } from './components/formulario/activity-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RelatorioComponent } from './components/relatorio/relatorio.component';
+import { TabelaComponent } from './components/tabela/tabela.component';
+
 
 const routes: Routes = [
   {
