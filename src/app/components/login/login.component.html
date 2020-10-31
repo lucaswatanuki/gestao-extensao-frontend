@@ -1,3 +1,31 @@
-
-
-
+<mat-toolbar color="primary">
+    Gestão Extensão <span class="toolbar-spacer"> </span>
+</mat-toolbar>
+<div
+    style="width: 350px; position: absolute; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <mat-card style="width: 100%;" class="mat-elevation-z20">
+        <h1>Gestão Extensão</h1>
+        <h3>Login</h3>
+        <form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
+            <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Username</mat-label>
+                    <input matInput type="text" placeholder="Username" [(ngModel)]="form.username" name="username"
+                        #username="ngModel" required>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Password" [(ngModel)]="form.password" name="password"
+                        #password="ngModel" required minlength="6" required>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <button mat-raised-button color="primary" (click)="onSubmit()" style="margin-right: 20px;"> Login
+                </button>
+                <button mat-raised-button color="warn" (click)="loadSignUp()"> Criar Conta </button>
+            </div>
+        </form>
+    </mat-card>
+</div>
