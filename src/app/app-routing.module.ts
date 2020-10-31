@@ -4,23 +4,32 @@ import { ActivityFormComponent } from './components/formulario/activity-form.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { TabelaComponent } from './components/tabela/tabela.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService } from './core/auth/auth-guard.service';
+import { CadastroComponent } from './components/cadastro/cadastro.component';
 
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: 'dashboard', component: DashboardComponent
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'criar-atividade', component: ActivityFormComponent
+    path: 'criar-atividade', component: ActivityFormComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'docentes', component: TabelaComponent
+    path: 'docentes', component: TabelaComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'relatorio', component: RelatorioComponent
+    path: 'relatorio', component: RelatorioComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: 'signup', component: CadastroComponent
   }
 ];
 

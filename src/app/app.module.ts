@@ -11,7 +11,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TabelaComponent } from './components/tabela/tabela.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { MaterialModule } from './material/material.module';
-
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuardService } from './core/auth/auth-guard.service';
+import { httpInterceptorProviders } from './core/auth/auth-interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { CadastroComponent } from './components/cadastro/cadastro.component';
 
 @NgModule({
   declarations: [
@@ -20,16 +27,22 @@ import { MaterialModule } from './material/material.module';
     ActivityFormComponent,
     TabelaComponent,
     RelatorioComponent,
+    LoginComponent,
+    CadastroComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
     ReactiveFormsModule,
     MaterialModule,
+    FormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuardService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
