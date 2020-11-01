@@ -5,11 +5,21 @@
 <mat-sidenav-container class="sidenav-container" *ngIf="authority">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+      <div class="profile-card">
+        <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Soufiane FADIL">
+        <div class="header">
+          <h2>Lucas Watanuki</h2>
+          <h4>lucaswatanuki@gmail.com</h4>
+          <h4> {{authority}}</h4>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      
       <a mat-list-item routerLink="/dashboard" *ngIf="authority === 'admin'">Dashboard</a>
       <a mat-list-item routerLink="/criar-atividade" *ngIf="authority === 'user'">Atividades</a>
-      <a mat-list-item href="#" *ngIf="authority === 'admin'">Autorizações</a>
+      <a mat-list-item href="#" *ngIf="authority === 'user'">Autorizações</a>
       <a mat-list-item routerLink='/docentes' *ngIf="authority === 'admin'">Docentes</a>
       <a mat-list-item routerLink='/relatorio' *ngIf="authority === 'admin'">Relatórios</a>
     </mat-nav-list>
@@ -21,6 +31,11 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{ title }}</span>
+      <span class="toolbar-spacer"> </span>
+      <div style="margin-right: 30px;"> {{info.username}}</div>
+      <button mat-raised-button color="warn" (click)="logout()">
+        <mat-icon> logout </mat-icon>
+      </button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

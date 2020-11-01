@@ -26,7 +26,7 @@ const routes: Routes = [
     path: 'relatorio', component: RelatorioComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'login', component: LoginComponent
+    path: 'login', component: LoginComponent, 
   },
   {
     path: 'signup', component: CadastroComponent
