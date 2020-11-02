@@ -15,8 +15,10 @@ export class AppComponent {
 
   title = 'Gestão Extensão';
   private roles: string[];
-  public authority: string;
+  public authority = false;
   info: any;
+  admin = false;
+  user = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -24,27 +26,24 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private tokenStorage: TokenStorageService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
 
     this.info = {
       token: this.tokenStorage.getToken(),
       username: this.tokenStorage.getUsername(),
-      authorities: this.tokenStorage.getAuthorities()
+      authorities: this.tokenStorage.getAuthorities(),
+      email: this.tokenStorage.getEmail(),
     };
 
     if (this.tokenStorage.getToken()) {
+      this.authority = true;
       this.roles = this.tokenStorage.getAuthorities();
-      this.roles.every(role => {
-        if (role === 'ROLE_ADMIN') {
-          this.authority = 'admin';
-          return false;
-        } else {
-        this.authority = 'user';
-        return true;
-      }
-      });
+
+      this.admin = this.roles.includes('ROLE_ADMIN');
+      this.user = this.roles.includes('ROLE_USER');
+
     }
   }
 

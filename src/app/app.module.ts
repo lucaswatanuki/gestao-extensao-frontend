@@ -19,6 +19,11 @@ import { httpInterceptorProviders } from './core/auth/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
+import { AutorizacaoComponent } from './components/autorizacao/autorizacao.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +34,8 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
     RelatorioComponent,
     LoginComponent,
     CadastroComponent,
+    AutorizacaoComponent,
+    ConfiguracaoComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +47,10 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [AuthGuardService, httpInterceptorProviders],
   bootstrap: [AppComponent]

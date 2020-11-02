@@ -2,7 +2,7 @@ export class SignUpInfo {
     name: string;
     username: string;
     email: string;
-    role: string[];
+    profiles: string[];
     password: string;
     cpf: string;
     rf: string;
