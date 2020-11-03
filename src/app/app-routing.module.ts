@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActivityFormComponent } from './components/formulario/activity-form.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
-import { TabelaComponent } from './components/tabela/tabela.component';
+import { DocenteComponent } from './components/docente/docente.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './core/auth/auth-guard.service';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'criar-atividade', component: ActivityFormComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'docentes', component: TabelaComponent, canActivate: [AuthGuardService]
+    path: 'docentes', component: DocenteComponent, canActivate: [AuthGuardService]
   },
   {
     path: 'autorizacoes', component: AutorizacaoComponent, canActivate: [AuthGuardService]

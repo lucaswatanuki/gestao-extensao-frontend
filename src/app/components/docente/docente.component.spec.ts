@@ -4,7 +4,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
-import { TabelaComponent } from './tabela.component';
+import { TabelaComponent } from './docente.component';
 
 describe('TabelaComponent', () => {
   let component: TabelaComponent;
