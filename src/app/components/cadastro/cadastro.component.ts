@@ -27,7 +27,10 @@ export class CadastroComponent implements OnInit {
       name: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      endereco: new FormControl('', Validators.required),
+      rf: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      cpf: new FormControl('', [Validators.required])
     });
   }
 
@@ -48,7 +51,10 @@ export class CadastroComponent implements OnInit {
       this.formularioCadastro.get('name').value,
       this.formularioCadastro.get('username').value,
       this.formularioCadastro.get('email').value,
-      this.formularioCadastro.get('password').value
+      this.formularioCadastro.get('password').value,
+      this.formularioCadastro.get('cpf').value,
+      this.formularioCadastro.get('rf').value,
+      this.formularioCadastro.get('endereco').value
     );
 
 

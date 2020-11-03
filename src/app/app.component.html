@@ -5,13 +5,42 @@
 <mat-sidenav-container class="sidenav-container" *ngIf="authority">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard" *ngIf="authority === 'admin'">Dashboard</a>
-      <a mat-list-item routerLink="/criar-atividade" *ngIf="authority === 'user'">Atividades</a>
-      <a mat-list-item href="#" *ngIf="authority === 'admin'">Autorizações</a>
-      <a mat-list-item routerLink='/docentes' *ngIf="authority === 'admin'">Docentes</a>
-      <a mat-list-item routerLink='/relatorio' *ngIf="authority === 'admin'">Relatórios</a>
+      <div class="profile-card">
+        <img src="../assets/user-profile.jpg" alt="Soufiane FADIL">
+        <div class="header">
+          <h2> {{ info.username }} </h2>
+          <h4> {{ info.email }} </h4>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item routerLink="/dashboard" *ngIf="admin">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+      <a mat-list-item routerLink="/criar-atividade" *ngIf="user || admin">
+        <mat-icon>assignment</mat-icon>Atividades
+      </a>
+      <a mat-list-item routerLink="/autorizacoes" *ngIf="user || admin">
+        <mat-icon>assignment_turned_in</mat-icon>
+        Autorizações
+      </a>
+      <a mat-list-item routerLink='/docentes' *ngIf="admin">
+        <mat-icon>account_circle</mat-icon>Docentes
+      </a>
+      <a mat-list-item routerLink='/relatorio' *ngIf="admin">
+        <mat-icon>assessment</mat-icon>Relatórios
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item routerLink='/configuracao' *ngIf="admin || user">
+        <mat-icon>settings</mat-icon>Configurações
+      </a>
+
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,6 +50,12 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{ title }}</span>
+      <span class="toolbar-spacer"> </span>
+      <mat-icon>settings</mat-icon>
+      <button mat-raised-button color="warn" (click)="logout()">
+        <mat-icon> logout </mat-icon>
+        Logout
+      </button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

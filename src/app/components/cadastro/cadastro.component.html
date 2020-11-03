@@ -51,6 +51,38 @@
             </mat-error>
           </mat-form-field>
         </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Password</mat-label>
+            <input matInput type="cpf" placeholder="CPF" formControlName="cpf">
+            <mat-error *ngIf="formularioCadastro.get('cpf').hasError('required')">
+              CPF <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>RF</mat-label>
+            <input matInput type="rf" placeholder="RF" formControlName="rf">
+            <mat-error *ngIf="formularioCadastro.get('rf').hasError('required')">
+              RF <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Endereco</mat-label>
+            <input matInput type="endereco" placeholder="Endereco" formControlName="endereco">
+            <mat-error *ngIf="formularioCadastro.get('endereco').hasError('required')">
+              Endereco <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
         <br>
         <div class="form-group">
           <button mat-raised-button color="primary" (click)="onSubmit(form)" style="margin-right: 20px;"> Registrar </button>
