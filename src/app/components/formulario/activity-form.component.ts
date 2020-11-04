@@ -7,6 +7,9 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./activity-form.component.scss']
 })
 export class ActivityFormComponent {
+
+  panelOpenState = false;
+  
   addressForm = this.fb.group({
     company: null,
     firstName: [null, Validators.required],

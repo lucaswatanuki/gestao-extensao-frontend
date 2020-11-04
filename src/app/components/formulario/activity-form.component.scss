@@ -3,9 +3,8 @@
 }
 
 .shipping-card {
-  min-width: 120px;
-  margin: 20px 20px 20px;
-  padding: auto;
+  margin: 10px;
+  padding: 0;
 }
 
 .mat-radio-button {
@@ -25,4 +24,26 @@
 
 .col:last-child {
   margin-right: 0;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 1px;
+}
+
+.mat-accordion {
+  margin-left: 0;
+}
+
+.expand .mat-expansion-panel-header-title,
+.expand .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.expand .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-container {
+  margin: 20px;
 }
