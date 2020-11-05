@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const MODULES = [
   MatToolbarModule,
@@ -31,6 +32,7 @@ const MODULES = [
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
+  MatExpansionModule,
 ]
 
 @NgModule({
