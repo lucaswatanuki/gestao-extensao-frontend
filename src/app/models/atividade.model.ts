@@ -1,8 +1,6 @@
 export class Atividade {
-    nome: string;
-    matricula: string;
-    titulo: string;
-    coordenador: String;
+    projeto: string;
+    coordenador: string;
     horaSemanal: number;
     horaMensal: number;
     prazo: number;

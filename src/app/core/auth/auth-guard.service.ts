@@ -2,6 +2,7 @@ import { TokenStorageService } from './token-storage.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from 'angular-jwt-universal';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class AuthGuardService implements CanActivate {
   private isAuthenticated: boolean = false;
 
   canActivate() {
-    if (this.authService.getToken()) {
+    const jwtHelper = new JwtHelperService;
+    if (!jwtHelper.isTokenExpired(this.authService.getToken())) {
       return true;
     }
     this.toast.error('Usuário não autenticado! Realizar login.', 'Erro');

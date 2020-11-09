@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const MODULES = [
   MatToolbarModule,
@@ -33,12 +34,13 @@ const MODULES = [
   MatPaginatorModule,
   MatSortModule,
   MatExpansionModule,
-]
+  MatSnackBarModule
+];
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, MODULES 
+    CommonModule, MODULES
   ],
   exports: [MODULES]
 })
