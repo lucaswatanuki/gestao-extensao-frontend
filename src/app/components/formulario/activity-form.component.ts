@@ -62,13 +62,12 @@ export class ActivityFormComponent {
     });
   }
 
-  constructor(private _snackBar: MatSnackBar,
-    private fb: FormBuilder, private convenioService: ConvenioService) { }
+  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService) { }
 
 
     openSnackBar(message: string, action: string): void{
-      this._snackBar.open(message, action, {
-        duration: 10000,
+      this.snackBar.open(message, action, {
+        duration: 5000,
       });
     }
 

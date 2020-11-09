@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -52,7 +52,8 @@ import { CursoComponent } from './components/atividades/curso/curso.component';
     ToastrModule.forRoot(),
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    HammerModule
   ],
   providers: [AuthGuardService, httpInterceptorProviders],
   bootstrap: [AppComponent]
