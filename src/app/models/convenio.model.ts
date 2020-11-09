@@ -1,8 +1,6 @@
 import { Atividade } from './atividade.model';
 
 export class Convenio extends Atividade{
-    instituicao: String;
+    instituicao: string;
     descricao: string;
-    parcelas: number;
-    dataRecebimento: string;
 }
