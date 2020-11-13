@@ -24,7 +24,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { DocenteComponent } from './components/docente/docente.component';
-import { CursoComponent } from './components/atividades/curso/curso.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { CursoComponent } from './components/atividades/curso/curso.component';
     CadastroComponent,
     AutorizacaoComponent,
     ConfiguracaoComponent,
-    CursoComponent,
   ],
   imports: [
     CommonModule,

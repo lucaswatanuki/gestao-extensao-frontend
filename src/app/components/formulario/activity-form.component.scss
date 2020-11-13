@@ -26,6 +26,10 @@
   margin-right: 0;
 }
 
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
 .mat-form-field + .mat-form-field {
   margin-left: 1px;
 }

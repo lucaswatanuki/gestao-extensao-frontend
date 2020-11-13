@@ -1,42 +1,44 @@
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="autorizacoes" matSort class="full-width-table">
-     <!-- Position Column -->
-     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+<div class="grid-container">
+  <h1 class="mat-h1">Autorizações</h1>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="autorizacoes" matSort class="full-width-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="dataCriacao">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Criado em</th>
-      <td mat-cell *matCellDef="let element"> {{element.dataCriacao }} </td>
-    </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="dataCriacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Criado em</th>
+        <td mat-cell *matCellDef="let element"> {{element.dataCriacao }} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="docente">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Solicitante</th>
-      <td mat-cell *matCellDef="let element"> {{ element.docente }} </td>
-    </ng-container>
+      <ng-container matColumnDef="docente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Solicitante</th>
+        <td mat-cell *matCellDef="let element"> {{ element.docente }} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="horas">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Horas</th>
-      <td mat-cell *matCellDef="let element"> {{ element.horas }} </td>
-    </ng-container>
+      <ng-container matColumnDef="horas">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Horas</th>
+        <td mat-cell *matCellDef="let element"> {{ element.horas }} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="urgente">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Urgencia</th>
-      <td mat-cell *matCellDef="let element"> {{ element.urgente }} </td>
-    </ng-container>
+      <ng-container matColumnDef="urgente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Urgencia</th>
+        <td mat-cell *matCellDef="let element"> {{ element.urgente }} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
 </div>
-

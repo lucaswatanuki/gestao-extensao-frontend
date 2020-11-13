@@ -1,3 +1,5 @@
+import { CursoService } from './../../services/atividade/curso.service';
+import { CursoExtensao } from './../../models/curso.model';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +17,7 @@ export class ActivityFormComponent {
   cursoForm: FormGroup;
   regenciaForm: FormGroup;
   convenioModel: Convenio;
+  cursoModel: CursoExtensao;
   durationInSeconds = 5;
 
   panelOpenState = false;
@@ -34,17 +37,15 @@ export class ActivityFormComponent {
     });
 
     this.cursoForm = this.fb.group({
-      company: null,
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      address: [null, Validators.required],
-      address2: null,
-      city: [null, Validators.required],
-      state: [null, Validators.required],
-      postalCode: [null, Validators.compose([
-        Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-      ],
-      shipping: ['free', Validators.required]
+      instituicao: [null, Validators.required],
+      projeto: [null, Validators.required],
+      coordenador: [null, Validators.required],
+      participacao: [null, Validators.required],
+      disciplinas: [null, Validators.required],
+      cargaHoraTotal: [null, Validators.required],
+      valorBrutoHoraAula: [null, Validators.required],
+      valorBrutoTotalAula: [null, Validators.required],
+      valorBrutoOutrasAtividades: [null, Validators.required],
     });
 
     this.regenciaForm = this.fb.group({
@@ -62,7 +63,8 @@ export class ActivityFormComponent {
     });
   }
 
-  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService) { }
+  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService,
+    private cursoService: CursoService) { }
 
 
     openSnackBar(message: string, action: string): void{
@@ -83,6 +85,25 @@ export class ActivityFormComponent {
     this.convenioModel.projeto = this.convenioForm.get('projeto').value;
     this.convenioModel.valorBruto = this.convenioForm.get('valorBruto').value;
 
+    console.log(this.convenioModel);
+
+    this.convenioService.salvarConvenio(this.convenioModel).subscribe(
+      data => {
+        console.log(data);
+        this.form.resetForm();
+        this.openSnackBar('Atividade submetida com sucesso!', 'OK');
+      },
+      erro => {
+        console.log(erro);
+      }
+    );
+  }
+
+  submeterCurso(form: FormGroupDirective): void {
+    console.log(this.convenioForm);
+    this.cursoModel = new CursoExtensao();
+    this.cursoModel.coordenador = this.convenioForm.get('coordenador').value;
+    this.cursoModel.projeto = this.convenioForm.get('projeto').value;
     console.log(this.convenioModel);
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(

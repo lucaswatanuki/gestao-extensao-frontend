@@ -22,7 +22,7 @@ export class AutorizacaoComponent implements OnInit {
 
   constructor(private autorizacaoService: AutorizacaoService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getAutorizacoes();
   }
 
@@ -37,6 +37,6 @@ export class AutorizacaoComponent implements OnInit {
         this.errorMsg = `${erro.status}: ${JSON.parse(erro.error).message}`;
         console.error(this.errorMsg);
       }
-    )
+    );
   }
 }
