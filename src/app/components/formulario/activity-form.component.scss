@@ -8,8 +8,8 @@
 }
 
 .mat-radio-button {
-  display: block;
-  margin: 5px 0;
+  display: inline-flex;
+  margin-right: 10px;
 }
 
 .row {
@@ -24,10 +24,6 @@
 
 .col:last-child {
   margin-right: 0;
-}
-
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
 }
 
 .mat-form-field + .mat-form-field {

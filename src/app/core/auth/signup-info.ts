@@ -1,23 +1,25 @@
 export class SignUpInfo {
-    name: string;
+    nome: string;
     username: string;
     email: string;
     profiles: string[];
-    password: string;
+    senha: string;
     cpf: string;
     rf: string;
     endereco: string;
+    telefone: string;
 
  
-    constructor(name: string, username: string, 
+    constructor(nome: string, username: string, 
         email: string, password: string,
-        cpf: string, rf: string, endereco: string) {
-        this.name = name;
+        cpf: string, rf: string, endereco: string, telefone: string) {
+        this.nome = nome;
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.senha = password;
         this.cpf = cpf;
         this.endereco = endereco;
         this.rf = rf;
+        this.telefone = telefone;
     }
 }

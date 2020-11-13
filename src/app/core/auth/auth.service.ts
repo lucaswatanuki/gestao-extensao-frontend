@@ -7,8 +7,9 @@ import { JwtResponse } from './jwt-response';
 import { SignUpInfo } from './signup-info';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(this.signupUrl, info, httpOptions);
+  signUp(info: SignUpInfo): Observable<any> {
+    return this.http.post(this.signupUrl, info, { responseType: 'text' });
   }
 }
