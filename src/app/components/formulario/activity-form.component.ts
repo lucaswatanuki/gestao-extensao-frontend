@@ -41,11 +41,11 @@ export class ActivityFormComponent {
       projeto: [null, Validators.required],
       coordenador: [null, Validators.required],
       participacao: [null, Validators.required],
-      disciplinas: [null, Validators.required],
-      cargaHoraTotal: [null, Validators.required],
-      valorBrutoHoraAula: [null, Validators.required],
-      valorBrutoTotalAula: [null, Validators.required],
-      valorBrutoOutrasAtividades: [null, Validators.required],
+      // disciplinas: [null, Validators.required],
+      // cargaHoraTotal: [null, Validators.required],
+      // valorBrutoHoraAula: [null, Validators.required],
+      // valorBrutoTotalAula: [null, Validators.required],
+      // valorBrutoOutrasAtividades: [null, Validators.required],
     });
 
     this.regenciaForm = this.fb.group({
@@ -102,8 +102,9 @@ export class ActivityFormComponent {
   submeterCurso(form: FormGroupDirective): void {
     console.log(this.convenioForm);
     this.cursoModel = new CursoExtensao();
-    this.cursoModel.coordenador = this.convenioForm.get('coordenador').value;
-    this.cursoModel.projeto = this.convenioForm.get('projeto').value;
+    this.cursoModel.coordenador = this.cursoForm.get('coordenador').value;
+    this.cursoModel.projeto = this.cursoForm.get('projeto').value;
+    this.cursoModel.participacao = this.cursoForm.get('participacao').value;
     console.log(this.convenioModel);
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(

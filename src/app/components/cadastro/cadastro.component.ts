@@ -1,5 +1,7 @@
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -8,70 +10,66 @@ import { SignUpInfo } from 'src/app/core/auth/signup-info';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss']
+  styleUrls: ['./cadastro.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  }]
 })
 export class CadastroComponent implements OnInit {
 
-  signupInfo: SignUpInfo;
-  isSignedUp = false;
-  isSignUpFailed = false;
-  errorMessage = '';
   formularioCadastro: FormGroup;
+  signupInfo: SignUpInfo;
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
 
-  constructor(private authService: AuthService, private fbuilder: FormBuilder, private toast: ToastrService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.formularioCadastro = this.fbuilder.group({
-      name: new FormControl('', Validators.required),
-      username: new FormControl('', Validators.required),
+    this.formularioCadastro = this.formBuilder.group({
+      usuario: new FormControl('', Validators.required),
+      nome_completo: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      senha: new FormControl('', [Validators.required, Validators.minLength(6)]),
       endereco: new FormControl('', Validators.required),
       rf: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      cpf: new FormControl('', [Validators.required])
+      cpf: new FormControl('', [Validators.required]),
+      telefone: new FormControl('', [Validators.required, Validators.minLength(11)])
     });
-  }
-
-  showSuccess() {
-    this.toast.success('Conta criada com sucesso');
   }
 
   login() {
     this.router.navigate(['/login']);
   }
 
-  showFail() {
-    this.toast.error('Erro ao cadastrar conta');
+  openSnackBar(message: string, action: string): void{
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
+
   onSubmit(form: FormGroupDirective) {
     console.log(this.formularioCadastro);
     this.signupInfo = new SignUpInfo(
-      this.formularioCadastro.get('name').value,
-      this.formularioCadastro.get('username').value,
+      this.formularioCadastro.get('nome_completo').value,
+      this.formularioCadastro.get('usuario').value,
       this.formularioCadastro.get('email').value,
-      this.formularioCadastro.get('password').value,
+      this.formularioCadastro.get('senha').value,
       this.formularioCadastro.get('cpf').value,
+      this.formularioCadastro.get('endereco').value,
       this.formularioCadastro.get('rf').value,
-      this.formularioCadastro.get('endereco').value
+      this.formularioCadastro.get('telefone').value,
     );
 
 
     this.authService.signUp(this.signupInfo).subscribe(
       data => {
         console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
         this.form.resetForm();
-        this.showSuccess();
+        this.openSnackBar('Usuário criado com sucesso!', 'OK');
         this.router.navigate(['/login']);
       },
       error => {
         console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-        this.showFail();
       }
     );
   }
