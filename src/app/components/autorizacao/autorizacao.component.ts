@@ -1,30 +1,42 @@
+import { AutorizacaoService } from './../../services/autorizacao/autorizacao.service';
+import { Autorizacao } from './../../models/autorizacao.model';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { AutorizacaoDataSource, AutorizacaoItem } from './autorizacao-datasource';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-autorizacao',
   templateUrl: './autorizacao.component.html',
   styleUrls: ['./autorizacao.component.scss']
 })
-export class AutorizacaoComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+export class AutorizacaoComponent implements OnInit {
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<AutorizacaoItem>;
-  dataSource: AutorizacaoDataSource;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  autorizacao: Autorizacao = new Autorizacao();
+  autorizacoes: MatTableDataSource<Autorizacao>;
+  errorMsg: string;
+  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente'];
 
-  ngOnInit() {
-    this.dataSource = new AutorizacaoDataSource();
+  constructor(private autorizacaoService: AutorizacaoService) {}
+
+  ngOnInit(): void {
+    this.getAutorizacoes();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  getAutorizacoes(): void {
+    this.autorizacaoService.listarAutorizacoes().subscribe(
+      data => {
+        this.autorizacoes = new MatTableDataSource(data);
+        this.autorizacoes.sort = this.sort;
+        this.autorizacoes.paginator = this.paginator;
+      },
+      erro => {
+        this.errorMsg = `${erro.status}: ${JSON.parse(erro.error).message}`;
+        console.error(this.errorMsg);
+      }
+    );
   }
 }
