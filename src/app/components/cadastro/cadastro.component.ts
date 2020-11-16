@@ -59,8 +59,8 @@ export class CadastroComponent implements OnInit {
       this.formularioCadastro.get('email').value,
       this.formularioCadastro.get('senha').value,
       this.formularioCadastro.get('cpf').value,
-      this.formularioCadastro.get('endereco').value,
       this.formularioCadastro.get('rf').value,
+      this.formularioCadastro.get('endereco').value,
       this.formularioCadastro.get('telefone').value,
     );
 
