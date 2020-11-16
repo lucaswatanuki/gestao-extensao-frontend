@@ -24,6 +24,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { DocenteComponent } from './components/docente/docente.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { AngularValidateBrLibModule } from 'angular-validate-br';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { DocenteComponent } from './components/docente/docente.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    HammerModule
+    HammerModule,
+    TextMaskModule,
+    AngularValidateBrLibModule
   ],
   providers: [AuthGuardService, httpInterceptorProviders],
   bootstrap: [AppComponent]

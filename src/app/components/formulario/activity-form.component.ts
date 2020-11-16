@@ -63,8 +63,8 @@ export class ActivityFormComponent {
     });
   }
 
-  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService,
-    private cursoService: CursoService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService, private cursoService: CursoService) { }
 
 
     openSnackBar(message: string, action: string): void{

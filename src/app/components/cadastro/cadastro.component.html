@@ -1,80 +1,100 @@
 <mat-toolbar color="primary">
-  Gestão Extensão <span class="toolbar-spacer"> </span>
+  Gestão Extensão  -  Criar Conta <span class="toolbar-spacer"> </span>
+  <button mat-raised-button color="warn" (click) = "login()" >Login</button>
 </mat-toolbar>
 
-<div style="width: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-  <h1 class="mat-h1">Criar conta</h1>
-  <mat-vertical-stepper class="mat-elevation-z4" #stepper>
-    <mat-step [stepControl]="formularioCadastro">
-      <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
-        <ng-template matStepLabel>Username, email e senha</ng-template>
-        <mat-form-field class="form" appearance="outline">
-          <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" formControlName="usuario" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" formControlName="email" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field style="flex: auto;" appearance="outline">
-          <mat-label>Senha</mat-label>
-          <input type="password" matInput placeholder="Senha" formControlName="senha" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Próximo</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="formularioCadastro">
-      <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
-        <ng-template matStepLabel>Dados pessoais</ng-template>
-        <mat-form-field appearance="outline">
-          <mat-label>Nome Completo</mat-label>
-          <input matInput formControlName="nome_completo" placeholder="Nome Completo" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-          <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf" placeholder="Ex. XXX.XXX.XXX-XX" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-          <mat-label>Matricula</mat-label>
-          <input matInput formControlName="rf" placeholder="Matricula" required>
-        </mat-form-field>
+<mat-grid-list cols="1">
+  <div class="grid-container">
+    <mat-vertical-stepper class="mat-elevation-z4" #stepper>
+      <mat-step [stepControl]="formularioCadastro">
+        <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
+          <ng-template matStepLabel>Username, email e senha</ng-template>
+          <mat-form-field class="input-label" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="usuario" required>
+            <mat-error *ngIf="formularioCadastro.controls['usuario'].hasError('required')">
+              Username <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="input-label" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="formularioCadastro.controls['email'].hasError('required')">
+              Email <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="input-label" style="flex: auto;" appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input type="password" matInput placeholder="Senha" formControlName="senha" required>
+            <mat-error *ngIf="formularioCadastro.controls['senha'].hasError('required')">
+              Senha <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="formularioCadastro">
+        <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
+          <ng-template matStepLabel>Dados pessoais</ng-template>
+          <mat-form-field class="input-label" appearance="outline">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput formControlName="nome_completo" placeholder="Nome Completo" required>
+            <mat-error *ngIf="formularioCadastro.controls['nome_completo'].hasError('required')">
+              Nome completo é <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input matInput [textMask] = "{mask: cpfMascara}" formControlName="cpf" placeholder="Ex. XXX.XXX.XXX-XX" required>
+            <mat-error *ngIf="formularioCadastro.get('cpf').errors">
+              CPF <strong>inválido</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline">
+            <mat-label>Matricula</mat-label>
+            <input matInput maxlength="6" formControlName="rf" placeholder="Matricula" required>
+            <mat-error *ngIf="formularioCadastro.controls['rf'].hasError('required')">
+              Matricula <strong>obrigatória</strong>
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="formularioCadastro">
+        <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
+          <ng-template matStepLabel>Endereço e telefone</ng-template>
+          <mat-form-field class="input-label" appearance="outline">
+            <mat-label>Endereço</mat-label>
+            <input matInput formControlName="endereco" placeholder="Ex. 1 Main St, New York, NY">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone" placeholder="Ex. (DDD) 9XXXX-XXXX" [textMask] = "{mask: telefoneMascara}">
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>Tudo pronto!</p>
         <div>
           <button mat-button matStepperPrevious>Voltar</button>
-          <button mat-button matStepperNext>Próximo</button>
+          <button style="margin-left: 20px;" mat-raised-button color="warn" (click)="onSubmit(form)">Confirmar</button>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="formularioCadastro">
-      <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
-        <ng-template matStepLabel>Dados pessoais</ng-template>
-        <mat-form-field appearance="outline">
-          <mat-label>Endereço</mat-label>
-          <input matInput formControlName="endereco" placeholder="Ex. 1 Main St, New York, NY" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-          <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone" placeholder="Ex. 1 (12) 12345-0958" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Voltar</button>
-          <button mat-button matStepperNext>Próximo</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>Tudo pronto!</p>
-      <div>
-        <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="onSubmit(form)">Confirmar</button>
-      </div>
-    </mat-step>
-  </mat-vertical-stepper>
-</div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</mat-grid-list>

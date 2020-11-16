@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ValidateBrService } from 'angular-validate-br';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { SignUpInfo } from 'src/app/core/auth/signup-info';
 
@@ -19,25 +19,29 @@ export class CadastroComponent implements OnInit {
 
   formularioCadastro: FormGroup;
   signupInfo: SignUpInfo;
+  public telefoneMascara = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  public cpfMascara = [/[1-9]/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.formularioCadastro = this.formBuilder.group({
       usuario: new FormControl('', Validators.required),
       nome_completo: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      endereco: new FormControl('', Validators.required),
-      rf: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      cpf: new FormControl('', [Validators.required]),
-      telefone: new FormControl('', [Validators.required, Validators.minLength(11)])
+      endereco: new FormControl(''),
+      rf: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
+      cpf: new FormControl('', [Validators.required, this.validateBrService.cpf]),
+      telefone: new FormControl('', [Validators.minLength(11)])
     });
   }
 
-  login() {
+  login(): void {
+    this.form.resetForm();
     this.router.navigate(['/login']);
   }
 
@@ -47,7 +51,7 @@ export class CadastroComponent implements OnInit {
     });
   }
 
-  onSubmit(form: FormGroupDirective) {
+  onSubmit(form: FormGroupDirective): void {
     console.log(this.formularioCadastro);
     this.signupInfo = new SignUpInfo(
       this.formularioCadastro.get('nome_completo').value,
