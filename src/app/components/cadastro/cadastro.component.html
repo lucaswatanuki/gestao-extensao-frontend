@@ -79,7 +79,10 @@
           <br>
           <mat-form-field appearance="outline">
             <mat-label>Telefone</mat-label>
-            <input matInput formControlName="telefone" placeholder="Ex. (DDD) 9XXXX-XXXX" [textMask] = "{mask: telefoneMascara}">
+            <input matInput formControlName="telefone" placeholder="Ex. (DDD) 9XXXX-XXXX" [textMask] = "{mask: telefoneMascara}" required>
+            <mat-error *ngIf="formularioCadastro.controls['telefone'].hasError('required')">
+              Matricula <strong>obrigatória</strong>
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>
@@ -92,7 +95,7 @@
         <p>Tudo pronto!</p>
         <div>
           <button mat-button matStepperPrevious>Voltar</button>
-          <button style="margin-left: 20px;" mat-raised-button color="warn" (click)="onSubmit(form)">Confirmar</button>
+          <button [disabled]="!formularioCadastro.valid" style="margin-left: 20px;" mat-raised-button color="warn" (click)="onSubmit(form)">Confirmar</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
