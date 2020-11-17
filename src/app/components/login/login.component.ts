@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  showFail() {
-    this.toast.show('Verificar usuário e senha', 'Erro ao realizar login');
+  showFail(mensagem: string) {
+    this.toast.show(mensagem, 'Erro ao realizar login');
   }
 
   onSubmit() {
@@ -56,10 +56,10 @@ export class LoginComponent implements OnInit {
 
         this.reloadPage();
       },
-      error => {
-        console.log(error);
+      response => {
+        console.log(response);
         this.isLoginFailed = true;
-        this.showFail();
+        this.showFail(response.error.mensagem);
       }
     );
   }
