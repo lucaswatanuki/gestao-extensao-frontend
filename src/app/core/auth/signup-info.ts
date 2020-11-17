@@ -9,17 +9,15 @@ export class SignUpInfo {
     endereco: string;
     telefone: string;
 
- 
-    constructor(nome: string, username: string, 
-        email: string, password: string,
-        cpf: string, rf: string, endereco: string, telefone: string) {
+    // tslint:disable-next-line: max-line-length
+    constructor(nome: string, username: string, email: string, password: string, cpf: string, rf: string, endereco: string, telefone: string) {
         this.nome = nome;
         this.username = username;
         this.email = email;
         this.senha = password;
         this.cpf = cpf;
-        this.endereco = endereco;
         this.rf = rf;
+        this.endereco = endereco;
         this.telefone = telefone;
     }
 }

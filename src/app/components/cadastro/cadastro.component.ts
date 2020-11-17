@@ -1,7 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ValidateBrService } from 'angular-validate-br';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -17,6 +18,8 @@ import { SignUpInfo } from 'src/app/core/auth/signup-info';
 })
 export class CadastroComponent implements OnInit {
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  cadastro = false;
   formularioCadastro: FormGroup;
   signupInfo: SignUpInfo;
   public telefoneMascara = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
@@ -25,7 +28,7 @@ export class CadastroComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService, private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.formularioCadastro = this.formBuilder.group({
@@ -47,7 +50,8 @@ export class CadastroComponent implements OnInit {
 
   openSnackBar(message: string, action: string): void{
     this.snackBar.open(message, action, {
-      duration: 5000,
+      duration: 15000,
+      horizontalPosition: this.horizontalPosition
     });
   }
 
@@ -59,8 +63,8 @@ export class CadastroComponent implements OnInit {
       this.formularioCadastro.get('email').value,
       this.formularioCadastro.get('senha').value,
       this.formularioCadastro.get('cpf').value,
-      this.formularioCadastro.get('endereco').value,
       this.formularioCadastro.get('rf').value,
+      this.formularioCadastro.get('endereco').value,
       this.formularioCadastro.get('telefone').value,
     );
 
@@ -69,11 +73,12 @@ export class CadastroComponent implements OnInit {
       data => {
         console.log(data);
         this.form.resetForm();
-        this.openSnackBar('Usuário criado com sucesso!', 'OK');
+        this.openSnackBar('Foi enviado um email para confirmação de cadastro', 'OK');
         this.router.navigate(['/login']);
       },
       error => {
         console.log(error);
+        this.toast.error(error.mensagem);
       }
     );
   }
