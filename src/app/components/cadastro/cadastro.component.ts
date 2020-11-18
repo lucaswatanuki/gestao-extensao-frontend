@@ -23,7 +23,7 @@ export class CadastroComponent implements OnInit {
   formularioCadastro: FormGroup;
   signupInfo: SignUpInfo;
   public telefoneMascara = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  public cpfMascara = [/[1-9]/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+  public cpfMascara = [/[0-9]/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
 
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;

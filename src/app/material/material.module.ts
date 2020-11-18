@@ -18,6 +18,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 const MODULES = [
@@ -37,7 +40,9 @@ const MODULES = [
   MatSortModule,
   MatExpansionModule,
   MatSnackBarModule,
-  MatStepperModule
+  MatStepperModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
 ];
 
 @NgModule({

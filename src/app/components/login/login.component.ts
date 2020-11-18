@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private toast: ToastrService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   showFail(mensagem: string) {
-    this.toast.show(mensagem, 'Erro ao realizar login');
+    this.toast.show(mensagem);
   }
 
   onSubmit() {
@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
 
   loadSignUp() {
     this.router.navigate(['/signup']);
-    //window.location.replace('http://localhost:4200/signup');
   }
 
   reloadPage() {
