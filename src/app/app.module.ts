@@ -26,6 +26,8 @@ import { ConfiguracaoComponent } from './components/configuracao/configuracao.co
 import { DocenteComponent } from './components/docente/docente.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularValidateBrLibModule } from 'angular-validate-br';
+import { AutorizacaoDetalhesComponent } from './components/autorizacao/autorizacao-detalhes/autorizacao-detalhes.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { AngularValidateBrLibModule } from 'angular-validate-br';
     CadastroComponent,
     AutorizacaoComponent,
     ConfiguracaoComponent,
+    AutorizacaoDetalhesComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +62,7 @@ import { AngularValidateBrLibModule } from 'angular-validate-br';
     TextMaskModule,
     AngularValidateBrLibModule
   ],
-  providers: [AuthGuardService, httpInterceptorProviders],
+  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
