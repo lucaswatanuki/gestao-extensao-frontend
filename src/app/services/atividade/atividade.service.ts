@@ -16,4 +16,12 @@ export class AtividadeService {
   listarAtividades(): Observable<any> {
     return this.http.get<Atividade[]>(this.baseUrl + '/listar');
   }
+
+  excluirAtividade(id: number): void {
+    this.http.delete(this.baseUrl + '/' + id);
+  }
+
+  consultarAtividade(id: number): Observable<Atividade> {
+    return this.http.get<Atividade>(this.baseUrl + '/' + id);
+  }
 }
