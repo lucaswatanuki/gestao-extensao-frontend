@@ -1,1 +1,20 @@
-<p>autorizacao-detalhes works!</p>
+<h1 mat-dialog-title>Detalhes da Atividade</h1>
+<form name="form" [formGroup]='formularioAtividade'>
+  <mat-form-field appearance="outline">
+    <mat-label>Projeto</mat-label>
+    <input [(ngModel)]="atividade.projeto" formControlName="projeto" matInput placeholder="Projeto" readonly>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Hora Semanal</mat-label>
+    <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput placeholder="Hora Semanal" readonly>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Prazo (meses)</mat-label>
+    <input [(ngModel)]="atividade.prazo" formControlName="prazo" matInput placeholder="Prazo" readonly>
+  </mat-form-field>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Fechar</button>
+</div>
+

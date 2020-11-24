@@ -1,9 +1,11 @@
+import { AutorizacaoDetalhesComponent } from './autorizacao-detalhes/autorizacao-detalhes.component';
 import { AutorizacaoService } from './../../services/autorizacao/autorizacao.service';
 import { Autorizacao } from './../../models/autorizacao.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -19,9 +21,9 @@ export class AutorizacaoComponent implements OnInit {
   autorizacao: Autorizacao = new Autorizacao();
   autorizacoes: MatTableDataSource<Autorizacao>;
   errorMsg: string;
-  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente'];
+  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente', 'action'];
 
-  constructor(private autorizacaoService: AutorizacaoService) {}
+  constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getAutorizacoes();
@@ -37,6 +39,22 @@ export class AutorizacaoComponent implements OnInit {
       erro => {
         this.errorMsg = `${erro.status}: ${JSON.parse(erro.error).message}`;
         console.error(this.errorMsg);
+      }
+    );
+  }
+
+  consultarDetalheAutorizacao(id: number): void {
+    const dialogRef = this.dialog.open(AutorizacaoDetalhesComponent, {
+      data: {
+        width: 'auto',
+        height: 'auto',
+        id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        this.getAutorizacoes();
       }
     );
   }

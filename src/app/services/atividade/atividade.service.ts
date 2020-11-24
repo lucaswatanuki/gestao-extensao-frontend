@@ -21,7 +21,7 @@ export class AtividadeService {
     this.http.delete(this.baseUrl + '/' + id);
   }
 
-  consultarAtividade(id: number): Observable<any> {
-    return this.http.get(this.baseUrl + '/' + id);
+  consultarAtividade(id: number): Observable<Atividade> {
+    return this.http.get<Atividade>(this.baseUrl + '/' + id);
   }
 }
