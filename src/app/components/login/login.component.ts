@@ -54,7 +54,11 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
 
-        this.reloadPage();
+        if (this.roles.includes('ROLE_ADMIN')) {
+          window.location.replace(environment.localhost + 'dashboard');
+        } else { 
+          window.location.replace(environment.localhost + 'criar-atividade');
+        }
       },
       response => {
         console.log(response);

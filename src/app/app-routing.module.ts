@@ -34,7 +34,7 @@ const routes: Routes = [
     path: 'configuracao', component: ConfiguracaoComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'login', component: LoginComponent, 
+    path: 'login', component: LoginComponent,
   },
   {
     path: 'signup', component: CadastroComponent

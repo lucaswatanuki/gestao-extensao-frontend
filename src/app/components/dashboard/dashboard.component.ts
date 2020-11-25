@@ -1,3 +1,5 @@
+import { environment } from './../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 import { Dashboard } from './../../models/dashboard.model';
 import { DashboardService } from './../../services/dashboard/dashboard.service';
 import { Autorizacao } from './../../models/autorizacao.model';
@@ -35,7 +37,7 @@ export class DashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private dashboardService: DashboardService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private dashboardService: DashboardService, private toast: ToastrService) { }
 
   ngOnInit() {
     this.getDadosDashboard();
@@ -48,7 +50,9 @@ export class DashboardComponent {
         this.dashboard = data;
       },
       error => {
-        this.errorMsg = `${error.status}: ${JSON.parse(error.error).message}`;
+        console.log(error);
+        this.toast.error('Acesso negado.');
+        window.location.replace(environment.localhost + 'criar-atividade');
       }
     );
   }
