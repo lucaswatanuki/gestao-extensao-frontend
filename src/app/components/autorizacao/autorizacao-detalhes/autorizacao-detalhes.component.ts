@@ -14,7 +14,6 @@ export class AutorizacaoDetalhesComponent implements OnInit {
   atividade: Atividade = new Atividade();
   formularioAtividade: FormGroup;
 
-
   constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder, private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
@@ -24,6 +23,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       horaMensal: new FormControl(''),
       horaSemanal: new FormControl(''),
       prazo: new FormControl(''),
+      valor: new FormControl(''),
     });
     if (this.data.id) {
       this.atividadeService.consultarAtividade(this.data.id).subscribe(
@@ -34,6 +34,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.horaMensal = response.horaMensal;
           this.atividade.horaSemanal = response.horaSemanal;
           this.atividade.prazo = response.prazo;
+          this.atividade.valorBruto = response.valorBruto;
       },
       error => {
         console.log(error);
