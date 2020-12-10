@@ -1,3 +1,4 @@
+import { CursoExtensao } from './../../models/curso.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,5 +17,10 @@ export class ConvenioService {
   salvarConvenio(convenio: Convenio): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/convenio', convenio);
   }
+
+  salvarCurso(curso: CursoExtensao): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/curso', curso);
+  }
+
 
 }

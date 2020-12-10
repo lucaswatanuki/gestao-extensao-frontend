@@ -1,8 +1,12 @@
-<div *ngIf="!authority">
-  <router-outlet></router-outlet>
+<div *ngIf="!isLoggedIn$">
+  <router-outlet>
+    <div *ngIf="loaderService.isLoading | async" class="loader-container">
+      <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+    </div>
+  </router-outlet>
 </div>
 
-<mat-sidenav-container class="sidenav-container" *ngIf="authority">
+<mat-sidenav-container class="sidenav-container" *ngIf="isLoggedIn$">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-nav-list>
@@ -58,6 +62,10 @@
       </button>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <router-outlet></router-outlet>
+    <router-outlet>
+      <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+      </div>
+    </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

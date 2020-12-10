@@ -19,6 +19,7 @@ export class AuthGuardService implements CanActivate {
     if (!jwtHelper.isTokenExpired(this.authService.getToken())) {
       return true;
     }
+    this.authService.clearToken();
     this.toast.error('Usuário não autenticado! Realizar login.', 'Erro');
     this.router.navigate(['/login']);
     return false;

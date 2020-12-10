@@ -29,6 +29,13 @@ export class TokenStorageService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
+  public isLogged(): boolean {
+    const usertoken = this.getToken();
+    if (usertoken != null) {
+      return true;
+    }
+  }
+
   public saveUsername(username: string) {
     window.sessionStorage.removeItem(USERNAME_KEY);
     window.sessionStorage.setItem(USERNAME_KEY, username);
@@ -50,6 +57,10 @@ export class TokenStorageService {
   public saveAuthorities(authorities: string[]) {
     window.sessionStorage.removeItem(AUTHORITIES_KEY);
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+  }
+
+  public clearToken() {
+    window.sessionStorage.clear();
   }
 
   public getAuthorities(): string[] {

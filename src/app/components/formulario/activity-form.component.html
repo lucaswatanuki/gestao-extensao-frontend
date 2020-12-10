@@ -48,22 +48,6 @@
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas semanais</mat-label>
-                    <input matInput #postalCode maxlength="5" placeholder="Carga horária semanal" type="number"
-                      formControlName="horaSemanal">
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas mensais</mat-label>
-                    <input matInput #postalCode maxlength="5" placeholder="Carga horária mensal" type="number"
-                      formControlName="horaMensal">
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Descrição</mat-label>
                     <input matInput placeholder="A participação no projeto consistirá de..."
                       formControlName="descricao">
@@ -72,26 +56,52 @@
               </div>
               <div class="row">
                 <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Inicio</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dataInicio" placeholder="Selecionar data" 
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Fim</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="dataFim" placeholder="Selecionar data"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Prazo de participação</mat-label>
-                    <input matInput #postalCode maxlength="5" placeholder="Prazo de participação" type="number"
-                      formControlName="prazo">
+                    <mat-label>Valor bruto (R$)</mat-label>
+                    <input matInput #postalCode maxlength="5" placeholder="Valor bruto" type="number"
+                      formControlName="valorBruto">
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Valor bruto</mat-label>
-                    <input matInput #postalCode maxlength="5" placeholder="Valor bruto" type="number"
-                      formControlName="valorBruto">
+                    <mat-label>Qtd Horas semanais</mat-label>
+                    <input matInput #postalCode maxlength="5" min="1" placeholder="Carga horária semanal" type="number"
+                      formControlName="horaSemanal">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Qtd Horas mensais</mat-label>
+                    <input matInput #postalCode maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
+                      formControlName="horaMensal">
                   </mat-form-field>
                 </div>
               </div>
             </mat-card-content>
             <mat-card-actions>
               <button [disabled]="!convenioForm.valid" mat-raised-button color="primary"
-                (click)="submeterConvenio(form)">Submit</button>
+                (click)="submeterConvenio(form)">Enviar</button>
             </mat-card-actions>
           </mat-card>
         </form>
@@ -113,10 +123,10 @@
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Titulo do Projeto</mat-label>
-                    <input matInput placeholder="Titulo do Projeto" formControlName="projeto">
-                    <mat-error *ngIf="convenioForm.controls['projeto'].hasError('required')">
-                      Nome ou titulo do projeto <strong>obrigatório</strong>
+                    <mat-label>Nome do curso</mat-label>
+                    <input matInput placeholder="Nome do curso" formControlName="nomeCurso">
+                    <mat-error *ngIf="cursoForm.controls['nomeCurso'].hasError('required')">
+                      Nome do curso <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -125,8 +135,8 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Instituição de Ensino</mat-label>
-                    <input matInput placeholder="Instituição de Ensino" formControlName="instituicao">
-                    <mat-error *ngIf="convenioForm.controls['instituicao'].hasError('required')">
+                    <input matInput placeholder="Instituição vinculada" formControlName="instituicao">
+                    <mat-error *ngIf="cursoForm.controls['instituicao'].hasError('required')">
                       Nome da instituição <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -135,7 +145,7 @@
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Coordenador(a) </mat-label>
                     <input matInput placeholder="Coordenador(a)" formControlName="coordenador">
-                    <mat-error *ngIf="convenioForm.controls['coordenador'].hasError('required')">
+                    <mat-error *ngIf="cursoForm.controls['coordenador'].hasError('required')">
                       Nome do coordenador(a) <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -148,10 +158,84 @@
                   <mat-radio-button value="COORDENAÇÃO">Coordenação</mat-radio-button>
                 </mat-radio-group>
               </div>
+              <div class="row" style="margin-top: 5px;">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Disciplina de participação</mat-label>
+                    <input matInput placeholder="Disciplina" formControlName="disciplina">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Carga horária total de aulas ministradas</mat-label>
+                    <input matInput #postalCode maxlength="5" min="1" placeholder="Carga horária total" type="number"
+                      formControlName="totalHorasMinistradas">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Qtd Horas semanais dedicadas (aulas + preparação e outras atividades)</mat-label>
+                    <input matInput #postalCode maxlength="5" min="1" placeholder="Carga horária semanal" type="number"
+                      formControlName="horaSemanal">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Qtd Horas mensais dedicadas (aulas + preparação e outras atividades)</mat-label>
+                    <input matInput #postalCode maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
+                      formControlName="horaMensal">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto por hora-aula (R$)</mat-label>
+                    <input matInput #postalCode maxlength="5" placeholder="Valor bruto hora-aula" type="number"
+                      formControlName="valorBrutoHoraAula">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto pelo total de aulas (R$)</mat-label>
+                    <input matInput #postalCode maxlength="5" placeholder="Valor bruto total aulas" type="number"
+                      formControlName="valorBrutoTotalAula">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto de outras atividades (R$)</mat-label>
+                    <input matInput #postalCode maxlength="5" placeholder="Valor bruto de outras atividades" type="number"
+                      formControlName="valorBrutoOutraAtividade">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Inicio</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="dataInicio" placeholder="Selecionar data" 
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Fim</mat-label>
+                    <input matInput [matDatepicker]="picker3" formControlName="dataFim" placeholder="Selecionar data"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
             </mat-card-content>
             <mat-card-actions>
               <button [disabled]="!cursoForm.valid" mat-raised-button color="primary"
-                (click)="submeterCurso(form)">Submit</button>
+                (click)="submeterCurso(form)">Enviar</button>
             </mat-card-actions>
           </mat-card>
         </form>

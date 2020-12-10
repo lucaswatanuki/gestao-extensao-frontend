@@ -1,6 +1,6 @@
 import { CursoService } from './../../services/atividade/curso.service';
 import { CursoExtensao } from './../../models/curso.model';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Convenio } from 'src/app/models/convenio.model';
@@ -11,7 +11,7 @@ import { ConvenioService } from 'src/app/services/atividade/convenio.service';
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })
-export class ActivityFormComponent {
+export class ActivityFormComponent implements OnInit{
 
   convenioForm: FormGroup;
   cursoForm: FormGroup;
@@ -24,7 +24,7 @@ export class ActivityFormComponent {
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.convenioForm = this.fb.group({
       instituicao: [null, Validators.required],
       projeto: [null, Validators.required],
@@ -32,20 +32,25 @@ export class ActivityFormComponent {
       horaSemanal: [null, Validators.required],
       horaMensal: [null, Validators.required],
       descricao: [null, Validators.required],
-      prazo: [null, Validators.required],
-      valorBruto: [null, Validators.required],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
+      valorBruto: [null],
     });
 
     this.cursoForm = this.fb.group({
       instituicao: [null, Validators.required],
-      projeto: [null, Validators.required],
+      nomeCurso: [null, Validators.required],
       coordenador: [null, Validators.required],
       participacao: [null, Validators.required],
-      // disciplinas: [null, Validators.required],
-      // cargaHoraTotal: [null, Validators.required],
-      // valorBrutoHoraAula: [null, Validators.required],
-      // valorBrutoTotalAula: [null, Validators.required],
-      // valorBrutoOutrasAtividades: [null, Validators.required],
+      disciplina: [null],
+      totalHorasMinistradas: [null, Validators.required],
+      horaSemanal: [null, Validators.required],
+      horaMensal: [null, Validators.required],
+      valorBrutoHoraAula: [null],
+      valorBrutoTotalAula: [null],
+      valorBrutoOutraAtividade: [null],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
     });
 
     this.regenciaForm = this.fb.group({
@@ -67,11 +72,11 @@ export class ActivityFormComponent {
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService, private cursoService: CursoService) { }
 
 
-    openSnackBar(message: string, action: string): void{
-      this.snackBar.open(message, action, {
-        duration: 5000,
-      });
-    }
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 
   submeterConvenio(form: FormGroupDirective): void {
     console.log(this.convenioForm);
@@ -81,9 +86,10 @@ export class ActivityFormComponent {
     this.convenioModel.descricao = this.convenioForm.get('descricao').value;
     this.convenioModel.horaMensal = this.convenioForm.get('horaMensal').value;
     this.convenioModel.horaSemanal = this.convenioForm.get('horaSemanal').value;
-    this.convenioModel.prazo = this.convenioForm.get('prazo').value;
     this.convenioModel.projeto = this.convenioForm.get('projeto').value;
     this.convenioModel.valorBruto = this.convenioForm.get('valorBruto').value;
+    this.convenioModel.dataInicio = this.convenioForm.get('dataInicio').value;
+    this.convenioModel.dataFim = this.convenioForm.get('dataFim').value;
 
     console.log(this.convenioModel);
 
@@ -91,7 +97,7 @@ export class ActivityFormComponent {
       data => {
         console.log(data);
         this.form.resetForm();
-        this.openSnackBar('Atividade submetida com sucesso!', 'OK');
+        this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {
         console.log(erro);
@@ -111,7 +117,7 @@ export class ActivityFormComponent {
       data => {
         console.log(data);
         this.form.resetForm();
-        this.openSnackBar('Atividade submetida com sucesso!', 'OK');
+        this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {
         console.log(erro);

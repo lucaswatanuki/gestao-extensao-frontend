@@ -7,4 +7,6 @@ export class Atividade {
     prazo: number;
     valorBruto: number;
     dataCriacao: Date;
+    dataInicio: Date;
+    dataFim: Date;
 }
