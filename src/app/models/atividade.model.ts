@@ -9,4 +9,5 @@ export class Atividade {
     dataCriacao: Date;
     dataInicio: Date;
     dataFim: Date;
+    docente: string;
 }

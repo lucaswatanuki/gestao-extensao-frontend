@@ -6,9 +6,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline" style="width: 100px;">
     <mat-label>Hora Semanal</mat-label>
-    <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput placeholder="Hora Semanal" readonly>
+    <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput placeholder="Hora Semanal"
+      readonly>
   </mat-form-field>
-  <mat-form-field appearance="outline" style="width: 100px;"> 
+  <mat-form-field appearance="outline" style="width: 100px;">
     <mat-label>Hora Mensal</mat-label>
     <input [(ngModel)]="atividade.horaMensal" formControlName="horaMensal" matInput placeholder="Hora Mensal" readonly>
   </mat-form-field>
@@ -24,25 +25,22 @@
   <br>
   <mat-form-field appearance="outline">
     <mat-label>Data Inicio</mat-label>
-    <input matInput placeholder="dd/MM/yyyy" readonly>
+    <input matInput [(ngModel)]="atividade.dataInicio" formControlName="dataInicio" placeholder="dd/MM/yyyy" readonly>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Data Fim</mat-label>
-    <input matInput placeholder="dd/MM/yyyy" readonly>
+    <input matInput [(ngModel)]="atividade.dataFim" formControlName="dataFim" placeholder="dd/MM/yyyy" readonly>
   </mat-form-field>
-</form>
 
-<h1 mat-dialog-title>Docente</h1>
-
-<form>
-    <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Nome</mat-label>
-        <input matInput placeholder="Nome Docente" readonly>
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Total de Horas alocadas atual</mat-label>
-        <input matInput placeholder="Nome Docente" readonly>
-    </mat-form-field>
+  <h1 mat-dialog-title>Docente</h1>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="atividade.docente" formControlName="docente" placeholder="Nome Docente" readonly>
+  </mat-form-field>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Total de Horas alocadas atual</mat-label>
+    <input matInput placeholder="Nome Docente" readonly>
+  </mat-form-field>
 </form>
 
 
@@ -50,4 +48,3 @@
   <button mat-button (click)="onNoClick()">Fechar</button>
   <button mat-button (click)="onNoClick()" color="accent">Aprovar</button>
 </div>
-

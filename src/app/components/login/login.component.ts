@@ -32,15 +32,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  showFail(mensagem: string) {
-    this.toast.show(mensagem);
+  showFail(mensagem: string): void {
+    this.toast.error(mensagem);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     console.log(this.form);
 
     this.loginInfo = new AuthLoginInfo(
-      this.form.username,
+      this.form.matricula,
       this.form.password);
 
     this.authService.login(this.loginInfo).subscribe(
