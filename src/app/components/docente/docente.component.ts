@@ -16,7 +16,7 @@ export class DocenteComponent implements OnInit {
   docente: Docente = new Docente();
   docentes: MatTableDataSource<any>;
   errorMsg: string;
-  displayedColumns: string[] = ['RF', 'nome', 'email', 'totalHoras'];
+  displayedColumns: string[] = ['matricula', 'nome', 'email', 'totalHorasEmAndamento', 'totalHorasFuturas'];
 
   constructor(private docenteService: DocenteService) {}
   

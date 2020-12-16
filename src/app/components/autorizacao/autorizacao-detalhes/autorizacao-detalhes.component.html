@@ -33,14 +33,29 @@
   </mat-form-field>
 
   <h1 mat-dialog-title>Docente</h1>
-  <mat-form-field appearance="outline" style="width: 100%;">
-    <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="atividade.docente" formControlName="docente" placeholder="Nome Docente" readonly>
-  </mat-form-field>
-  <mat-form-field appearance="outline" style="width: 100%;">
-    <mat-label>Total de Horas alocadas atual</mat-label>
-    <input matInput placeholder="Nome Docente" readonly>
-  </mat-form-field>
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="atividade.docente" formControlName="docente" placeholder="Nome Docente" readonly>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Horas em andamento</mat-label>
+        <input matInput [(ngModel)]="atividade.horasEmAndamento" formControlName="horasEmAndamento" placeholder="Horas em andamento" readonly>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Horas futuras</mat-label>
+        <input matInput [(ngModel)]="atividade.horasFuturas" formControlName="horasFuturas" placeholder="Horas futuras" readonly>
+      </mat-form-field>
+    </div>
+  </div>
+
 </form>
 
 

@@ -28,7 +28,8 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       dataInicio: new FormControl(''),
       dataFim: new FormControl(''),
       docente: new FormControl(''),
-
+      horasEmAndamento: new FormControl(''),
+      horasFuturas: new FormControl(''),
     });
     if (this.data.id) {
       this.atividadeService.consultarAtividade(this.data.id).subscribe(
@@ -43,6 +44,8 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.dataInicio = response.dataInicio;
           this.atividade.dataFim = response.dataFim;
           this.atividade.docente = response.docente;
+          this.atividade.horasEmAndamento = response.horasEmAndamento;
+          this.atividade.horasFuturas = response.horasFuturas;
       },
       error => {
         console.log(error);
