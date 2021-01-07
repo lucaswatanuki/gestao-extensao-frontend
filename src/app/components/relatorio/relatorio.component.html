@@ -16,8 +16,7 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Data Inicio</mat-label>
-                        <input matInput [matDatepicker]="picker"
-                            placeholder="Selecionar data" required>
+                        <input matInput [matDatepicker]="picker" placeholder="Selecionar data" required>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -25,8 +24,7 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Data Fim</mat-label>
-                        <input matInput [matDatepicker]="picker1"
-                            placeholder="Selecionar data" required>
+                        <input matInput [matDatepicker]="picker1" placeholder="Selecionar data" required>
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
@@ -34,11 +32,14 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <mat-label>Status de atividade: </mat-label>
+                    <h4>
+                        <mat-label>Status de atividade: </mat-label>
+                    </h4>
                     <mat-radio-group aria-label="Select an option">
                         <mat-radio-button value="CONCLUIDO">Concluido</mat-radio-button>
-                        <mat-radio-button value="EMANDAMENTO">Em andamento</mat-radio-button>
+                        <mat-radio-button value="EM_ANDAMENTO">Em andamento</mat-radio-button>
                         <mat-radio-button value="FUTURO">A realizar</mat-radio-button>
+                        <mat-radio-button value="TODOS">Todos</mat-radio-button>
                     </mat-radio-group>
                 </div>
             </div>
@@ -48,6 +49,46 @@
                     <button mat-raised-button color="primary">Exportar PDF</button>
                 </div>
             </div>
+            <div class="row" style="margin-top: 20px;">
+                <div class="col">
+                    <table mat-table [dataSource]="relatorio" class="full-width-table">
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="nomeDocente">
+                            <th mat-header-cell *matHeaderCellDef>Docente</th>
+                            <td mat-cell *matCellDef="let element"> {{element.nomeDocente}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="tipoAtividade">
+                            <th mat-header-cell *matHeaderCellDef>Atividade</th>
+                            <td mat-cell *matCellDef="let element"> {{element.tipoAtividade}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="dataInicio">
+                            <th mat-header-cell *matHeaderCellDef>Inicio</th>
+                            <td mat-cell *matCellDef="let element"> {{element.dataInicio }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dataFim">
+                            <th mat-header-cell *matHeaderCellDef>Fim</th>
+                            <td mat-cell *matCellDef="let element"> {{ element.dataFim }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="statusAtividade">
+                            <th mat-header-cell *matHeaderCellDef>Status</th>
+                            <td mat-cell *matCellDef="let element"> {{ element.statusAtividade }} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+                </div>
+            </div>
+
         </mat-card-content>
     </mat-card>
 </div>

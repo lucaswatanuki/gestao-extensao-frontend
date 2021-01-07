@@ -1,3 +1,4 @@
+import { RelatorioService } from './services/relatorio/relatorio.service';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +13,7 @@ import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
 import { AuthGuardService } from './core/auth/auth-guard.service';
 import { httpInterceptorProviders } from './core/auth/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
@@ -60,9 +61,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     MatSortModule,
     HammerModule,
     TextMaskModule,
-    AngularValidateBrLibModule
+    AngularValidateBrLibModule,
   ],
-  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent],
+  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent, RelatorioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
