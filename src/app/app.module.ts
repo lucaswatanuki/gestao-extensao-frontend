@@ -1,3 +1,4 @@
+import { DocenteService } from './services/docente/docente.service';
 import { RelatorioService } from './services/relatorio/relatorio.service';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActivityFormComponent } from './components/formulario/activity-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RelatorioComponent } from './components/relatorio/relatorio.component';
+import { RelatorioComponent, RelatorioDocenteSearchDialogueComponent } from './components/relatorio/relatorio.component';
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
@@ -44,6 +45,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     ConfiguracaoComponent,
     AutorizacaoDetalhesComponent,
     SpinnerComponent,
+    RelatorioDocenteSearchDialogueComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     TextMaskModule,
     AngularValidateBrLibModule,
   ],
-  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent, RelatorioService],
+  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent, RelatorioService, DocenteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
