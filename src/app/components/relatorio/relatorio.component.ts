@@ -7,6 +7,8 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 interface Food {
   value: string;
@@ -23,17 +25,25 @@ export class RelatorioComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  formRelatorio: FormGroup;
+  request: Relatorio = new Relatorio;
   relatorio: MatTableDataSource<Relatorio>;
   errorMsg: string;
-  displayedColumns: string[] = ['nomeDocente', 'tipoAtividade', 'dataInicio', 'dataFim', 'statusAtividade'];
+  displayedColumns: string[] = ['nomeDocente', 'tipoAtividade', 'dataInicio', 'dataFim', 'prazo', 'statusAtividade'];
 
-  constructor(private relatorioService: RelatorioService, public dialog: MatDialog) { }
+  constructor(private relatorioService: RelatorioService, public dialog: MatDialog, private fbuilder: FormBuilder, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.formRelatorio = this.fbuilder.group({
+      inicio: new FormControl('', [Validators.required]),
+      fim: new FormControl('', [Validators.required]),
+      nomeDocente: new FormControl('', [Validators.required]),
+      status: new FormControl('', [Validators.required])
+    });
   }
 
-  gerarRelatorioPorDocente(id: number, status: string, dataInicio: Date, dataFim: Date): void {
-    this.relatorioService.extrairRelatorioPorDocente(id, status, dataInicio, dataFim).subscribe(
+  gerarRelatorioPorDocente(request: Relatorio): void {
+    this.relatorioService.extrairRelatorioPorDocente(request).subscribe(
       data => {
         this.relatorio = new MatTableDataSource(data);
         this.relatorio.paginator = this.paginator;
@@ -45,6 +55,33 @@ export class RelatorioComponent implements OnInit {
     );
   }
 
+  extrairRelatorioPDF(request: Relatorio): void {
+    this.relatorioService.gerarPdf(request).subscribe(
+      data => {
+        const blob = new Blob([data], {type: 'application/pdf'});
+
+        if(window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob);
+          return;
+        }
+
+        const dados = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        link.href = dados;
+        var date = this.datePipe.transform(new Date(),"dd-MM-yyyy_HH:mm:ss");
+        link.download = 'relatorio_' + date + '.pdf';
+        link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}))
+
+        setTimeout(function() {
+          window.URL.revokeObjectURL(dados);
+          link.remove();
+        }, 100);
+      }
+    );
+  }
+
+
   openDialogDocente(): void {
     const dialogRef = this.dialog.open(RelatorioDocenteSearchDialogueComponent, {
       data: {
@@ -55,7 +92,8 @@ export class RelatorioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      //this.formCotacao.get('produto').setValue(result.id);
+      this.formRelatorio.get('nomeDocente').setValue(result.nome);
+      this.request.idDocente = result.id;
     });
   }
 

@@ -45,13 +45,13 @@
     <div class="col">
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Horas em andamento</mat-label>
-        <input matInput [(ngModel)]="atividade.horasEmAndamento" formControlName="horasEmAndamento" placeholder="Horas em andamento" readonly>
+        <input matInput [(ngModel)]="atividade.horasEmAndamento" formControlName="horasEmAndamento" placeholder="Horas aprovadas" readonly>
       </mat-form-field>
     </div>
     <div class="col">
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Horas futuras</mat-label>
-        <input matInput [(ngModel)]="atividade.horasFuturas" formControlName="horasFuturas" placeholder="Horas futuras" readonly>
+        <input matInput [(ngModel)]="atividade.horasFuturas" formControlName="horasFuturas" placeholder="Horas solicitadas" readonly>
       </mat-form-field>
     </div>
   </div>
@@ -61,5 +61,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Fechar</button>
-  <button mat-button (click)="onNoClick()" color="accent">Aprovar</button>
+  <button mat-button (click)="onNoClick()" color="accent">Aceitar</button>
 </div>

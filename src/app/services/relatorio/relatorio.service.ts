@@ -3,6 +3,8 @@ import { HttpClient, HttpParams, HttpClientModule, HttpHeaders } from '@angular/
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +15,12 @@ export class RelatorioService {
 
   constructor(private http: HttpClient) { }
 
-  extrairRelatorioPorDocente(id: number, status: string, dataInicio: Date, dataFim: Date): Observable<any> {
+  extrairRelatorioPorDocente(request: Relatorio): Observable<any> {
     
-    let header = new HttpHeaders().append('status', status);
-    let parametro = new HttpParams();
-    parametro.set('dataInicio', dataInicio.toLocaleDateString());
-    parametro.set('dataFim', dataFim.toLocaleDateString());
-    
-    return this.http.get<Relatorio[]>(this.baseUrl + '/' + id, { headers: header, params: parametro });
+    return this.http.post<Relatorio[]>(this.baseUrl + '/docente', request);
+  }
+
+  gerarPdf(request: Relatorio): Observable<Blob>  {
+    return this.http.post(this.baseUrl + '/export', request, {responseType: 'blob'});
   }
 }

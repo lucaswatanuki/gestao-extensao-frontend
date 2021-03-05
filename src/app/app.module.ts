@@ -18,7 +18,7 @@ import { HttpClientModule, HttpParams, HttpHeaders, HttpClient } from '@angular/
 import { AuthGuardService } from './core/auth/auth-guard.service';
 import { httpInterceptorProviders } from './core/auth/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { AutorizacaoComponent } from './components/autorizacao/autorizacao.component';
 import { MatTableModule } from '@angular/material/table';
@@ -65,7 +65,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     TextMaskModule,
     AngularValidateBrLibModule,
   ],
-  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent, RelatorioService, DocenteService],
+  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent, RelatorioService, DocenteService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
