@@ -4,13 +4,13 @@
 <div
     style="width: 350px; position: absolute; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <mat-card style="width: 100%;" class="mat-elevation-z20">
-        <h1>Gestão Extensão</h1>
+        <h1><b>Gestão Extensão</b></h1>
         <h3>Login</h3>
         <form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
             <div class="form-group">
                 <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Username</mat-label>
-                    <input matInput type="text" placeholder="Username" [(ngModel)]="form.username" name="username"
+                    <mat-label>Matricula</mat-label>
+                    <input matInput type="text" placeholder="Matricula" [(ngModel)]="form.matricula" name="matricula"
                         #username="ngModel" required>
                 </mat-form-field>
             </div>

@@ -1,0 +1,52 @@
+.full-width {
+  width: 100%;
+}
+
+.mat-radio-button {
+  display: inline-flex;
+  margin-right: 5px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 1px;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+
+.mat-elevation-z8 {
+    margin: 5px;
+}
+
+.mat-radio-button {
+  display: inline-flex;
+  margin-right: 10px;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}

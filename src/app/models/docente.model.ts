@@ -1,5 +1,5 @@
 export class Docente {
-    rf: string;
+    matricula: string;
     nome: string;
     email: string;
     autorizado: boolean;

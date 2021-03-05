@@ -6,9 +6,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline" style="width: 100px;">
     <mat-label>Hora Semanal</mat-label>
-    <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput placeholder="Hora Semanal" readonly>
+    <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput placeholder="Hora Semanal"
+      readonly>
   </mat-form-field>
-  <mat-form-field appearance="outline" style="width: 100px;"> 
+  <mat-form-field appearance="outline" style="width: 100px;">
     <mat-label>Hora Mensal</mat-label>
     <input [(ngModel)]="atividade.horaMensal" formControlName="horaMensal" matInput placeholder="Hora Mensal" readonly>
   </mat-form-field>
@@ -24,30 +25,41 @@
   <br>
   <mat-form-field appearance="outline">
     <mat-label>Data Inicio</mat-label>
-    <input matInput placeholder="dd/MM/yyyy" readonly>
+    <input matInput [(ngModel)]="atividade.dataInicio" formControlName="dataInicio" placeholder="dd/MM/yyyy" readonly>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Data Fim</mat-label>
-    <input matInput placeholder="dd/MM/yyyy" readonly>
+    <input matInput [(ngModel)]="atividade.dataFim" formControlName="dataFim" placeholder="dd/MM/yyyy" readonly>
   </mat-form-field>
-</form>
 
-<h1 mat-dialog-title>Docente</h1>
-
-<form>
-    <mat-form-field appearance="outline" style="width: 100%;">
+  <h1 mat-dialog-title>Docente</h1>
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Nome</mat-label>
-        <input matInput placeholder="Nome Docente" readonly>
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Total de Horas alocadas atual</mat-label>
-        <input matInput placeholder="Nome Docente" readonly>
-    </mat-form-field>
+        <input matInput [(ngModel)]="atividade.docente" formControlName="docente" placeholder="Nome Docente" readonly>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Horas em andamento</mat-label>
+        <input matInput [(ngModel)]="atividade.horasEmAndamento" formControlName="horasEmAndamento" placeholder="Horas aprovadas" readonly>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Horas futuras</mat-label>
+        <input matInput [(ngModel)]="atividade.horasFuturas" formControlName="horasFuturas" placeholder="Horas solicitadas" readonly>
+      </mat-form-field>
+    </div>
+  </div>
+
 </form>
 
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Fechar</button>
-  <button mat-button (click)="onNoClick()" color="accent">Aprovar</button>
+  <button mat-button (click)="onNoClick()" color="accent">Aceitar</button>
 </div>
-
