@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Atividade } from 'src/app/models/atividade.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
 
 @Component({
   selector: 'app-autorizacao-detalhes',
@@ -13,11 +14,20 @@ export class AutorizacaoDetalhesComponent implements OnInit {
 
   atividade: Atividade = new Atividade();
   formularioAtividade: FormGroup;
+  admin = false;
+  user = false;
+  private roles: string[];
 
   constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder, 
-    private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data) { }
+    private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+
+      this.admin = this.roles.includes('ROLE_ADMIN');
+      this.user = this.roles.includes('ROLE_USER');
+    }
     this.formularioAtividade = this.fbuilder.group({
       projeto: new FormControl(''),
       id: new FormControl(''),

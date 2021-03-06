@@ -61,5 +61,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Fechar</button>
-  <button mat-button (click)="onNoClick()" color="accent">Aceitar</button>
+  <button mat-button (click)="onNoClick()" color="accent" *ngIf='admin'>Aceitar</button>
 </div>

@@ -20,6 +20,11 @@ export class RelatorioService {
     return this.http.post<Relatorio[]>(this.baseUrl + '/docente', request);
   }
 
+  extrairRelatorioGeral(request: Relatorio): Observable<any> {
+    
+    return this.http.post<Relatorio[]>(this.baseUrl + '/todos', request);
+  }
+
   gerarPdf(request: Relatorio): Observable<Blob>  {
     return this.http.post(this.baseUrl + '/export', request, {responseType: 'blob'});
   }
