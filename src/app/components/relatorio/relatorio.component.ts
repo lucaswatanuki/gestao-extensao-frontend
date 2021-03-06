@@ -42,25 +42,36 @@ export class RelatorioComponent implements OnInit {
     });
   }
 
-  gerarRelatorioPorDocente(request: Relatorio): void {
-    this.relatorioService.extrairRelatorioPorDocente(request).subscribe(
-      data => {
-        this.relatorio = new MatTableDataSource(data);
-        this.relatorio.paginator = this.paginator;
-      },
-      error => {
-        this.errorMsg = `${error.status}: ${JSON.parse(error.error).message}`;
-        console.error(this.errorMsg);
-      }
-    );
+  gerarRelatorio(request: Relatorio): void {
+    if (request.idDocente == null) {
+      this.relatorioService.extrairRelatorioGeral(request).subscribe(
+        data => {
+          this.relatorio = new MatTableDataSource(data);
+          this.relatorio.paginator = this.paginator;
+        },
+        error => {
+          this.errorMsg = `${error.status}: ${JSON.parse(error.error).message}`;
+          console.error(this.errorMsg);
+        });
+    } else {
+      this.relatorioService.extrairRelatorioPorDocente(request).subscribe(
+        data => {
+          this.relatorio = new MatTableDataSource(data);
+          this.relatorio.paginator = this.paginator;
+        },
+        error => {
+          this.errorMsg = `${error.status}: ${JSON.parse(error.error).message}`;
+          console.error(this.errorMsg);
+        });
+    }
   }
 
   extrairRelatorioPDF(request: Relatorio): void {
     this.relatorioService.gerarPdf(request).subscribe(
       data => {
-        const blob = new Blob([data], {type: 'application/pdf'});
+        const blob = new Blob([data], { type: 'application/pdf' });
 
-        if(window.navigator && window.navigator.msSaveOrOpenBlob) {
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
           window.navigator.msSaveOrOpenBlob(blob);
           return;
         }
@@ -69,11 +80,11 @@ export class RelatorioComponent implements OnInit {
         const link = document.createElement('a');
 
         link.href = dados;
-        var date = this.datePipe.transform(new Date(),"dd-MM-yyyy_HH:mm:ss");
+        var date = this.datePipe.transform(new Date(), "dd-MM-yyyy_HH:mm:ss");
         link.download = 'relatorio_' + date + '.pdf';
-        link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}))
+        link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
 
-        setTimeout(function() {
+        setTimeout(function () {
           window.URL.revokeObjectURL(dados);
           link.remove();
         }, 100);
@@ -92,8 +103,12 @@ export class RelatorioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.formRelatorio.get('nomeDocente').setValue(result.nome);
-      this.request.idDocente = result.id;
+      if (result === 'Todos') {
+        this.formRelatorio.get('nomeDocente').setValue(result);
+      } else {
+        this.formRelatorio.get('nomeDocente').setValue(result.nome);
+        this.request.idDocente = result.id;
+      }
     });
   }
 

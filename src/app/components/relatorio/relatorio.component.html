@@ -84,11 +84,16 @@
               mat-raised-button
               color="primary"
               style="margin-right: 10px"
-              (click)="gerarRelatorioPorDocente(request)"
+              (click)="gerarRelatorio(request)"
             >
               Gerar relatório
             </button>
             <button
+              [disabled]="
+                (request.dataFim &&
+                  request.dataInicio &&
+                  request.statusAtividade) == null
+              "
               mat-raised-button
               color="primary"
               (click)="extrairRelatorioPDF(request)"

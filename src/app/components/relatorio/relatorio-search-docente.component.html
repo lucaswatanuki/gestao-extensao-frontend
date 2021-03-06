@@ -35,5 +35,8 @@
         <tr mat-header-row class="table-header" *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row, columns: displayedColumns;" (click)="selectRow(row)"></tr>
     </table>
+    <div mat-dialog-actions>
+        <button mat-button (click)="selectRow('Todos')">Selecionar todos os docentes</button>
+      </div>
     <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
 </div>
