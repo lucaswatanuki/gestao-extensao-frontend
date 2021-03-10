@@ -98,6 +98,14 @@
                   </mat-form-field>
                 </div>
               </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Incluir observação</mat-label>
+                    <textarea matInput formControlName="observacao"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
             </mat-card-content>
             <mat-card-actions>
               <button [disabled]="!convenioForm.valid" mat-raised-button color="primary"
@@ -229,6 +237,14 @@
                       required>
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <mat-label>Incluir observação</mat-label>
+                    <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
                 </div>
               </div>
