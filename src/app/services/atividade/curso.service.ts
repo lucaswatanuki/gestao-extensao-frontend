@@ -13,7 +13,7 @@ export class CursoService {
 
   constructor(private http: HttpClient) { }
 
-  salvarConvenio(curso: CursoExtensao): Observable<any> {
+  salvarCurso(curso: CursoExtensao): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/curso', curso);
   }
 }

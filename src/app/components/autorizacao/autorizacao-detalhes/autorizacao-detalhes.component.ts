@@ -1,9 +1,10 @@
 import { AtividadeService } from './../../../services/atividade/atividade.service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Atividade } from 'src/app/models/atividade.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-autorizacao-detalhes',
@@ -11,6 +12,8 @@ import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
   styleUrls: ['./autorizacao-detalhes.component.scss']
 })
 export class AutorizacaoDetalhesComponent implements OnInit {
+
+  @ViewChild('content', {static: false}) content: ElementRef;
 
   atividade: Atividade = new Atividade();
   formularioAtividade: FormGroup;
@@ -40,6 +43,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       docente: new FormControl(''),
       horasEmAndamento: new FormControl(''),
       horasFuturas: new FormControl(''),
+      observacao: new FormControl(''),
     });
     if (this.data.id) {
       this.atividadeService.consultarAtividade(this.data.id).subscribe(
@@ -56,6 +60,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.docente = response.docente;
           this.atividade.horasEmAndamento = response.horasEmAndamento;
           this.atividade.horasFuturas = response.horasFuturas;
+          this.atividade.observacao = response.observacao;
       },
       error => {
         console.log(error);
@@ -65,6 +70,17 @@ export class AutorizacaoDetalhesComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  downloadPDF(): void {
+    let doc = new jsPDF('p', 'pt', 'a4', true);
+    doc.html(this.content.nativeElement, {
+      callback: (doc) => {
+        doc.save('atividade.pdf');
+      },
+      x: 20,
+      y: 10
+    });
   }
 
 }

@@ -12,4 +12,5 @@ export class Atividade {
     docente: string;
     horasFuturas: number;
     horasEmAndamento: number;
+    observacao: string;
 }

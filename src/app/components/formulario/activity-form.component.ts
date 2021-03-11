@@ -35,6 +35,7 @@ export class ActivityFormComponent implements OnInit{
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
       valorBruto: [null],
+      observacao: [null]
     });
 
     this.cursoForm = this.fb.group({
@@ -51,6 +52,7 @@ export class ActivityFormComponent implements OnInit{
       valorBrutoOutraAtividade: [null],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
+      observacao: [null]
     });
 
     this.regenciaForm = this.fb.group({
@@ -90,6 +92,7 @@ export class ActivityFormComponent implements OnInit{
     this.convenioModel.valorBruto = this.convenioForm.get('valorBruto').value;
     this.convenioModel.dataInicio = this.convenioForm.get('dataInicio').value;
     this.convenioModel.dataFim = this.convenioForm.get('dataFim').value;
+    this.convenioModel.observacao = this.convenioForm.get('observacao').value;
 
     console.log(this.convenioModel);
 
@@ -111,9 +114,11 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.coordenador = this.cursoForm.get('coordenador').value;
     this.cursoModel.projeto = this.cursoForm.get('projeto').value;
     this.cursoModel.participacao = this.cursoForm.get('participacao').value;
+    this.cursoModel.observacao = this.cursoForm.get('observacao').value;
+    
     console.log(this.convenioModel);
 
-    this.convenioService.salvarConvenio(this.convenioModel).subscribe(
+    this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
         console.log(data);
         this.form.resetForm();
