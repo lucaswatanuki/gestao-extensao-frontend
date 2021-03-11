@@ -21,7 +21,7 @@ export class AutorizacaoComponent implements OnInit {
   autorizacao: Autorizacao = new Autorizacao();
   autorizacoes: MatTableDataSource<Autorizacao>;
   errorMsg: string;
-  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente', 'action'];
+  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente', 'abrir'];
 
   constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog) {}
 
