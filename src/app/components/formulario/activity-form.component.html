@@ -109,7 +109,7 @@
             </mat-card-content>
             <mat-card-actions>
               <button [disabled]="!convenioForm.valid" mat-raised-button color="primary"
-                (click)="submeterConvenio(form)">Enviar</button>
+                (click)="submeterConvenio(form); convenioForm.reset()">Enviar</button>
             </mat-card-actions>
           </mat-card>
         </form>
@@ -163,7 +163,7 @@
                 <mat-label style="margin-right: 20px;">Participação em: </mat-label>
                 <mat-radio-group aria-label="Select an option" formControlName="participacao">
                   <mat-radio-button value="DISCIPLINA">Disciplina</mat-radio-button>
-                  <mat-radio-button value="COORDENAÇÃO">Coordenação</mat-radio-button>
+                  <mat-radio-button value="COORDENACAO">Coordenação</mat-radio-button>
                 </mat-radio-group>
               </div>
               <div class="row" style="margin-top: 5px;">
@@ -251,7 +251,7 @@
             </mat-card-content>
             <mat-card-actions>
               <button [disabled]="!cursoForm.valid" mat-raised-button color="primary"
-                (click)="submeterCurso(form)">Enviar</button>
+                (click)="submeterCurso(form); cursoForm.reset()">Enviar</button>
             </mat-card-actions>
           </mat-card>
         </form>
