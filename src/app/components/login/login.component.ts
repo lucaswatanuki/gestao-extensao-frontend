@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   showFail(mensagem: string): void {
-    this.toast.error(mensagem);
+    this.toast.error(mensagem, "Erro");
   }
 
   onSubmit(): void {

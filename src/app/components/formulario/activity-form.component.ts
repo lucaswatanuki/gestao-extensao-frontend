@@ -98,8 +98,6 @@ export class ActivityFormComponent implements OnInit{
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(
       data => {
-        console.log(data);
-        this.form.resetForm();
         this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {
@@ -112,16 +110,23 @@ export class ActivityFormComponent implements OnInit{
     console.log(this.convenioForm);
     this.cursoModel = new CursoExtensao();
     this.cursoModel.coordenador = this.cursoForm.get('coordenador').value;
-    this.cursoModel.projeto = this.cursoForm.get('projeto').value;
+    this.cursoModel.nomeCurso = this.cursoForm.get('nomeCurso').value;
     this.cursoModel.participacao = this.cursoForm.get('participacao').value;
     this.cursoModel.observacao = this.cursoForm.get('observacao').value;
-    
+    this.cursoModel.disciplinas = this.cursoForm.get('disciplina').value;
+    this.cursoModel.cargaHorariaTotal = this.cursoForm.get('totalHorasMinistradas').value;
+    this.cursoModel.horaSemanal = this.cursoForm.get('horaSemanal').value;
+    this.cursoModel.horaMensal = this.cursoForm.get('horaMensal').value;
+    this.cursoModel.valorBrutoHoraAula = this.cursoForm.get('valorBrutoHoraAula').value;
+    this.cursoModel.valorBrutoTotalAula = this.cursoForm.get('valorBrutoTotalAula').value;
+    this.cursoModel.valorBrutoOutrasAtividade = this.cursoForm.get('valorBrutoOutraAtividade').value;
+    this.cursoModel.dataInicio = this.cursoForm.get('dataInicio').value;
+    this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
+
     console.log(this.convenioModel);
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
-        console.log(data);
-        this.form.resetForm();
         this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {

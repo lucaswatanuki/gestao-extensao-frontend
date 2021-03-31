@@ -10,7 +10,7 @@ export class Atividade {
     dataInicio: Date;
     dataFim: Date;
     docente: string;
-    horasFuturas: number;
-    horasEmAndamento: number;
+    horasAprovadas: number;
+    horasSolicitadas: number;
     observacao: string;
 }

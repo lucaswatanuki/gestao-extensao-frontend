@@ -58,8 +58,8 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.dataInicio = response.dataInicio;
           this.atividade.dataFim = response.dataFim;
           this.atividade.docente = response.docente;
-          this.atividade.horasEmAndamento = response.horasEmAndamento;
-          this.atividade.horasFuturas = response.horasFuturas;
+          this.atividade.horasAprovadas = response.horasAprovadas;
+          this.atividade.horasSolicitadas = response.horasSolicitadas;
           this.atividade.observacao = response.observacao;
       },
       error => {
