@@ -92,7 +92,7 @@
     <div class="row">
       <div class="col">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Horas aprovadas</mat-label>
+          <mat-label>Horas aprovadas em {{currentYear}}</mat-label>
           <input
             matInput
             [(ngModel)]="atividade.horasAprovadas"
@@ -109,7 +109,7 @@
             matInput
             [(ngModel)]="atividade.horasSolicitadas"
             formControlName="horasFuturas"
-            placeholder="Horas solicitadas"
+            placeholder="Total de horas solicitadas"
             readonly
           />
         </mat-form-field>
@@ -133,7 +133,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" *ngIf="admin">
+  <button [disabled]="atividade.autorizado" mat-button (click)="autorizarAtividade(atividade)" *ngIf="admin">
     <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
     Aceitar
   </button>
@@ -141,7 +141,7 @@
     <mat-icon aria-hidden="false" aria-label="edit icon">cancel</mat-icon>
     Devolver
   </button>
-  <button mat-button (click)="downloadPDF()" *ngIf="admin">
+  <button mat-button (click)="extrairRelatorioPDF(atividade)" *ngIf="admin">
     <mat-icon aria-hidden="false" aria-label="edit icon">save</mat-icon>
     Salvar
   </button>

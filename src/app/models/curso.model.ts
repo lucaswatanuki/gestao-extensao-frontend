@@ -8,4 +8,5 @@ export class CursoExtensao extends Atividade {
     valorBrutoOutrasAtividade: number;
     periodo: number;
     nomeCurso: string;
+    instituicaoVinculada: string;
 }

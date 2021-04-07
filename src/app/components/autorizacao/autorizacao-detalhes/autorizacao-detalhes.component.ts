@@ -4,7 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Atividade } from 'src/app/models/atividade.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
-import { jsPDF } from 'jspdf';
+import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-autorizacao-detalhes',
@@ -20,11 +21,14 @@ export class AutorizacaoDetalhesComponent implements OnInit {
   admin = false;
   user = false;
   private roles: string[];
+  currentYear: number;
 
   constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder, 
-    private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService) { }
+    private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService,
+    private autorizacaoService: AutorizacaoService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.currentYear = new Date().getFullYear();
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
 
@@ -61,6 +65,8 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.horasAprovadas = response.horasAprovadas;
           this.atividade.horasSolicitadas = response.horasSolicitadas;
           this.atividade.observacao = response.observacao;
+          this.atividade.autorizado = response.autorizado;
+          this.atividade.tipoAtividade = response.tipoAtividade;
       },
       error => {
         console.log(error);
@@ -68,19 +74,44 @@ export class AutorizacaoDetalhesComponent implements OnInit {
     }
   }
 
+  autorizarAtividade(atividade: Atividade): void{
+    this.autorizacaoService.autorizar(atividade).subscribe(
+      res => {
+        this.dialogRef.close();
+        console.log("Atividade autorizada com sucesso");
+      },
+      error => {console.log(error);
+      });
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  downloadPDF(): void {
-    let doc = new jsPDF('p', 'pt', 'a4', true);
-    doc.html(this.content.nativeElement, {
-      callback: (doc) => {
-        doc.save('atividade.pdf');
-      },
-      x: 20,
-      y: 10
-    });
+  extrairRelatorioPDF(atividade: Atividade): void {
+    this.atividadeService.salvarAtividade(atividade).subscribe(
+      data => {
+        const blob = new Blob([data], { type: 'application/pdf' });
+
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob);
+          return;
+        }
+
+        const dados = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        link.href = dados;
+        var date = this.datePipe.transform(new Date(), "dd-MM-yyyy_HH:mm:ss");
+        link.download = 'relatorio_' + date + '.pdf';
+        link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+
+        setTimeout(function () {
+          window.URL.revokeObjectURL(dados);
+          link.remove();
+        }, 100);
+      }
+    );
   }
 
 }

@@ -34,12 +34,12 @@ export class ActivityFormComponent implements OnInit{
       descricao: [null, Validators.required],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
-      valorBruto: [null],
+      valorBruto: [null, Validators.required],
       observacao: [null]
     });
 
     this.cursoForm = this.fb.group({
-      instituicao: [null, Validators.required],
+      instituicaoVinculada: [null, Validators.required],
       nomeCurso: [null, Validators.required],
       coordenador: [null, Validators.required],
       participacao: [null, Validators.required],
@@ -80,7 +80,7 @@ export class ActivityFormComponent implements OnInit{
     });
   }
 
-  submeterConvenio(form: FormGroupDirective): void {
+  submeterConvenio(): void {
     console.log(this.convenioForm);
     this.convenioModel = new Convenio();
     this.convenioModel.coordenador = this.convenioForm.get('coordenador').value;
@@ -93,6 +93,7 @@ export class ActivityFormComponent implements OnInit{
     this.convenioModel.dataInicio = this.convenioForm.get('dataInicio').value;
     this.convenioModel.dataFim = this.convenioForm.get('dataFim').value;
     this.convenioModel.observacao = this.convenioForm.get('observacao').value;
+    this.convenioModel.tipoAtividadeSimultanea = this.convenioForm.get('tipoAtividadeSimultanea').value;
 
     console.log(this.convenioModel);
 
@@ -106,7 +107,7 @@ export class ActivityFormComponent implements OnInit{
     );
   }
 
-  submeterCurso(form: FormGroupDirective): void {
+  submeterCurso(): void {
     console.log(this.convenioForm);
     this.cursoModel = new CursoExtensao();
     this.cursoModel.coordenador = this.cursoForm.get('coordenador').value;
@@ -122,6 +123,7 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.valorBrutoOutrasAtividade = this.cursoForm.get('valorBrutoOutraAtividade').value;
     this.cursoModel.dataInicio = this.cursoForm.get('dataInicio').value;
     this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
+    this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
 
     console.log(this.convenioModel);
 

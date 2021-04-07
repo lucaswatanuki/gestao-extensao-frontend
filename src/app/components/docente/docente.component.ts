@@ -17,6 +17,7 @@ export class DocenteComponent implements OnInit {
   docentes: MatTableDataSource<any>;
   errorMsg: string;
   displayedColumns: string[] = ['matricula', 'nome', 'email', 'totalHorasEmAndamento', 'totalHorasFuturas'];
+  currentYear: number;
 
   constructor(private docenteService: DocenteService) {}
   
@@ -25,6 +26,7 @@ export class DocenteComponent implements OnInit {
   }
 
   getDocentes(): void {
+    this.currentYear = new Date().getFullYear();
      this.docenteService.listarDocentes().subscribe(
        data => {
          this.docentes = new MatTableDataSource(data);

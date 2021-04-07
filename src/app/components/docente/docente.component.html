@@ -19,14 +19,14 @@
     </ng-container>
 
     <ng-container matColumnDef="totalHorasEmAndamento">
-      <th mat-header-cell *matHeaderCellDef>Total Horas Aprovadas</th>
+      <th mat-header-cell *matHeaderCellDef>Horas Aprovadas {{currentYear}}</th>
       <td mat-cell *matCellDef="let element">
         {{ element.totalHorasAprovadas }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="totalHorasFuturas">
-      <th mat-header-cell *matHeaderCellDef>Total Horas Solicitadas</th>
+      <th mat-header-cell *matHeaderCellDef>Horas Solicitadas {{currentYear}}</th>
       <td mat-cell *matCellDef="let element">
         {{ element.totalHorasSolicitadas }}
       </td>

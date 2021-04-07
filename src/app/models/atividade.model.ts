@@ -13,4 +13,6 @@ export class Atividade {
     horasAprovadas: number;
     horasSolicitadas: number;
     observacao: string;
+    autorizado: boolean;
+    tipoAtividade: string;
 }
