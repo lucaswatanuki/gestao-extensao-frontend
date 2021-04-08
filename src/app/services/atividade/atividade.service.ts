@@ -24,4 +24,8 @@ export class AtividadeService {
   consultarAtividade(id: number): Observable<Atividade> {
     return this.http.get<Atividade>(this.baseUrl + '/' + id);
   }
+
+  salvarAtividade(atividade: Atividade): Observable<Blob>  {
+    return this.http.get(this.baseUrl + '/download/' + atividade.tipoAtividade + '/' + atividade.id, {responseType: 'blob'});
+  }
 }

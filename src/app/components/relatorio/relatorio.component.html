@@ -68,7 +68,7 @@
               <mat-radio-button value="EM_ANDAMENTO"
                 >Em andamento</mat-radio-button
               >
-              <mat-radio-button value="FUTURA">A realizar</mat-radio-button>
+              <mat-radio-button value="PENDENTE">Pendente</mat-radio-button>
               <mat-radio-button value="TODOS">Todos</mat-radio-button>
             </mat-radio-group>
           </div>
@@ -137,7 +137,7 @@
               </ng-container>
 
               <ng-container matColumnDef="prazo">
-                <th mat-header-cell *matHeaderCellDef>Prazo (meses)</th>
+                <th mat-header-cell *matHeaderCellDef>Duração (meses)</th>
                 <td mat-cell *matCellDef="let element">
                   {{ element.prazo }}
                 </td>
