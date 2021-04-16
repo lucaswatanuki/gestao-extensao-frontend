@@ -15,4 +15,5 @@ export class Atividade {
     observacao: string;
     autorizado: boolean;
     tipoAtividade: string;
+    revisao: string;
 }

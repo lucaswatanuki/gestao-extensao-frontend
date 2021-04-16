@@ -46,6 +46,14 @@
                 </div>
               </div>
               <div class="row">
+                <mat-label style="margin-right: 20px;">Participação em: </mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="tipoAtividadeSimultanea">
+                  <mat-radio-button value="PESQUISA">Pesquisa</mat-radio-button>
+                  <mat-radio-button value="ENSINO">Ensino</mat-radio-button>
+                  <mat-radio-button value="EXTENSAO">Extensão</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Descrição</mat-label>
@@ -252,6 +260,162 @@
             <mat-card-actions>
               <button [disabled]="!cursoForm.valid" mat-raised-button color="primary"
                 (click)="submeterCurso(); cursoForm.reset()">Enviar</button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Regência Concomitante
+          </mat-panel-title>
+          <mat-panel-description>
+            Submeter atividades relacionadas a Regência Concomitante
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form name="form" [formGroup]="regenciaForm" #f="ngForm">
+          <mat-card class="mat-elevation-z0">
+            <mat-card-content>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nome do curso</mat-label>
+                    <input matInput placeholder="Nome do curso" formControlName="curso">
+                    <mat-error *ngIf="regenciaForm.controls['curso'].hasError('required')">
+                      Nome do curso <strong>obrigatório</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Instituição de Ensino Vinculada</mat-label>
+                    <input matInput placeholder="Instituição vinculada" formControlName="instituicao">
+                    <mat-error *ngIf="regenciaForm.controls['instituicao'].hasError('required')">
+                      Nome da instituição <strong>obrigatório</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Coordenador(a) </mat-label>
+                    <input matInput placeholder="Coordenador(a)" formControlName="coordenador">
+                    <mat-error *ngIf="regenciaForm.controls['coordenador'].hasError('required')">
+                      Nome do coordenador(a) <strong>obrigatório</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <mat-label style="margin-right: 20px;">Nível: </mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="disciplinaParticipacao">
+                  <mat-radio-button value="GRADUACAO">Graduação</mat-radio-button>
+                  <mat-radio-button value="POS_GRADUACAO">Pós-Graduação</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="row">
+                <mat-label style="margin-right: 20px;">Será o responsável pela disciplina: </mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="responsavel">
+                  <mat-radio-button [value]="true">Sim</mat-radio-button>
+                  <mat-radio-button [value]="false">Não</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="row">
+                <mat-label style="margin-right: 20px;">Será o único docente da disciplina: </mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="unicoDocente">
+                  <mat-radio-button [value]="true">Sim</mat-radio-button>
+                  <mat-radio-button [value]="false">Não</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="row" style="margin-top: 5px;">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Disciplina de participação</mat-label>
+                    <input matInput placeholder="Disciplina" formControlName="disciplinaParticipacao">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Carga horária total de aulas ministradas</mat-label>
+                    <input matInput maxlength="5" min="1" placeholder="Carga horária total" type="number"
+                      formControlName="cargaHoraTotalMinistrada">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas semanais dedicadas (aulas + preparação e outras atividades)</mat-label>
+                    <input matInput maxlength="5" min="1" placeholder="Carga horária semanal" type="number"
+                      formControlName="horaSemanal">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas mensais dedicadas (aulas + preparação e outras atividades)</mat-label>
+                    <input matInput maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
+                      formControlName="horaMensal">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto por hora-aula (R$)</mat-label>
+                    <input matInput maxlength="5" placeholder="Valor bruto hora-aula" type="number"
+                      formControlName="valorBrutoHoraAula">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto pelo total de aulas (R$)</mat-label>
+                    <input matInput maxlength="5" placeholder="Valor bruto total aulas" type="number"
+                      formControlName="valorBrutoTotalAula">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto de outras atividades (R$)</mat-label>
+                    <input matInput maxlength="5" placeholder="Valor bruto de outras atividades" type="number"
+                      formControlName="valorBrutoOutraAtividade">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Inicio</mat-label>
+                    <input matInput [matDatepicker]="picker4" formControlName="dataInicio" placeholder="Selecionar data" 
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Fim</mat-label>
+                    <input matInput [matDatepicker]="picker5" formControlName="dataFim" placeholder="Selecionar data"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                    <mat-datepicker #picker5></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field  appearance="outline" class="full-width">
+                    <mat-label>Incluir observação</mat-label>
+                    <textarea matInput formControlName="observacao"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button [disabled]="!regenciaForm.valid" mat-raised-button color="primary"
+                (click)="submeterRegencia(); regenciaForm.reset()">Enviar</button>
             </mat-card-actions>
           </mat-card>
         </form>

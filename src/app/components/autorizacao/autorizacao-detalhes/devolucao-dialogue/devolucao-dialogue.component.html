@@ -1,0 +1,21 @@
+<h1>Devolver atividade</h1>
+
+<mat-card class="mat-elevation-z0">
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Incluir observação</mat-label>
+                    <textarea matInput [(ngModel)]="atividade.observacao"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button (click) = "dialogRef.close(false)">Cancelar</button>
+    <button mat-button (click) = "devolverAtividade(atividade)" color="accent">Enviar</button>
+</div>

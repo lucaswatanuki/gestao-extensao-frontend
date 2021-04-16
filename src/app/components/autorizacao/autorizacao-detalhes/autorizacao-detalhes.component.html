@@ -1,117 +1,90 @@
 <div id="content" #content>
   <h1 mat-dialog-title>Solicitação de Atividade #{{ atividade.id }}</h1>
   <form name="form" [formGroup]="formularioAtividade">
-    <mat-form-field appearance="outline">
-      <mat-label>Título do Projeto</mat-label>
-      <input
-        [(ngModel)]="atividade.projeto"
-        formControlName="projeto"
-        matInput
-        placeholder="Projeto"
-        readonly
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100px">
-      <mat-label>Hora Semanal</mat-label>
-      <input
-        [(ngModel)]="atividade.horaSemanal"
-        formControlName="horaSemanal"
-        matInput
-        placeholder="Hora Semanal"
-        readonly
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100px">
-      <mat-label>Hora Mensal</mat-label>
-      <input
-        [(ngModel)]="atividade.horaMensal"
-        formControlName="horaMensal"
-        matInput
-        placeholder="Hora Mensal"
-        readonly
-      />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="outline" style="width: 100px">
-      <mat-label>Prazo (meses)</mat-label>
-      <input
-        [(ngModel)]="atividade.prazo"
-        formControlName="prazo"
-        matInput
-        placeholder="Prazo"
-        readonly
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Valor Bruto (R$)</mat-label>
-      <input
-        [(ngModel)]="atividade.valorBruto"
-        formControlName="valor"
-        matInput
-        placeholder="Valor Bruto (R$)"
-        readonly
-      />
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="outline">
-      <mat-label>Data Inicio</mat-label>
-      <input
-        matInput
-        [(ngModel)]="atividade.dataInicio"
-        formControlName="dataInicio"
-        placeholder="dd/MM/yyyy"
-        readonly
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Data Fim</mat-label>
-      <input
-        matInput
-        [(ngModel)]="atividade.dataFim"
-        formControlName="dataFim"
-        placeholder="dd/MM/yyyy"
-        readonly
-      />
-    </mat-form-field>
-
-    <h1 mat-dialog-title>Docente</h1>
     <div class="row">
       <div class="col">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Nome</mat-label>
-          <input
-            matInput
-            [(ngModel)]="atividade.docente"
-            formControlName="docente"
-            placeholder="Nome Docente"
-            readonly
-          />
+          <mat-label>Título do Projeto</mat-label>
+          <input [(ngModel)]="atividade.projeto" formControlName="projeto" matInput placeholder="Projeto" readonly />
         </mat-form-field>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Horas aprovadas em {{currentYear}}</mat-label>
-          <input
-            matInput
-            [(ngModel)]="atividade.horasAprovadas"
-            formControlName="horasEmAndamento"
-            placeholder="Horas aprovadas"
-            readonly
-          />
+          <mat-label>Hora Semanal</mat-label>
+          <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput placeholder="Hora Semanal"
+            readonly />
         </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Horas solicitadas</mat-label>
-          <input
-            matInput
-            [(ngModel)]="atividade.horasSolicitadas"
-            formControlName="horasFuturas"
-            placeholder="Total de horas solicitadas"
-            readonly
-          />
+          <mat-label>Hora Mensal</mat-label>
+          <input [(ngModel)]="atividade.horaMensal" formControlName="horaMensal" matInput placeholder="Hora Mensal"
+            readonly />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Prazo (meses)</mat-label>
+          <input [(ngModel)]="atividade.prazo" formControlName="prazo" matInput placeholder="Prazo" readonly />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Valor Bruto (R$)</mat-label>
+          <input [(ngModel)]="atividade.valorBruto" formControlName="valor" matInput placeholder="Valor Bruto (R$)"
+            readonly />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Data Inicio</mat-label>
+          <input matInput [(ngModel)]="atividade.dataInicio" formControlName="dataInicio" placeholder="dd/MM/yyyy"
+            readonly />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Data Fim</mat-label>
+          <input matInput [(ngModel)]="atividade.dataFim" formControlName="dataFim" placeholder="dd/MM/yyyy" readonly />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <h1 mat-dialog-title>Docente</h1>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Nome</mat-label>
+          <input matInput [(ngModel)]="atividade.docente" formControlName="docente" placeholder="Nome Docente"
+            readonly />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Horas solicitadas em convênios</mat-label>
+          <input matInput [(ngModel)]="atividade.horasAprovadas" formControlName="horasEmAndamento"
+            placeholder="Horas aprovadas" readonly />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Horas solicitadas em cursos de extensão</mat-label>
+          <input matInput [(ngModel)]="atividade.horasSolicitadas" formControlName="horasFuturas"
+            placeholder="Total de horas solicitadas" readonly />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Horas solicitadas em regência</mat-label>
+          <input matInput [(ngModel)]="atividade.horasAprovadas" formControlName="horasEmAndamento"
+            placeholder="Total de horas solicitadas" readonly />
         </mat-form-field>
       </div>
     </div>
@@ -119,13 +92,16 @@
     <div class="row">
       <div class="col">
         <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Comentário</mat-label>
-          <textarea
-            matInput
-            [(ngModel)]="atividade.observacao"
-            formControlName="observacao"
-            readonly
-          ></textarea>
+          <mat-label>Comentário docente</mat-label>
+          <textarea matInput [(ngModel)]="atividade.observacao" formControlName="observacao" readonly></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Itens a revisar</mat-label>
+          <textarea matInput [(ngModel)]="atividade.revisao" formControlName="revisao" readonly></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -133,11 +109,12 @@
 </div>
 
 <div mat-dialog-actions>
-  <button [disabled]="atividade.autorizado" mat-button (click)="autorizarAtividade(atividade)" *ngIf="admin">
+  <button [disabled]="atividade.autorizado" mat-button
+    (click)="openConfirmationDialog(atividade, 'Deseja confirmar autorização?', true)" *ngIf="admin">
     <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
     Aceitar
   </button>
-  <button mat-button (click)="onNoClick()" color="warn" *ngIf="admin">
+  <button mat-button (click)="devolverAtividade(atividade.id)" color="warn" *ngIf="admin">
     <mat-icon aria-hidden="false" aria-label="edit icon">cancel</mat-icon>
     Devolver
   </button>

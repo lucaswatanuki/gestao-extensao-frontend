@@ -29,8 +29,8 @@ import { DocenteComponent } from './components/docente/docente.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularValidateBrLibModule } from 'angular-validate-br';
 import { AutorizacaoDetalhesComponent } from './components/autorizacao/autorizacao-detalhes/autorizacao-detalhes.component';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
-
+import { ConfirmacaoDialogueComponent } from './shared/confirmacao-dialogue/confirmacao-dialogue.component';
+import { DevolucaoDialogueComponent } from './components/autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +44,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     AutorizacaoComponent,
     ConfiguracaoComponent,
     AutorizacaoDetalhesComponent,
-    SpinnerComponent,
-    RelatorioDocenteSearchDialogueComponent
+    RelatorioDocenteSearchDialogueComponent,
+    ConfirmacaoDialogueComponent,
+    DevolucaoDialogueComponent,
   ],
   imports: [
     CommonModule,

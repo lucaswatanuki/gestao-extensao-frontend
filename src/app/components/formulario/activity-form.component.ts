@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Convenio } from 'src/app/models/convenio.model';
 import { ConvenioService } from 'src/app/services/atividade/convenio.service';
+import { Regencia } from 'src/app/models/regencia.model';
 
 @Component({
   selector: 'app-activity-form',
@@ -18,6 +19,7 @@ export class ActivityFormComponent implements OnInit{
   regenciaForm: FormGroup;
   convenioModel: Convenio;
   cursoModel: CursoExtensao;
+  regenciaModel: Regencia;
   durationInSeconds = 5;
 
   panelOpenState = false;
@@ -35,7 +37,8 @@ export class ActivityFormComponent implements OnInit{
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
       valorBruto: [null, Validators.required],
-      observacao: [null]
+      observacao: [null],
+      tipoAtividadeSimultanea: [null, Validators.required]
     });
 
     this.cursoForm = this.fb.group({
@@ -56,17 +59,26 @@ export class ActivityFormComponent implements OnInit{
     });
 
     this.regenciaForm = this.fb.group({
-      company: null,
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      address: [null, Validators.required],
-      address2: null,
-      city: [null, Validators.required],
-      state: [null, Validators.required],
-      postalCode: [null, Validators.compose([
-        Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-      ],
-      shipping: ['free', Validators.required]
+      nivel: [null, Validators.required],
+      curso: [null, Validators.required],
+      coordenador: [null, Validators.required],
+      disciplinaParticipacao: [null, Validators.required],
+      cargaHoraTotalMinistrada: [null, Validators.required],
+      cargaHorariaTotalDedicada: [null],
+      valorBrutoHoraAula: [null, Validators.required],
+      valorBrutoTotalAula: [null, Validators.required],
+      valorBrutoOutraAtividade: [null, Validators.required],
+      instituicao: [null],
+      diasTrabalhadosUnicamp: [null],
+      diasTrabalhadosOutraInstituicao: [null],
+      responsavel: [null, Validators.required],
+      unicoDocente: [null, Validators.required],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
+      totalHorasMinistradas: [null, Validators.required],
+      horaSemanal: [null, Validators.required],
+      horaMensal: [null, Validators.required],
+      observacao: [null]
     });
   }
 
@@ -81,7 +93,6 @@ export class ActivityFormComponent implements OnInit{
   }
 
   submeterConvenio(): void {
-    console.log(this.convenioForm);
     this.convenioModel = new Convenio();
     this.convenioModel.coordenador = this.convenioForm.get('coordenador').value;
     this.convenioModel.instituicao = this.convenioForm.get('instituicao').value;
@@ -108,7 +119,6 @@ export class ActivityFormComponent implements OnInit{
   }
 
   submeterCurso(): void {
-    console.log(this.convenioForm);
     this.cursoModel = new CursoExtensao();
     this.cursoModel.coordenador = this.cursoForm.get('coordenador').value;
     this.cursoModel.nomeCurso = this.cursoForm.get('nomeCurso').value;
@@ -126,6 +136,38 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
 
     console.log(this.convenioModel);
+
+    this.cursoService.salvarCurso(this.cursoModel).subscribe(
+      data => {
+        this.openSnackBar(data.mensagem, 'OK');
+      },
+      erro => {
+        console.log(erro);
+      }
+    );
+  }
+
+  submeterRegencia(): void {
+    this.regenciaModel = new Regencia();
+    this.regenciaModel.coordenador = this.regenciaForm.get('coordenador').value;
+    this.regenciaModel.nivel = this.regenciaForm.get('nivel').value;
+    this.regenciaModel.curso = this.regenciaForm.get('curso').value;
+    this.regenciaModel.observacao = this.regenciaForm.get('observacao').value;
+    this.regenciaModel.disciplinaParticipacao = this.regenciaForm.get('disciplinaParticipacao').value;
+    this.regenciaModel.cargaHoraTotalMinistrada = this.regenciaForm.get('cargaHoraTotalMinistrada').value;
+    this.regenciaModel.cargaHorariaTotalDedicada = this.regenciaForm.get('cargaHorariaTotalDedicada').value;
+    this.regenciaModel.valorBrutoHoraAula = this.regenciaForm.get('valorBrutoHoraAula').value;
+    this.regenciaModel.valorBrutoTotalAula = this.regenciaForm.get('valorBrutoTotalAula').value;
+    this.regenciaModel.valorBrutoOutraAtividade = this.regenciaForm.get('valorBrutoOutraAtividade').value;
+    this.regenciaModel.dataInicio = this.regenciaForm.get('dataInicio').value;
+    this.regenciaModel.dataFim = this.regenciaForm.get('dataFim').value;
+    this.regenciaModel.instituicao = this.regenciaForm.get('instituicao').value;
+    this.regenciaModel.diasTrabalhadosOutraInstituicao = this.regenciaForm.get('diasTrabalhadosOutraInstituicao').value;
+    this.regenciaModel.diasTrabalhadosUnicamp = this.regenciaForm.get('diasTrabalhadosUnicamp').value;
+    this.regenciaModel.responsavel = this.regenciaForm.get('responsavel').value;
+    this.regenciaModel.unicoDocente = this.regenciaForm.get('unicoDocente').value;
+    this.regenciaModel.horaSemanal = this.regenciaForm.get('horaSemanal').value;
+    this.regenciaModel.horaMensal = this.regenciaForm.get('horaMensal').value;
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
