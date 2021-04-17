@@ -105,6 +105,21 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="row" *ngIf="fileInfos!=null">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">Arquivos</div>
+          <ul
+            class="list-group list-group-flush"
+            *ngFor="let file of fileInfos | async"
+          >
+            <li class="list-group-item">
+              <a href="{{ file.url }}">{{ file.nome }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 

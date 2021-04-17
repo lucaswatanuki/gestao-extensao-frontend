@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { DevolucaoDialogueComponent } from './devolucao-dialogue/devolucao-dialogue.component';
+import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-autorizacao-detalhes',
@@ -27,10 +29,12 @@ export class AutorizacaoDetalhesComponent implements OnInit {
   currentYear: number;
   confirmacaoDialogueRef: MatDialogRef<ConfirmacaoDialogueComponent>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  fileInfos: Observable<any>;
 
   constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService,
-    private autorizacaoService: AutorizacaoService, private datePipe: DatePipe, public dialog: MatDialog, private snackBar: MatSnackBar) { }
+    private autorizacaoService: AutorizacaoService, private datePipe: DatePipe, public dialog: MatDialog, private snackBar: MatSnackBar,
+    private uploadService: UploadArquivoService ) { }
 
   ngOnInit(): void {
     this.currentYear = new Date().getFullYear();
@@ -74,6 +78,9 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.autorizado = response.autorizado;
           this.atividade.tipoAtividade = response.tipoAtividade;
           this.atividade.revisao = response.revisao;
+
+          this.fileInfos = this.uploadService.getArquivos(this.atividade.id);
+          console.log(this.fileInfos);
         },
         error => {
           console.log(error);

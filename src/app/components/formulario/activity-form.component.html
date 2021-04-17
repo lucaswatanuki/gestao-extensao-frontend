@@ -114,6 +114,13 @@
                   </mat-form-field>
                 </div>
               </div>
+              <div class="row">
+                <div class="col">
+                  <label class="btn btn-default">
+                    <input type="file" (change)="selecionarArquivo($event)" />
+                  </label>
+                </div>
+              </div>
             </mat-card-content>
             <mat-card-actions>
               <button [disabled]="!convenioForm.valid" mat-raised-button color="primary"
@@ -254,6 +261,13 @@
                     <mat-label>Incluir observação</mat-label>
                     <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label class="btn btn-default">
+                    <input type="file" (change)="selecionarArquivo($event)" />
+                  </label>
                 </div>
               </div>
             </mat-card-content>
@@ -410,6 +424,13 @@
                     <mat-label>Incluir observação</mat-label>
                     <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label class="btn btn-default">
+                    <input type="file" (change)="selecionarArquivo($event)" />
+                  </label>
                 </div>
               </div>
             </mat-card-content>

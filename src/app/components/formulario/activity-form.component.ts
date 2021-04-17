@@ -1,11 +1,14 @@
 import { CursoService } from './../../services/atividade/curso.service';
 import { CursoExtensao } from './../../models/curso.model';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Convenio } from 'src/app/models/convenio.model';
 import { ConvenioService } from 'src/app/services/atividade/convenio.service';
 import { Regencia } from 'src/app/models/regencia.model';
+import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Atividade } from 'src/app/models/atividade.model';
 
 @Component({
   selector: 'app-activity-form',
@@ -14,6 +17,8 @@ import { Regencia } from 'src/app/models/regencia.model';
 })
 export class ActivityFormComponent implements OnInit{
 
+  @ViewChild('fileInput') fileInput: ElementRef;
+
   convenioForm: FormGroup;
   cursoForm: FormGroup;
   regenciaForm: FormGroup;
@@ -21,6 +26,10 @@ export class ActivityFormComponent implements OnInit{
   cursoModel: CursoExtensao;
   regenciaModel: Regencia;
   durationInSeconds = 5;
+  selectedFiles: FileList;
+  currentFile: File;
+  progress = 0;
+  fileAttr = 'Choose File';
 
   panelOpenState = false;
 
@@ -83,7 +92,9 @@ export class ActivityFormComponent implements OnInit{
   }
 
   // tslint:disable-next-line: max-line-length
-  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService, private cursoService: CursoService) { }
+  constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService, 
+    private cursoService: CursoService, 
+    private uploadService: UploadArquivoService) { }
 
 
   openSnackBar(message: string, action: string): void {
@@ -110,6 +121,7 @@ export class ActivityFormComponent implements OnInit{
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(
       data => {
+        this.upload(data.id);
         this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {
@@ -139,6 +151,7 @@ export class ActivityFormComponent implements OnInit{
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
+        this.upload(data.id);
         this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {
@@ -171,11 +184,58 @@ export class ActivityFormComponent implements OnInit{
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
+        this.upload(data.id);
         this.openSnackBar(data.mensagem, 'OK');
       },
       erro => {
         console.log(erro);
       }
     );
+  }
+
+  selecionarArquivo(event): void {
+    this.selectedFiles = event.target.files;
+  }
+
+  uploadFileEvt(imgFile: any) {
+    if (imgFile.target.files && imgFile.target.files[0]) {
+      this.fileAttr = '';
+      Array.from(imgFile.target.files).forEach((file: File) => {
+        this.fileAttr += file.name + ' - ';
+      });
+
+      // HTML5 FileReader API
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        let image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          let imgBase64Path = e.target.result;
+        };
+      };
+      reader.readAsDataURL(imgFile.target.files[0]);
+      
+      // Reset if duplicate image uploaded again
+      this.fileInput.nativeElement.value = "";
+    } else {
+      this.fileAttr = 'Choose File';
+    }
+  }
+
+  upload(atividadeId: number): void {
+    this.progress = 0;
+  
+    this.currentFile = this.selectedFiles.item(0);
+    this.uploadService.upload(this.currentFile, atividadeId).subscribe(
+      event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+        }
+      },
+      err => {
+        this.progress = 0;
+        this.currentFile = undefined;
+      });
+    this.selectedFiles = undefined;
   }
 }
