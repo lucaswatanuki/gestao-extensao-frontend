@@ -1,6 +1,7 @@
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Arquivo } from 'src/app/models/arquivo.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,8 +26,12 @@ export class UploadArquivoService {
     return this.http.request(req);
   }
 
-  getArquivos(atividadeId: number): Observable<any> {
-    return this.http.get(this.baseUrl + '/' + atividadeId);
+  getArquivos(atividadeId: number) {
+    return this.http.get<Arquivo[]>(this.baseUrl + '/' + atividadeId);
+  }
+
+  download(arquivoId: number): Observable<Blob>  {
+    return this.http.get(this.baseUrl + '/download/' + arquivoId, {responseType: 'blob'});
   }
 
 }

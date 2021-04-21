@@ -11,6 +11,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/sn
 import { DevolucaoDialogueComponent } from './devolucao-dialogue/devolucao-dialogue.component';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { Observable } from 'rxjs';
+import { Arquivo } from 'src/app/models/arquivo.model';
 
 @Component({
   selector: 'app-autorizacao-detalhes',
@@ -29,7 +30,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
   currentYear: number;
   confirmacaoDialogueRef: MatDialogRef<ConfirmacaoDialogueComponent>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  fileInfos: Observable<any>;
+  fileInfos$: Observable<Arquivo[]>;
 
   constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService,
@@ -79,8 +80,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.tipoAtividade = response.tipoAtividade;
           this.atividade.revisao = response.revisao;
 
-          this.fileInfos = this.uploadService.getArquivos(this.atividade.id);
-          console.log(this.fileInfos);
+          this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
         },
         error => {
           console.log(error);
@@ -167,5 +167,31 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       horizontalPosition: this.horizontalPosition
     });
   }
+
+  downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
+    this.uploadService.download(atividade.id).subscribe(
+      data => {
+        const blob = new Blob([data], { type: arquivo.tipo });
+
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob);
+          return;
+        }
+
+        const dados = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        link.href = dados;
+        link.download = arquivo.nome;
+        link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+
+        setTimeout(function () {
+          window.URL.revokeObjectURL(dados);
+          link.remove();
+        }, 100);
+      }
+    );
+  }
+
 
 }

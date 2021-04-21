@@ -105,17 +105,20 @@
         </mat-form-field>
       </div>
     </div>
-    <div class="row" *ngIf="fileInfos!=null">
+    <div class="row" *ngIf="(fileInfos$ | async)?.length > 0;">
       <div class="col">
         <div class="card">
-          <div class="card-header">Arquivos</div>
+          <h1 mat-dialog-title>Anexos</h1>
           <ul
             class="list-group list-group-flush"
-            *ngFor="let file of fileInfos | async"
+            *ngFor="let file of fileInfos$ | async"
           >
             <li class="list-group-item">
-              <a href="{{ file.url }}">{{ file.nome }}</a>
+              {{ file.nome }} <button mat-button (click)="downloadArquivo(file, atividade)" *ngIf="admin">
+                <mat-icon aria-hidden="false" aria-label="download">download</mat-icon>
+              </button>
             </li>
+
           </ul>
         </div>
       </div>
