@@ -1,11 +1,17 @@
 import { AtividadeService } from './../../../services/atividade/atividade.service';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Atividade } from 'src/app/models/atividade.model';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
 import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
 import { DatePipe } from '@angular/common';
+import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
+import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
+import { DevolucaoDialogueComponent } from './devolucao-dialogue/devolucao-dialogue.component';
+import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
+import { Observable } from 'rxjs';
+import { Arquivo } from 'src/app/models/arquivo.model';
 
 @Component({
   selector: 'app-autorizacao-detalhes',
@@ -14,7 +20,7 @@ import { DatePipe } from '@angular/common';
 })
 export class AutorizacaoDetalhesComponent implements OnInit {
 
-  @ViewChild('content', {static: false}) content: ElementRef;
+  @ViewChild('content', { static: false }) content: ElementRef;
 
   atividade: Atividade = new Atividade();
   formularioAtividade: FormGroup;
@@ -22,10 +28,14 @@ export class AutorizacaoDetalhesComponent implements OnInit {
   user = false;
   private roles: string[];
   currentYear: number;
+  confirmacaoDialogueRef: MatDialogRef<ConfirmacaoDialogueComponent>;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  fileInfos$: Observable<Arquivo[]>;
 
-  constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder, 
+  constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService,
-    private autorizacaoService: AutorizacaoService, private datePipe: DatePipe) { }
+    private autorizacaoService: AutorizacaoService, private datePipe: DatePipe, public dialog: MatDialog, private snackBar: MatSnackBar,
+    private uploadService: UploadArquivoService ) { }
 
   ngOnInit(): void {
     this.currentYear = new Date().getFullYear();
@@ -48,6 +58,7 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       horasEmAndamento: new FormControl(''),
       horasFuturas: new FormControl(''),
       observacao: new FormControl(''),
+      revisao: new FormControl(''),
     });
     if (this.data.id) {
       this.atividadeService.consultarAtividade(this.data.id).subscribe(
@@ -67,20 +78,24 @@ export class AutorizacaoDetalhesComponent implements OnInit {
           this.atividade.observacao = response.observacao;
           this.atividade.autorizado = response.autorizado;
           this.atividade.tipoAtividade = response.tipoAtividade;
-      },
-      error => {
-        console.log(error);
-      });
+          this.atividade.revisao = response.revisao;
+
+          this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
+        },
+        error => {
+          console.log(error);
+        });
     }
   }
 
-  autorizarAtividade(atividade: Atividade): void{
+  autorizarAtividade(atividade: Atividade): void {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
         this.dialogRef.close();
         console.log("Atividade autorizada com sucesso");
       },
-      error => {console.log(error);
+      error => {
+        console.log(error);
       });
   }
 
@@ -113,5 +128,70 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       }
     );
   }
+
+  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean) {
+    this.confirmacaoDialogueRef = this.dialog.open(ConfirmacaoDialogueComponent, {
+      disableClose: false
+    });
+    this.confirmacaoDialogueRef.componentInstance.mensagem = mensagem;
+
+    this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+      if (result && aceitar) {
+        this.autorizarAtividade(atividade);
+        this.openSnackBar('Atividade aceita com sucesso!', 'OK')
+      }
+      this.dialogRef = null;
+    });
+  }
+
+  devolverAtividade(id: number): void {
+    const dialogRef = this.dialog.open(DevolucaoDialogueComponent, {
+      data: {
+        width: 'auto',
+        height: 'auto',
+        id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.openSnackBar('Atividade devolvida para revisão', 'OK')
+      }
+    }
+    );
+  }
+
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition
+    });
+  }
+
+  downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
+    this.uploadService.download(atividade.id).subscribe(
+      data => {
+        const blob = new Blob([data], { type: arquivo.tipo });
+
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob);
+          return;
+        }
+
+        const dados = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        link.href = dados;
+        link.download = arquivo.nome;
+        link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+
+        setTimeout(function () {
+          window.URL.revokeObjectURL(dados);
+          link.remove();
+        }, 100);
+      }
+    );
+  }
+
 
 }

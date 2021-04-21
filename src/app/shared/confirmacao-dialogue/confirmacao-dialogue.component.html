@@ -1,0 +1,9 @@
+<h1>Confirmar</h1>
+<p>
+  {{mensagem}}
+</p>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close(false)">Não</button>
+  <button mat-button (click)="dialogRef.close(true)" color="accent">Sim</button>
+</div>
