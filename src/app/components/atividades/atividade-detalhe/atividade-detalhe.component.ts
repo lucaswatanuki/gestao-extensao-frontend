@@ -1,28 +1,28 @@
-import { AtividadeService } from './../../../services/atividade/atividade.service';
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Atividade } from 'src/app/models/atividade.model';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
-import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
 import { DatePipe } from '@angular/common';
-import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
-import { DevolucaoDialogueComponent } from './devolucao-dialogue/devolucao-dialogue.component';
-import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
 import { Arquivo } from 'src/app/models/arquivo.model';
+import { Atividade } from 'src/app/models/atividade.model';
+import { Autorizacao } from 'src/app/models/autorizacao.model';
+import { AtividadeService } from 'src/app/services/atividade/atividade.service';
+import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
+import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
+import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
+import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
 
 @Component({
-  selector: 'app-autorizacao-detalhes',
-  templateUrl: './autorizacao-detalhes.component.html',
-  styleUrls: ['./autorizacao-detalhes.component.scss']
+  selector: 'app-atividade-detalhe',
+  templateUrl: './atividade-detalhe.component.html',
+  styleUrls: ['./atividade-detalhe.component.scss']
 })
-export class AutorizacaoDetalhesComponent implements OnInit {
+export class AtividadeDetalheComponent implements OnInit {
 
-  @ViewChild('content', { static: false }) content: ElementRef;
-
-  atividade: Atividade = new Atividade();
+  atividade: Atividade;
   formularioAtividade: FormGroup;
   admin = false;
   user = false;
@@ -31,17 +31,18 @@ export class AutorizacaoDetalhesComponent implements OnInit {
   confirmacaoDialogueRef: MatDialogRef<ConfirmacaoDialogueComponent>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   fileInfos$: Observable<Arquivo[]>;
+  autorizacao: Autorizacao
 
-  constructor(public dialogRef: MatDialogRef<AutorizacaoDetalhesComponent>, private fbuilder: FormBuilder,
-    private atividadeService: AtividadeService, @Inject(MAT_DIALOG_DATA) public data, private tokenStorage: TokenStorageService,
+  constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
+    private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
     private autorizacaoService: AutorizacaoService, private datePipe: DatePipe, public dialog: MatDialog, private snackBar: MatSnackBar,
-    private uploadService: UploadArquivoService ) { }
+    private uploadService: UploadArquivoService, private router: Router) { }
 
   ngOnInit(): void {
+    this.atividade = new Atividade();
     this.currentYear = new Date().getFullYear();
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
-
       this.admin = this.roles.includes('ROLE_ADMIN');
       this.user = this.roles.includes('ROLE_USER');
     }
@@ -60,47 +61,28 @@ export class AutorizacaoDetalhesComponent implements OnInit {
       observacao: new FormControl(''),
       revisao: new FormControl(''),
     });
-    if (this.data.id) {
-      this.atividadeService.consultarAtividade(this.data.id).subscribe(
-        response => {
-          console.log(response);
-          this.atividade.projeto = response.projeto;
-          this.atividade.id = response.id;
-          this.atividade.horaMensal = response.horaMensal;
-          this.atividade.horaSemanal = response.horaSemanal;
-          this.atividade.prazo = response.prazo;
-          this.atividade.valorBruto = response.valorBruto;
-          this.atividade.dataInicio = response.dataInicio;
-          this.atividade.dataFim = response.dataFim;
-          this.atividade.docente = response.docente;
-          this.atividade.horasAprovadas = response.horasAprovadas;
-          this.atividade.horasSolicitadas = response.horasSolicitadas;
-          this.atividade.observacao = response.observacao;
-          this.atividade.autorizado = response.autorizado;
-          this.atividade.tipoAtividade = response.tipoAtividade;
-          this.atividade.revisao = response.revisao;
 
-          this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
-        },
-        error => {
-          console.log(error);
-        });
-    }
+    this.atividadeService.consultarAtividade(this.route.snapshot.params['id']).subscribe(
+      response => {
+        console.log(response);
+        this.atividade = response;
+
+        this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
+      },
+      error => {
+        console.log(error);
+      });
+
   }
 
   autorizarAtividade(atividade: Atividade): void {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
-        this.dialogRef.close();
         console.log("Atividade autorizada com sucesso");
       },
       error => {
         console.log(error);
       });
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   extrairRelatorioPDF(atividade: Atividade): void {
@@ -137,10 +119,10 @@ export class AutorizacaoDetalhesComponent implements OnInit {
 
     this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
       if (result && aceitar) {
+        atividade.autorizado = true;
         this.autorizarAtividade(atividade);
         this.openSnackBar('Atividade aceita com sucesso!', 'OK')
       }
-      this.dialogRef = null;
     });
   }
 
@@ -193,5 +175,8 @@ export class AutorizacaoDetalhesComponent implements OnInit {
     );
   }
 
+  voltar(): void {
+    this.router.navigate(['autorizacoes']);
+  }
 
 }

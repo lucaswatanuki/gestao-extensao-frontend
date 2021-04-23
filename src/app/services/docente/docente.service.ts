@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Alocacao } from 'src/app/models/alocacao.model';
 import { Docente } from 'src/app/models/docente.model';
 import { environment } from 'src/environments/environment';
 
@@ -17,5 +18,9 @@ export class DocenteService {
 
   listarDocentes(): Observable<any> {
     return this.http.get<Docente[]>(this.baseUrl + '/todos');
+  }
+
+  consultarAlocacoes(docenteId: number): Observable<any> {
+    return this.http.get<Alocacao[]>(`${this.baseUrl}/${docenteId}/alocacoes`);
   }
 }
