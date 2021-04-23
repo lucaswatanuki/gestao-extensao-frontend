@@ -26,7 +26,7 @@
       </ng-container>
 
       <ng-container matColumnDef="horas">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Horas</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Horas solicitadas</th>
         <td mat-cell *matCellDef="let element"> {{ element.horas }} </td>
       </ng-container>
 
@@ -39,7 +39,7 @@
         <th mat-header-cell *matHeaderCellDef>Abrir</th>
         <td mat-cell *matCellDef="let element"> 
           <button mat-raised-button color="warn" (click)="consultarDetalheAutorizacao(element.id)">
-            <mat-icon aria-hidden="false" aria-label="edit icon">open_in_new</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="edit icon">visibility</mat-icon>
           </button>
         </td>
       </ng-container>

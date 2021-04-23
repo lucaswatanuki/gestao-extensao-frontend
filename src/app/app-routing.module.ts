@@ -9,7 +9,7 @@ import { AuthGuardService } from './core/auth/auth-guard.service';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { AutorizacaoComponent } from './components/autorizacao/autorizacao.component';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
-import { AutorizacaoDetalhesComponent } from './components/autorizacao/autorizacao-detalhes/autorizacao-detalhes.component';
+import { AtividadeDetalheComponent } from './components/atividades/atividade-detalhe/atividade-detalhe.component';
 
 
 const routes: Routes = [
@@ -29,9 +29,6 @@ const routes: Routes = [
     path: 'autorizacoes', component: AutorizacaoComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'atividade-detalhe', component: AutorizacaoDetalhesComponent, canActivate: [AuthGuardService]
-  },
-  {
     path: 'relatorio', component: RelatorioComponent, canActivate: [AuthGuardService]
   },
   {
@@ -42,6 +39,9 @@ const routes: Routes = [
   },
   {
     path: 'signup', component: CadastroComponent
+  },
+  {
+    path: 'atividade/:id', component: AtividadeDetalheComponent, canActivate: [AuthGuardService]
   }
 ];
 

@@ -6,5 +6,4 @@ export class Autorizacao {
     docente: string;
     horas: number;
     urgente: boolean;
-
 }

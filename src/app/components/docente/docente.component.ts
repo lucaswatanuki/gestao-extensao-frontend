@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Docente } from 'src/app/models/docente.model';
 import { DocenteService } from 'src/app/services/docente/docente.service';
+import { DocenteDetalheComponent } from './docente-detalhe/docente-detalhe.component';
 
 @Component({
   selector: 'app-docente',
@@ -16,10 +18,10 @@ export class DocenteComponent implements OnInit {
   docente: Docente = new Docente();
   docentes: MatTableDataSource<any>;
   errorMsg: string;
-  displayedColumns: string[] = ['matricula', 'nome', 'email', 'totalHorasEmAndamento', 'totalHorasFuturas'];
+  displayedColumns: string[] = ['matricula', 'nome', 'email', 'totalHorasEmAndamento', 'totalHorasFuturas', 'alocacoes'];
   currentYear: number;
 
-  constructor(private docenteService: DocenteService) {}
+  constructor(private docenteService: DocenteService, public dialog: MatDialog) {}
   
   ngOnInit() {
     this.getDocentes();
@@ -37,6 +39,16 @@ export class DocenteComponent implements OnInit {
          console.error(this.errorMsg);
        }
      );
+  }
+
+  openDialogDocente(id: number): void {
+    this.dialog.open(DocenteDetalheComponent, {
+      data: {
+        width: 'auto',
+        height: 'auto',
+        id
+      }
+    });
   }
 
 }

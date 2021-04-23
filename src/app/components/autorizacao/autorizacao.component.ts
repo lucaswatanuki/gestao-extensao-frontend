@@ -1,4 +1,3 @@
-import { AutorizacaoDetalhesComponent } from './autorizacao-detalhes/autorizacao-detalhes.component';
 import { AutorizacaoService } from './../../services/autorizacao/autorizacao.service';
 import { Autorizacao } from './../../models/autorizacao.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -6,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class AutorizacaoComponent implements OnInit {
   errorMsg: string;
   displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente', 'abrir'];
 
-  constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog) {}
+  constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.getAutorizacoes();
@@ -44,19 +44,7 @@ export class AutorizacaoComponent implements OnInit {
   }
 
   consultarDetalheAutorizacao(id: number): void {
-    const dialogRef = this.dialog.open(AutorizacaoDetalhesComponent, {
-      data: {
-        width: 'auto',
-        height: 'auto',
-        id
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(
-      data => {
-        this.getAutorizacoes();
-      }
-    );
+    this.router.navigate(['atividade', id])
   }
 
 }

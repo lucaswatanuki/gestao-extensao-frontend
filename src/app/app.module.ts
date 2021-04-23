@@ -28,9 +28,10 @@ import { ConfiguracaoComponent } from './components/configuracao/configuracao.co
 import { DocenteComponent } from './components/docente/docente.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularValidateBrLibModule } from 'angular-validate-br';
-import { AutorizacaoDetalhesComponent } from './components/autorizacao/autorizacao-detalhes/autorizacao-detalhes.component';
 import { ConfirmacaoDialogueComponent } from './shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from './components/autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
+import { AtividadeDetalheComponent } from './components/atividades/atividade-detalhe/atividade-detalhe.component';
+import { DocenteDetalheComponent } from './components/docente/docente-detalhe/docente-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +44,11 @@ import { DevolucaoDialogueComponent } from './components/autorizacao/autorizacao
     CadastroComponent,
     AutorizacaoComponent,
     ConfiguracaoComponent,
-    AutorizacaoDetalhesComponent,
     RelatorioDocenteSearchDialogueComponent,
     ConfirmacaoDialogueComponent,
     DevolucaoDialogueComponent,
+    AtividadeDetalheComponent,
+    DocenteDetalheComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,7 @@ import { DevolucaoDialogueComponent } from './components/autorizacao/autorizacao
     TextMaskModule,
     AngularValidateBrLibModule,
   ],
-  providers: [AuthGuardService, httpInterceptorProviders, AutorizacaoDetalhesComponent, RelatorioService, DocenteService, DatePipe],
+  providers: [AuthGuardService, httpInterceptorProviders, RelatorioService, DocenteService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
