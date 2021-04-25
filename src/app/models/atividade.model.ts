@@ -1,3 +1,5 @@
+import { Alocacao } from "./alocacao.model";
+
 export class Atividade {
     id: number;
     projeto: string;
@@ -16,4 +18,5 @@ export class Atividade {
     autorizado: boolean;
     tipoAtividade: string;
     revisao: string;
+    alocacoes: Alocacao[];
 }

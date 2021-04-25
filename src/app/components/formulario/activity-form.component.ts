@@ -8,7 +8,7 @@ import { ConvenioService } from 'src/app/services/atividade/convenio.service';
 import { Regencia } from 'src/app/models/regencia.model';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Atividade } from 'src/app/models/atividade.model';
+import { Alocacao } from 'src/app/models/alocacao.model';
 
 @Component({
   selector: 'app-activity-form',
@@ -30,6 +30,11 @@ export class ActivityFormComponent implements OnInit{
   currentFile: File;
   progress = 0;
   fileAttr = 'Choose File';
+  mensagemSucesso = 'Atividade submetida com sucesso!';
+  hasUnitNumber = false;
+  alocacao: Alocacao;
+  alocacao2: Alocacao;
+
 
   panelOpenState = false;
 
@@ -47,6 +52,12 @@ export class ActivityFormComponent implements OnInit{
       dataFim: [null, Validators.required],
       valorBruto: [null, Validators.required],
       observacao: [null],
+      ano: [null],
+      semetre: [null],
+      horasSolicitadas: [null],
+      ano2: [null],
+      semetre2: [null],
+      horasSolicitadas2: [null],
       tipoAtividadeSimultanea: [null, Validators.required]
     });
 
@@ -116,13 +127,25 @@ export class ActivityFormComponent implements OnInit{
     this.convenioModel.dataFim = this.convenioForm.get('dataFim').value;
     this.convenioModel.observacao = this.convenioForm.get('observacao').value;
     this.convenioModel.tipoAtividadeSimultanea = this.convenioForm.get('tipoAtividadeSimultanea').value;
+    this.alocacao = new Alocacao();
+    this.alocacao.ano = this.convenioForm.get('ano').value;
+    this.alocacao.semestre = this.convenioForm.get('semestre').value;
+    this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas').value;
 
-    console.log(this.convenioModel);
+    if(this.hasUnitNumber) {
+      this.alocacao2 = new Alocacao();
+      this.alocacao.ano = this.convenioForm.get('ano2').value;
+      this.alocacao.semestre = this.convenioForm.get('semestre2').value;
+      this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
+      this.convenioModel.alocacoes.push(this.alocacao2);
+    }
+    
+    this.convenioModel.alocacoes.push(this.alocacao);
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(
       data => {
         this.upload(data.id);
-        this.openSnackBar(data.mensagem, 'OK');
+        this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {
         console.log(erro);
@@ -152,7 +175,7 @@ export class ActivityFormComponent implements OnInit{
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
         this.upload(data.id);
-        this.openSnackBar(data.mensagem, 'OK');
+        this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {
         console.log(erro);
@@ -185,7 +208,7 @@ export class ActivityFormComponent implements OnInit{
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
         this.upload(data.id);
-        this.openSnackBar(data.mensagem, 'OK');
+        this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {
         console.log(erro);

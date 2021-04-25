@@ -1,0 +1,38 @@
+.mat-form-field {
+    margin-right: 10px;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .col {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .col:last-child {
+    margin-right: 0;
+  }
+  
+  .mat-form-field + .mat-form-field {
+    margin-left: 1px;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  #content {
+    width: auto;
+    height: auto;
+  }
+
+  .grid-container {
+    margin-top: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+  
+  

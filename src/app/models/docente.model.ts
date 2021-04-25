@@ -1,7 +1,6 @@
-export class Docente {
-    matricula: string;
-    nome: string;
-    email: string;
+import { Usuario } from "./usuario.model";
+
+export class Docente extends Usuario{
     autorizado: boolean;
     totalHoras: number;
 }

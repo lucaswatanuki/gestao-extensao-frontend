@@ -4,4 +4,5 @@ export class JwtResponse{
     username: string;
     profiles: string[];
     email: string;
+    id: number;
 }
