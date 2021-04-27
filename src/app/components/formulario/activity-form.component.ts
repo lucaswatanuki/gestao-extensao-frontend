@@ -35,7 +35,6 @@ export class ActivityFormComponent implements OnInit{
   alocacao: Alocacao;
   alocacao2: Alocacao;
 
-
   panelOpenState = false;
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
@@ -53,10 +52,10 @@ export class ActivityFormComponent implements OnInit{
       valorBruto: [null, Validators.required],
       observacao: [null],
       ano: [null],
-      semetre: [null],
+      semestre: [null],
       horasSolicitadas: [null],
       ano2: [null],
-      semetre2: [null],
+      semestre2: [null],
       horasSolicitadas2: [null],
       tipoAtividadeSimultanea: [null, Validators.required]
     });
@@ -127,20 +126,20 @@ export class ActivityFormComponent implements OnInit{
     this.convenioModel.dataFim = this.convenioForm.get('dataFim').value;
     this.convenioModel.observacao = this.convenioForm.get('observacao').value;
     this.convenioModel.tipoAtividadeSimultanea = this.convenioForm.get('tipoAtividadeSimultanea').value;
+    this.convenioModel.alocacoes = [];
     this.alocacao = new Alocacao();
     this.alocacao.ano = this.convenioForm.get('ano').value;
     this.alocacao.semestre = this.convenioForm.get('semestre').value;
     this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas').value;
+    this.convenioModel.alocacoes.push(this.alocacao);
 
     if(this.hasUnitNumber) {
       this.alocacao2 = new Alocacao();
-      this.alocacao.ano = this.convenioForm.get('ano2').value;
-      this.alocacao.semestre = this.convenioForm.get('semestre2').value;
-      this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
+      this.alocacao2.ano = this.convenioForm.get('ano2').value;
+      this.alocacao2.semestre = this.convenioForm.get('semestre2').value;
+      this.alocacao2.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
       this.convenioModel.alocacoes.push(this.alocacao2);
     }
-    
-    this.convenioModel.alocacoes.push(this.alocacao);
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(
       data => {

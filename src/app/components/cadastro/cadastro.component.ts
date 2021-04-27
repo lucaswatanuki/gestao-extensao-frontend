@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ValidateBrService } from 'angular-validate-br';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { SignUpInfo } from 'src/app/core/auth/signup-info';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-cadastro',
@@ -31,11 +32,18 @@ export class CadastroComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService, private toast: ToastrService) { }
 
   ngOnInit(): void {
+    let senha = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    let confirmarSenha = new FormControl('', CustomValidators.equalTo(senha));
+    let email = new FormControl('', [Validators.required, Validators.email]);
+    let emailConfirmacao = new FormControl('', CustomValidators.equalTo(email));
+
     this.formularioCadastro = this.formBuilder.group({
       usuario: new FormControl('', Validators.required),
       nome_completo: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      email: email,
+      emailConfirmacao: emailConfirmacao,
+      senha: senha,
+      confirmarSenha: confirmarSenha,
       endereco: new FormControl(''),
       rf: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
       cpf: new FormControl('', [Validators.required, this.validateBrService.cpf]),
