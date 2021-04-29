@@ -1,1 +1,93 @@
-<p>configuracao works!</p>
+<div class="grid-container">
+    <h1 mat-dialog-title>
+        Dados do usuário
+    </h1>
+    <form name="form" [formGroup]="userForm">
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Nome Completo</mat-label>
+                    <input [(ngModel)]="usuario.nome" formControlName="nome" matInput placeholder="Nome" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Matricula</mat-label>
+                    <input [(ngModel)]="usuario.matricula" formControlName="matricula" matInput placeholder="Matricula"
+                        readonly />
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Email</mat-label>
+                    <input [(ngModel)]="usuario.email" formControlName="email" matInput placeholder="Email" readonly />
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Telefone</mat-label>
+                    <input [(ngModel)]="usuario.telefone" formControlName="telefone" matInput placeholder="Telefone" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Endereço</mat-label>
+                    <input [(ngModel)]="usuario.endereco" formControlName="endereco" matInput placeholder="Endereco" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="warn">
+                        <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
+                        Atualizar dados
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <hr>
+
+        <h1 mat-dialog-title>Alterar senha</h1>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Senha atual</mat-label>
+                    <input matInput type="password" [(ngModel)]="usuario.senhaAtual" formControlName="senhaAtual"
+                        placeholder="Senha atual" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Nova senha</mat-label>
+                    <input matInput type="password" [(ngModel)]="usuario.senhaNova" formControlName="senhaNova"
+                        placeholder="Senha nova" />
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Confirmar nova senha</mat-label>
+                    <input matInput type="password" [(ngModel)]="usuario.senhaConfirmacao"
+                        formControlName="senhaConfirmacao" placeholder="Confirmacao de senha" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div mat-dialog-actions>
+                    <button mat-raised-button color="warn">
+                        <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
+                        Atualizar senha
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

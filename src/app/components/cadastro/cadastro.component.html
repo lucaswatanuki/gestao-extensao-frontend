@@ -24,12 +24,26 @@
               Email <strong>obrigatório</strong>
             </mat-error>
           </mat-form-field>
+          <mat-form-field class="input-label" style="flex: auto; margin-left: 20px;" appearance="outline">
+            <mat-label>Confirmar email</mat-label>
+            <input matInput placeholder="Confirmar email" formControlName="emailConfirmacao" required>
+            <mat-error *ngIf="formularioCadastro.controls.emailConfirmacao.errors?.equalTo">
+              Erro ao confirmar email
+            </mat-error>
+          </mat-form-field>
           <br>
           <mat-form-field class="input-label" style="flex: auto;" appearance="outline">
             <mat-label>Senha</mat-label>
             <input type="password" matInput placeholder="Senha" formControlName="senha" required>
             <mat-error *ngIf="formularioCadastro.controls['senha'].hasError('required')">
               Senha <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="input-label" style="flex: auto; margin-left: 20px;" appearance="outline">
+            <mat-label>Confirmar senha</mat-label>
+            <input type="password" matInput placeholder="Confirmar senha" formControlName="confirmarSenha" required>
+            <mat-error *ngIf="formularioCadastro.controls.confirmarSenha.errors?.equalTo">
+              Erro ao confirmar senha
             </mat-error>
           </mat-form-field>
           <div>

@@ -20,7 +20,7 @@ export class DocenteDetalheComponent implements OnInit {
   alocacao: Alocacao[];
   alocacoes: MatTableDataSource<Alocacao>;
   errorMsg: string;
-  displayedColumns: string[] = ['tipoAtividade', 'semestre', 'ano', 'horasAprovadas'];
+  displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasAprovadas'];
 
   constructor(private docenteService: DocenteService, @Inject(MAT_DIALOG_DATA) public data) { }
 

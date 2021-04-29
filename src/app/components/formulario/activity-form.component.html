@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Criar atividade</h1>
+  <h1 class="mat-h1">Submeter atividade</h1>
   <mat-card class="shipping-card">
     <mat-accordion class="expand">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -103,6 +103,60 @@
                     <mat-label>Qtd Horas mensais</mat-label>
                     <input matInput maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
                       formControlName="horaMensal">
+                  </mat-form-field>
+                </div>
+              </div>
+              <h3>Alocação</h3>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre" min="1" max="2" type="number"
+                      formControlName="semestre">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano" type="number"
+                      formControlName="ano">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas" type="number"
+                      formControlName="horasSolicitadas">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="!hasUnitNumber">
+                <div class="col">
+                  <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+                    + Adicionar alocação de horas
+                  </button>
+                </div>
+              </div>
+              <div class="row" *ngIf="hasUnitNumber">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre2" min="1" max="2" type="number"
+                      formControlName="semestre2">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano2" type="number"
+                      formControlName="ano2">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas2" type="number"
+                      formControlName="horasSolicitadas2">
                   </mat-form-field>
                 </div>
               </div>

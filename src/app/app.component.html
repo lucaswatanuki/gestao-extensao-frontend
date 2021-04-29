@@ -41,7 +41,7 @@
       <mat-divider></mat-divider>
 
       <a mat-list-item routerLink='/configuracao' *ngIf="admin || user">
-        <mat-icon>settings</mat-icon>Configurações
+        <mat-icon>settings</mat-icon>Minha conta
       </a>
 
 
@@ -60,7 +60,6 @@
       </button>
       <span>{{ title }}</span>
       <span class="toolbar-spacer"> </span>
-      <mat-icon>settings</mat-icon>
       <button mat-raised-button color="warn" (click)="logout()">
         <mat-icon> logout </mat-icon>
         Logout
