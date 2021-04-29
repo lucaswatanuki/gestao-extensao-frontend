@@ -73,6 +73,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/signup']);
   }
 
+  loadResetSenha() {
+    this.router.navigate(['/senha/reset']);
+  }
+
   reloadPage() {
     window.location.replace(environment.localhost + 'dashboard');
   }

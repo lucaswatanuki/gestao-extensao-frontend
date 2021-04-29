@@ -32,6 +32,8 @@ import { ConfirmacaoDialogueComponent } from './shared/confirmacao-dialogue/conf
 import { DevolucaoDialogueComponent } from './components/autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
 import { AtividadeDetalheComponent } from './components/atividades/atividade-detalhe/atividade-detalhe.component';
 import { DocenteDetalheComponent } from './components/docente/docente-detalhe/docente-detalhe.component';
+import { ResetSenhaComponent } from './components/senha/reset-senha/reset-senha.component';
+import { UpdateSenhaComponent } from './components/senha/update/update-senha/update-senha.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { DocenteDetalheComponent } from './components/docente/docente-detalhe/do
     DevolucaoDialogueComponent,
     AtividadeDetalheComponent,
     DocenteDetalheComponent,
+    ResetSenhaComponent,
+    UpdateSenhaComponent,
   ],
   imports: [
     CommonModule,

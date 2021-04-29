@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Criar atividade</h1>
+  <h1 class="mat-h1">Submeter atividade</h1>
   <mat-card class="shipping-card">
     <mat-accordion class="expand">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -111,7 +111,7 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
-                    <input matInput placeholder="semestre" type="number"
+                    <input matInput placeholder="semestre" min="1" max="2" type="number"
                       formControlName="semestre">
                   </mat-form-field>
                 </div>
@@ -141,7 +141,7 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
-                    <input matInput placeholder="semestre2" type="number"
+                    <input matInput placeholder="semestre2" min="1" max="2" type="number"
                       formControlName="semestre2">
                   </mat-form-field>
                 </div>

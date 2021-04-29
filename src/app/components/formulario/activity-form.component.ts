@@ -169,7 +169,19 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
     this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
 
-    console.log(this.convenioModel);
+    this.alocacao = new Alocacao();
+    this.alocacao.ano = this.convenioForm.get('ano').value;
+    this.alocacao.semestre = this.convenioForm.get('semestre').value;
+    this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas').value;
+    this.cursoModel.alocacoes.push(this.alocacao);
+
+    if(this.hasUnitNumber) {
+      this.alocacao2 = new Alocacao();
+      this.alocacao2.ano = this.convenioForm.get('ano2').value;
+      this.alocacao2.semestre = this.convenioForm.get('semestre2').value;
+      this.alocacao2.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
+      this.cursoModel.alocacoes.push(this.alocacao2);
+    }
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
@@ -203,6 +215,20 @@ export class ActivityFormComponent implements OnInit{
     this.regenciaModel.unicoDocente = this.regenciaForm.get('unicoDocente').value;
     this.regenciaModel.horaSemanal = this.regenciaForm.get('horaSemanal').value;
     this.regenciaModel.horaMensal = this.regenciaForm.get('horaMensal').value;
+
+    this.alocacao = new Alocacao();
+    this.alocacao.ano = this.convenioForm.get('ano').value;
+    this.alocacao.semestre = this.convenioForm.get('semestre').value;
+    this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas').value;
+    this.regenciaModel.alocacoes.push(this.alocacao);
+
+    if(this.hasUnitNumber) {
+      this.alocacao2 = new Alocacao();
+      this.alocacao2.ano = this.convenioForm.get('ano2').value;
+      this.alocacao2.semestre = this.convenioForm.get('semestre2').value;
+      this.alocacao2.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
+      this.regenciaModel.alocacoes.push(this.alocacao2);
+    }
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {

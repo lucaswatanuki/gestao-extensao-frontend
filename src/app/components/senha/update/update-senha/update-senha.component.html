@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    Gestão Extensão
+</mat-toolbar>
+<div
+    style="width: 350px; position: absolute; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <mat-card style="width: 100%;" class="mat-elevation-z20">
+        <h1><b>Definir senha</b></h1>
+        <form name="form" [formGroup]="senhaForm">
+            <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Nova senha</mat-label>
+                    <input [(ngModel)]="model.senha" type="password" formControlName="senha" matInput placeholder="Password" />
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Confirmar senha</mat-label>
+                    <input formControlName="confirmarSenha" type="password" matInput placeholder="Password confirmation" />
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <button mat-raised-button [disabled]="!senhaForm.valid" color="primary" (click)="alterarSenha()" style="margin-right: 20px;"> Enviar
+                </button>
+                <button mat-raised-button color="warn" (click)="loadLogin()"> Voltar </button>
+            </div>
+        </form>
+    </mat-card>
+</div>

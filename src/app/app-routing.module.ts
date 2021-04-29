@@ -10,6 +10,8 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { AutorizacaoComponent } from './components/autorizacao/autorizacao.component';
 import { ConfiguracaoComponent } from './components/configuracao/configuracao.component';
 import { AtividadeDetalheComponent } from './components/atividades/atividade-detalhe/atividade-detalhe.component';
+import { ResetSenhaComponent } from './components/senha/reset-senha/reset-senha.component';
+import { UpdateSenhaComponent } from './components/senha/update/update-senha/update-senha.component';
 
 
 const routes: Routes = [
@@ -42,7 +44,16 @@ const routes: Routes = [
   },
   {
     path: 'atividade/:id', component: AtividadeDetalheComponent, canActivate: [AuthGuardService]
-  }
+  },
+  {
+    path: 'senha/alterarSenha/:token', component: UpdateSenhaComponent
+  },
+  {
+    path: 'senha/alterarSenha', component: UpdateSenhaComponent
+  },
+  {
+    path: 'senha/reset', component: ResetSenhaComponent
+  },
 ];
 
 @NgModule({
