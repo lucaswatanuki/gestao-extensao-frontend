@@ -9,6 +9,7 @@ import { Regencia } from 'src/app/models/regencia.model';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Alocacao } from 'src/app/models/alocacao.model';
+import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 
 @Component({
   selector: 'app-activity-form',
@@ -104,7 +105,7 @@ export class ActivityFormComponent implements OnInit{
   // tslint:disable-next-line: max-line-length
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService, 
     private cursoService: CursoService, 
-    private uploadService: UploadArquivoService) { }
+    private uploadService: UploadArquivoService, private atividadeService: AtividadeService) { }
 
 
   openSnackBar(message: string, action: string): void {
@@ -230,7 +231,7 @@ export class ActivityFormComponent implements OnInit{
       this.regenciaModel.alocacoes.push(this.alocacao2);
     }
 
-    this.cursoService.salvarCurso(this.cursoModel).subscribe(
+    this.atividadeService.salvarRegencia(this.regenciaModel).subscribe(
       data => {
         this.upload(data.id);
         this.openSnackBar(this.mensagemSucesso, 'OK');
