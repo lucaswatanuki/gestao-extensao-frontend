@@ -14,7 +14,7 @@ import { RelatorioComponent, RelatorioDocenteSearchDialogueComponent } from './c
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './core/auth/auth-guard.service';
 import { httpInterceptorProviders } from './core/auth/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Senha } from 'src/app/models/senha.model';
 import { SenhaService } from 'src/app/services/senha/senha.service';
@@ -11,10 +12,11 @@ import { SenhaService } from 'src/app/services/senha/senha.service';
 })
 export class ResetSenhaComponent implements OnInit {
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   senha: Senha;
   formEmail: FormGroup;
 
-  constructor(public router: Router, private fbuilder: FormBuilder, private senhaService: SenhaService) { }
+  constructor(public router: Router, private fbuilder: FormBuilder, private senhaService: SenhaService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.senha = new Senha();
@@ -32,10 +34,17 @@ export class ResetSenhaComponent implements OnInit {
     this.senha.email = this.formEmail.get('email').value;
     this.senhaService.resetarSenha(request).subscribe(
       data => {
+        this.openSnackBar('Verifique seu email', 'OK');
         this.loadLogin();
       },
       erro => console.log(erro)
     );
   }
 
+  openSnackBar(message: string, action: string): void{
+    this.snackBar.open(message, action, {
+      duration: 15000,
+      horizontalPosition: this.horizontalPosition
+    });
+  }
 }

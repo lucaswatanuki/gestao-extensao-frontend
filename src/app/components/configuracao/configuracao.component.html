@@ -50,15 +50,19 @@
                 </div>
             </div>
         </div>
-        <br/>
-        <hr>
+    </form>
 
-        <h1 mat-dialog-title>Alterar senha</h1>
+    <br />
+    <hr>
+
+    <h1 mat-dialog-title>Alterar senha</h1>
+    <form name="form" [formGroup]="senhaForm">
+
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="outline" style="width: 100%">
                     <mat-label>Senha atual</mat-label>
-                    <input matInput type="password" [(ngModel)]="usuario.senhaAtual" formControlName="senhaAtual"
+                    <input matInput type="password" [(ngModel)]="senhaModel.senhaAtual" formControlName="oldPassword"
                         placeholder="Senha atual" />
                 </mat-form-field>
             </div>
@@ -67,22 +71,24 @@
             <div class="col">
                 <mat-form-field appearance="outline" style="width: 100%">
                     <mat-label>Nova senha</mat-label>
-                    <input matInput type="password" [(ngModel)]="usuario.senhaNova" formControlName="senhaNova"
+                    <input matInput type="password" [(ngModel)]="senhaModel.senha" formControlName="senha"
                         placeholder="Senha nova" />
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field appearance="outline" style="width: 100%">
                     <mat-label>Confirmar nova senha</mat-label>
-                    <input matInput type="password" [(ngModel)]="usuario.senhaConfirmacao"
-                        formControlName="senhaConfirmacao" placeholder="Confirmacao de senha" />
+                    <input matInput type="password" formControlName="senhaConfirmacao" placeholder="Confirmacao de senha" />
+                    <mat-error *ngIf="senhaForm.controls.senhaConfirmacao.errors?.equalTo">
+                        Erro ao confirmar senha
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div mat-dialog-actions>
-                    <button mat-raised-button color="warn">
+                    <button mat-raised-button color="warn" (click)="alterarSenha()">
                         <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
                         Atualizar senha
                     </button>
