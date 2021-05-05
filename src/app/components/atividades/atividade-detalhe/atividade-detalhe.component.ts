@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
 import { Arquivo } from 'src/app/models/arquivo.model';
 import { Atividade } from 'src/app/models/atividade.model';
 import { Autorizacao } from 'src/app/models/autorizacao.model';
+import { Convenio } from 'src/app/models/convenio.model';
 import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
@@ -22,8 +23,8 @@ import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalh
 })
 export class AtividadeDetalheComponent implements OnInit {
 
-  atividade: Atividade;
-  formularioAtividade: FormGroup;
+  atividade: Convenio;
+  convenioForm: FormGroup;
   admin = false;
   user = false;
   private roles: string[];
@@ -39,30 +40,15 @@ export class AtividadeDetalheComponent implements OnInit {
     private uploadService: UploadArquivoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.atividade = new Atividade();
+    this.atividade = new Convenio();
     this.currentYear = new Date().getFullYear();
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.admin = this.roles.includes('ROLE_ADMIN');
       this.user = this.roles.includes('ROLE_USER');
     }
-    this.formularioAtividade = this.fbuilder.group({
-      projeto: new FormControl(''),
-      id: new FormControl(''),
-      horaMensal: new FormControl(''),
-      horaSemanal: new FormControl(''),
-      prazo: new FormControl(''),
-      valor: new FormControl(''),
-      dataInicio: new FormControl(''),
-      dataFim: new FormControl(''),
-      docente: new FormControl(''),
-      horasEmAndamento: new FormControl(''),
-      horasFuturas: new FormControl(''),
-      observacao: new FormControl(''),
-      revisao: new FormControl(''),
-    });
 
-    this.atividadeService.consultarAtividade(this.route.snapshot.params['id']).subscribe(
+    this.atividadeService.consultarConvenio(this.route.snapshot.params['id']).subscribe(
       response => {
         console.log(response);
         this.atividade = response;
@@ -72,6 +58,31 @@ export class AtividadeDetalheComponent implements OnInit {
       error => {
         console.log(error);
       });
+
+      this.convenioForm = this.fbuilder.group({
+        instituicao: [null, Validators.required],
+        projeto: [null, Validators.required],
+        coordenador: [null, Validators.required],
+        horaSemanal: [null, Validators.required],
+        horaMensal: [null, Validators.required],
+        descricao: [null, Validators.required],
+        dataInicio: [null, Validators.required],
+        dataFim: [null, Validators.required],
+        valorBruto: [null, Validators.required],
+        prazo: [null, Validators.required],
+        valor: [null, Validators.required],
+        docente: [null, Validators.required],
+        observacao: [null],
+        revisao: [null],
+        ano: [null],
+        semestre: [null],
+        horasSolicitadas: [null],
+        ano2: [null],
+        semestre2: [null],
+        horasSolicitadas2: [null],
+        tipoAtividadeSimultanea: [null, Validators.required]
+      });
+  
 
   }
 

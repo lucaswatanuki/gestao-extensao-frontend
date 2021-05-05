@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Regencia } from 'src/app/models/regencia.model';
+import { Convenio } from 'src/app/models/convenio.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class AtividadeService {
 
   salvarRegencia(request: Regencia): Observable<any> {
     return this.http.post<Regencia>(`${this.baseUrl}/regencia`, request);
+  }
+
+  consultarConvenio(id: number): Observable<Convenio> {
+    return this.http.get<Convenio>(this.baseUrl + '/convenio/' + id);
   }
 }
