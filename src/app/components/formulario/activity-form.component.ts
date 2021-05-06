@@ -9,6 +9,7 @@ import { Regencia } from 'src/app/models/regencia.model';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Alocacao } from 'src/app/models/alocacao.model';
+import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 
 @Component({
   selector: 'app-activity-form',
@@ -74,37 +75,48 @@ export class ActivityFormComponent implements OnInit{
       valorBrutoOutraAtividade: [null],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
-      observacao: [null]
+      observacao: [null],
+      ano: [null],
+      semestre: [null],
+      horasSolicitadas: [null],
+      ano2: [null],
+      semestre2: [null],
+      horasSolicitadas2: [null],
     });
 
     this.regenciaForm = this.fb.group({
       nivel: [null, Validators.required],
       curso: [null, Validators.required],
       coordenador: [null, Validators.required],
-      disciplinaParticipacao: [null, Validators.required],
+      disciplinaParticipacao: [null],
       cargaHoraTotalMinistrada: [null, Validators.required],
       cargaHorariaTotalDedicada: [null],
       valorBrutoHoraAula: [null, Validators.required],
       valorBrutoTotalAula: [null, Validators.required],
       valorBrutoOutraAtividade: [null, Validators.required],
-      instituicao: [null],
-      diasTrabalhadosUnicamp: [null],
-      diasTrabalhadosOutraInstituicao: [null],
+      instituicao: [null, Validators.required],
+      diasTrabalhadosUnicamp: [null, Validators.required],
+      diasTrabalhadosOutraInstituicao: [null, Validators.required],
       responsavel: [null, Validators.required],
       unicoDocente: [null, Validators.required],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
-      totalHorasMinistradas: [null, Validators.required],
       horaSemanal: [null, Validators.required],
       horaMensal: [null, Validators.required],
-      observacao: [null]
+      observacao: [null],
+      ano: [null],
+      semestre: [null],
+      horasSolicitadas: [null],
+      ano2: [null],
+      semestre2: [null],
+      horasSolicitadas2: [null],
     });
   }
 
   // tslint:disable-next-line: max-line-length
   constructor(private snackBar: MatSnackBar, private fb: FormBuilder, private convenioService: ConvenioService, 
     private cursoService: CursoService, 
-    private uploadService: UploadArquivoService) { }
+    private uploadService: UploadArquivoService, private atividadeService: AtividadeService) { }
 
 
   openSnackBar(message: string, action: string): void {
@@ -168,6 +180,7 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.dataInicio = this.cursoForm.get('dataInicio').value;
     this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
     this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
+    this.cursoModel.alocacoes = [];
 
     this.alocacao = new Alocacao();
     this.alocacao.ano = this.convenioForm.get('ano').value;
@@ -215,27 +228,29 @@ export class ActivityFormComponent implements OnInit{
     this.regenciaModel.unicoDocente = this.regenciaForm.get('unicoDocente').value;
     this.regenciaModel.horaSemanal = this.regenciaForm.get('horaSemanal').value;
     this.regenciaModel.horaMensal = this.regenciaForm.get('horaMensal').value;
+    this.regenciaModel.alocacoes = [];
 
     this.alocacao = new Alocacao();
-    this.alocacao.ano = this.convenioForm.get('ano').value;
-    this.alocacao.semestre = this.convenioForm.get('semestre').value;
-    this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas').value;
+    this.alocacao.ano = this.regenciaForm.get('ano').value;
+    this.alocacao.semestre = this.regenciaForm.get('semestre').value;
+    this.alocacao.horasSolicitadas = this.regenciaForm.get('horasSolicitadas').value;
     this.regenciaModel.alocacoes.push(this.alocacao);
 
     if(this.hasUnitNumber) {
       this.alocacao2 = new Alocacao();
-      this.alocacao2.ano = this.convenioForm.get('ano2').value;
-      this.alocacao2.semestre = this.convenioForm.get('semestre2').value;
-      this.alocacao2.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
+      this.alocacao2.ano = this.regenciaForm.get('ano2').value;
+      this.alocacao2.semestre = this.regenciaForm.get('semestre2').value;
+      this.alocacao2.horasSolicitadas = this.regenciaForm.get('horasSolicitadas2').value;
       this.regenciaModel.alocacoes.push(this.alocacao2);
     }
 
-    this.cursoService.salvarCurso(this.cursoModel).subscribe(
+    this.atividadeService.salvarRegencia(this.regenciaModel).subscribe(
       data => {
         this.upload(data.id);
         this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {
+        this.openSnackBar('Erro ao submeter atividade', 'OK');
         console.log(erro);
       }
     );

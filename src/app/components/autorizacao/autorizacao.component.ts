@@ -15,15 +15,15 @@ import { Router } from '@angular/router';
 })
 export class AutorizacaoComponent implements OnInit {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   autorizacao: Autorizacao = new Autorizacao();
   autorizacoes: MatTableDataSource<Autorizacao>;
   errorMsg: string;
-  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente', 'abrir'];
+  displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'horas', 'urgente', 'tipoAtividade', 'abrir'];
 
-  constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private router: Router) {}
+  constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.getAutorizacoes();
@@ -43,8 +43,18 @@ export class AutorizacaoComponent implements OnInit {
     );
   }
 
-  consultarDetalheAutorizacao(id: number): void {
-    this.router.navigate(['atividade', id])
+  consultarDetalheAutorizacao(element: Autorizacao): void {
+    if (element.tipoAtividade === 'CONVENIO') {
+      this.router.navigate(['atividade/convenio', element.id])
+    }
+
+    if (element.tipoAtividade === 'CURSO_EXTENSAO') {
+      this.router.navigate(['atividade/curso-extensao', element.id])
+    }
+
+    if (element.tipoAtividade === 'REGENCIA') {
+      this.router.navigate(['atividade/regencia', element.id])
+    }
   }
 
 }

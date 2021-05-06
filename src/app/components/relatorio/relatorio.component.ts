@@ -3,10 +3,10 @@ import { Docente } from './../../models/docente.model';
 import { Relatorio } from './../../models/relatorio.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { RelatorioService } from './../../services/relatorio/relatorio.service';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
@@ -148,15 +148,17 @@ export class RelatorioDocenteSearchDialogueComponent {
   }
 
   public getDocentes(): void {
-    this.docenteService.listarDocentes().subscribe(
-      data => {
-        this.source = new MatTableDataSource(data);
-        this.source.paginator = this.paginator;
-      },
-      error => {
-        this.errorMsg = `${error.status}: ${JSON.parse(error.error).message}`;
-      }
-    );
+    setTimeout(() => {
+      this.docenteService.listarDocentes().subscribe(
+        data => {
+          this.source = new MatTableDataSource(data);
+          this.source.paginator = this.paginator;
+        },
+        error => {
+          this.errorMsg = `${error.status}: ${JSON.parse(error.error).message}`;
+        }
+      );
+    });
   }
 
   selectRow(row) {

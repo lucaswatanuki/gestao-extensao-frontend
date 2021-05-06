@@ -12,6 +12,9 @@ import { ConfiguracaoComponent } from './components/configuracao/configuracao.co
 import { AtividadeDetalheComponent } from './components/atividades/atividade-detalhe/atividade-detalhe.component';
 import { ResetSenhaComponent } from './components/senha/reset-senha/reset-senha.component';
 import { UpdateSenhaComponent } from './components/senha/update/update-senha/update-senha.component';
+import { ConvenioComponent } from './components/atividades/convenio/convenio.component';
+import { RegenciaComponent } from './components/atividades/regencia/regencia.component';
+import { CursoExtensao } from './models/curso.model';
 
 
 const routes: Routes = [
@@ -43,7 +46,13 @@ const routes: Routes = [
     path: 'signup', component: CadastroComponent
   },
   {
-    path: 'atividade/:id', component: AtividadeDetalheComponent, canActivate: [AuthGuardService]
+    path: 'atividade/convenio/:id', component: ConvenioComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'atividade/regencia/:id', component: RegenciaComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'atividade/curso-extensao/:id', component: CursoExtensao, canActivate: [AuthGuardService]
   },
   {
     path: 'senha/alterarSenha/:token', component: UpdateSenhaComponent

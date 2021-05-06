@@ -3,6 +3,9 @@ import { Atividade } from './../../models/atividade.model';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Regencia } from 'src/app/models/regencia.model';
+import { Convenio } from 'src/app/models/convenio.model';
+import { CursoExtensao } from 'src/app/models/curso.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +30,21 @@ export class AtividadeService {
 
   salvarAtividade(atividade: Atividade): Observable<Blob>  {
     return this.http.get(this.baseUrl + '/download/' + atividade.tipoAtividade + '/' + atividade.id, {responseType: 'blob'});
+  }
+
+  salvarRegencia(request: Regencia): Observable<any> {
+    return this.http.post<Regencia>(`${this.baseUrl}/regencia`, request);
+  }
+
+  consultarConvenio(id: number): Observable<Convenio> {
+    return this.http.get<Convenio>(this.baseUrl + '/convenio/' + id);
+  }
+
+  consultarCurso(id: number): Observable<CursoExtensao> {
+    return this.http.get<CursoExtensao>(this.baseUrl + '/curso-extensao/' + id);
+  }
+
+  consultarRegencia(id: number): Observable<Regencia> {
+    return this.http.get<Regencia>(this.baseUrl + '/regencia/' + id);
   }
 }

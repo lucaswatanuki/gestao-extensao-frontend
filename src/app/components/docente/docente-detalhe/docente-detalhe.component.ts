@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Alocacao } from 'src/app/models/alocacao.model';
 import { Docente } from 'src/app/models/docente.model';
 import { DocenteService } from 'src/app/services/docente/docente.service';
@@ -22,11 +21,12 @@ export class DocenteDetalheComponent implements OnInit {
   errorMsg: string;
   displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasAprovadas'];
 
-  constructor(private docenteService: DocenteService, @Inject(MAT_DIALOG_DATA) public data) { }
+  constructor(private docenteService: DocenteService, @Inject(MAT_DIALOG_DATA) public data, private cdRef : ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.getAlocacoes(this.data.id);
-
+    setTimeout(() => {
+      this.getAlocacoes(this.data.id);
+    })
   }
 
   getAlocacoes(id: number): void {

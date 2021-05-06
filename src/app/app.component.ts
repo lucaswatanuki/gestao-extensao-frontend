@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { LoaderService } from './services/loader.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewChecked{
 
   title = 'Gestão Extensão';
   private roles: string[];
@@ -27,7 +27,11 @@ export class AppComponent implements OnInit{
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private tokenStorage: TokenStorageService, public loaderService: LoaderService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private tokenStorage: TokenStorageService, public loaderService: LoaderService, private cdRef : ChangeDetectorRef) { }
+ 
+  ngAfterViewChecked(): void {
+      this.cdRef.detectChanges();
+  }
 
   ngOnInit(): void {
 

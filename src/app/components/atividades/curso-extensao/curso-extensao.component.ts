@@ -8,23 +8,23 @@ import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
 import { Arquivo } from 'src/app/models/arquivo.model';
 import { Atividade } from 'src/app/models/atividade.model';
 import { Autorizacao } from 'src/app/models/autorizacao.model';
-import { Convenio } from 'src/app/models/convenio.model';
+import { CursoExtensao } from 'src/app/models/curso.model';
+import { ExportService } from 'src/app/services/arquivo.service';
 import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
-import { ExportService } from 'src/app/services/arquivo.service';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
 
 @Component({
-  selector: 'app-atividade-detalhe',
-  templateUrl: './atividade-detalhe.component.html',
-  styleUrls: ['./atividade-detalhe.component.scss']
+  selector: 'app-curso-extensao',
+  templateUrl: './curso-extensao.component.html',
+  styleUrls: ['./curso-extensao.component.scss']
 })
-export class AtividadeDetalheComponent implements OnInit {
+export class CursoExtensaoComponent implements OnInit {
 
-  atividade: Convenio;
-  convenioForm: FormGroup;
+  atividade: CursoExtensao;
+  cursoForm: FormGroup;
   admin = false;
   user = false;
   private roles: string[];
@@ -32,7 +32,7 @@ export class AtividadeDetalheComponent implements OnInit {
   confirmacaoDialogueRef: MatDialogRef<ConfirmacaoDialogueComponent>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   fileInfos$: Observable<Arquivo[]>;
-  autorizacao: Autorizacao
+  autorizacao: Autorizacao;
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
@@ -40,7 +40,7 @@ export class AtividadeDetalheComponent implements OnInit {
     private uploadService: UploadArquivoService, private router: Router, private arquivoService: ExportService) { }
 
   ngOnInit(): void {
-    this.atividade = new Convenio();
+    this.atividade = new CursoExtensao();
     this.currentYear = new Date().getFullYear();
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
@@ -48,7 +48,7 @@ export class AtividadeDetalheComponent implements OnInit {
       this.user = this.roles.includes('ROLE_USER');
     }
 
-    this.atividadeService.consultarConvenio(this.route.snapshot.params['id']).subscribe(
+    this.atividadeService.consultarCurso(this.route.snapshot.params['id']).subscribe(
       response => {
         console.log(response);
         this.atividade = response;
@@ -59,31 +59,30 @@ export class AtividadeDetalheComponent implements OnInit {
         console.log(error);
       });
 
-      this.convenioForm = this.fbuilder.group({
-        instituicao: [null, Validators.required],
-        projeto: [null, Validators.required],
+      this.cursoForm = this.fbuilder.group({
+        instituicaoVinculada: [null, Validators.required],
+        nomeCurso: [null, Validators.required],
         coordenador: [null, Validators.required],
+        participacao: [null, Validators.required],
+        disciplina: [null],
+        totalHorasMinistradas: [null, Validators.required],
         horaSemanal: [null, Validators.required],
         horaMensal: [null, Validators.required],
-        descricao: [null, Validators.required],
+        valorBrutoHoraAula: [null],
+        valorBrutoTotalAula: [null],
+        valorBrutoOutraAtividade: [null],
         dataInicio: [null, Validators.required],
         dataFim: [null, Validators.required],
-        valorBruto: [null, Validators.required],
-        prazo: [null, Validators.required],
-        valor: [null, Validators.required],
-        docente: [null, Validators.required],
         observacao: [null],
-        revisao: [null],
         ano: [null],
         semestre: [null],
         horasSolicitadas: [null],
         ano2: [null],
         semestre2: [null],
         horasSolicitadas2: [null],
-        tipoAtividadeSimultanea: [null, Validators.required]
+        revisao: [null],
+        docente: [null]
       });
-  
-
   }
 
   autorizarAtividade(atividade: Atividade): void {
@@ -146,5 +145,4 @@ export class AtividadeDetalheComponent implements OnInit {
   voltar(): void {
     this.router.navigate(['autorizacoes']);
   }
-
 }

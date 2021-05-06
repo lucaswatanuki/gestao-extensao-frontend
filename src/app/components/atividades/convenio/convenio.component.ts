@@ -9,19 +9,19 @@ import { Arquivo } from 'src/app/models/arquivo.model';
 import { Atividade } from 'src/app/models/atividade.model';
 import { Autorizacao } from 'src/app/models/autorizacao.model';
 import { Convenio } from 'src/app/models/convenio.model';
+import { ExportService } from 'src/app/services/arquivo.service';
 import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
-import { ExportService } from 'src/app/services/arquivo.service';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
 
 @Component({
-  selector: 'app-atividade-detalhe',
-  templateUrl: './atividade-detalhe.component.html',
-  styleUrls: ['./atividade-detalhe.component.scss']
+  selector: 'app-convenio',
+  templateUrl: './convenio.component.html',
+  styleUrls: ['./convenio.component.scss']
 })
-export class AtividadeDetalheComponent implements OnInit {
+export class ConvenioComponent implements OnInit {
 
   atividade: Convenio;
   convenioForm: FormGroup;
@@ -32,7 +32,7 @@ export class AtividadeDetalheComponent implements OnInit {
   confirmacaoDialogueRef: MatDialogRef<ConfirmacaoDialogueComponent>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   fileInfos$: Observable<Arquivo[]>;
-  autorizacao: Autorizacao
+  autorizacao: Autorizacao;
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,

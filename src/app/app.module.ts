@@ -14,7 +14,7 @@ import { RelatorioComponent, RelatorioDocenteSearchDialogueComponent } from './c
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './core/auth/auth-guard.service';
 import { httpInterceptorProviders } from './core/auth/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
@@ -34,6 +34,9 @@ import { AtividadeDetalheComponent } from './components/atividades/atividade-det
 import { DocenteDetalheComponent } from './components/docente/docente-detalhe/docente-detalhe.component';
 import { ResetSenhaComponent } from './components/senha/reset-senha/reset-senha.component';
 import { UpdateSenhaComponent } from './components/senha/update/update-senha/update-senha.component';
+import { CursoExtensaoComponent } from './components/atividades/curso-extensao/curso-extensao.component';
+import { RegenciaComponent } from './components/atividades/regencia/regencia.component';
+import { ConvenioComponent } from './components/atividades/convenio/convenio.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { UpdateSenhaComponent } from './components/senha/update/update-senha/upd
     DocenteDetalheComponent,
     ResetSenhaComponent,
     UpdateSenhaComponent,
+    ConvenioComponent,
+    CursoExtensaoComponent,
+    RegenciaComponent,
   ],
   imports: [
     CommonModule,

@@ -379,7 +379,7 @@
               </div>
               <div class="row">
                 <mat-label style="margin-right: 20px;">Nível: </mat-label>
-                <mat-radio-group aria-label="Select an option" formControlName="disciplinaParticipacao">
+                <mat-radio-group aria-label="Select an option" formControlName="nivel">
                   <mat-radio-button value="GRADUACAO">Graduação</mat-radio-button>
                   <mat-radio-button value="POS_GRADUACAO">Pós-Graduação</mat-radio-button>
                 </mat-radio-group>
@@ -477,6 +477,74 @@
                   <mat-form-field  appearance="outline" class="full-width">
                     <mat-label>Incluir observação</mat-label>
                     <textarea matInput formControlName="observacao"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field  appearance="outline" class="full-width">
+                    <mat-label>Dias Trabalhados Unicamp</mat-label>
+                    <input matInput placeholder="Dias Trabalhados Unicamp" formControlName="diasTrabalhadosUnicamp">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field  appearance="outline" class="full-width">
+                    <mat-label>Dias trabalhados em outra instituicao</mat-label>
+                    <input matInput placeholder="Dias trabalhados em outra instituicao" formControlName="diasTrabalhadosOutraInstituicao">
+                  </mat-form-field>
+                </div>
+              </div>
+              <h3>Alocação</h3>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre" min="1" max="2" type="number"
+                      formControlName="semestre">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano" type="number"
+                      formControlName="ano">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas" type="number"
+                      formControlName="horasSolicitadas">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="!hasUnitNumber">
+                <div class="col">
+                  <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+                    + Adicionar alocação de horas
+                  </button>
+                </div>
+              </div>
+              <div class="row" *ngIf="hasUnitNumber">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre2" min="1" max="2" type="number"
+                      formControlName="semestre2">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano2" type="number"
+                      formControlName="ano2">
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas2" type="number"
+                      formControlName="horasSolicitadas2">
                   </mat-form-field>
                 </div>
               </div>
