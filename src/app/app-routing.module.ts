@@ -46,9 +46,6 @@ const routes: Routes = [
     path: 'signup', component: CadastroComponent
   },
   {
-    path: 'atividade/:id', component: AtividadeDetalheComponent, canActivate: [AuthGuardService]
-  },
-  {
     path: 'atividade/convenio/:id', component: ConvenioComponent, canActivate: [AuthGuardService]
   },
   {

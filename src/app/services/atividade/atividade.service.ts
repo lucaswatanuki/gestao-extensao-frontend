@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Regencia } from 'src/app/models/regencia.model';
 import { Convenio } from 'src/app/models/convenio.model';
+import { CursoExtensao } from 'src/app/models/curso.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,13 @@ export class AtividadeService {
 
   consultarConvenio(id: number): Observable<Convenio> {
     return this.http.get<Convenio>(this.baseUrl + '/convenio/' + id);
+  }
+
+  consultarCurso(id: number): Observable<CursoExtensao> {
+    return this.http.get<CursoExtensao>(this.baseUrl + '/curso-extensao/' + id);
+  }
+
+  consultarRegencia(id: number): Observable<Regencia> {
+    return this.http.get<Regencia>(this.baseUrl + '/regencia/' + id);
   }
 }

@@ -1,6 +1,5 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,6 +11,7 @@ import { Autorizacao } from 'src/app/models/autorizacao.model';
 import { Convenio } from 'src/app/models/convenio.model';
 import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
+import { ExportService } from 'src/app/services/arquivo.service';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
@@ -36,8 +36,8 @@ export class AtividadeDetalheComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
-    private autorizacaoService: AutorizacaoService, private datePipe: DatePipe, public dialog: MatDialog, private snackBar: MatSnackBar,
-    private uploadService: UploadArquivoService, private router: Router) { }
+    private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private snackBar: MatSnackBar,
+    private uploadService: UploadArquivoService, private router: Router, private arquivoService: ExportService) { }
 
   ngOnInit(): void {
     this.atividade = new Convenio();
@@ -97,29 +97,7 @@ export class AtividadeDetalheComponent implements OnInit {
   }
 
   extrairRelatorioPDF(atividade: Atividade): void {
-    this.atividadeService.salvarAtividade(atividade).subscribe(
-      data => {
-        const blob = new Blob([data], { type: 'application/pdf' });
-
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(blob);
-          return;
-        }
-
-        const dados = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-
-        link.href = dados;
-        var date = this.datePipe.transform(new Date(), "dd-MM-yyyy_HH:mm:ss");
-        link.download = 'relatorio_' + date + '.pdf';
-        link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
-
-        setTimeout(function () {
-          window.URL.revokeObjectURL(dados);
-          link.remove();
-        }, 100);
-      }
-    );
+    this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
   openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean) {
@@ -162,28 +140,7 @@ export class AtividadeDetalheComponent implements OnInit {
   }
 
   downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
-    this.uploadService.download(atividade.id).subscribe(
-      data => {
-        const blob = new Blob([data], { type: arquivo.tipo });
-
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(blob);
-          return;
-        }
-
-        const dados = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-
-        link.href = dados;
-        link.download = arquivo.nome;
-        link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
-
-        setTimeout(function () {
-          window.URL.revokeObjectURL(dados);
-          link.remove();
-        }, 100);
-      }
-    );
+    this.arquivoService.downloadArquivo(arquivo, atividade);
   }
 
   voltar(): void {

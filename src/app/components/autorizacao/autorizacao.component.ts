@@ -45,7 +45,7 @@ export class AutorizacaoComponent implements OnInit {
 
   consultarDetalheAutorizacao(element: Autorizacao): void {
     if (element.tipoAtividade === 'CONVENIO') {
-      this.router.navigate(['atividade', element.id])
+      this.router.navigate(['atividade/convenio', element.id])
     }
 
     if (element.tipoAtividade === 'CURSO_EXTENSAO') {

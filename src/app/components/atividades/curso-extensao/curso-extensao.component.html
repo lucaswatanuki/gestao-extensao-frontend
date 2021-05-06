@@ -1,1 +1,195 @@
-<p>curso-extensao works!</p>
+<div class="grid-container">
+    <h1 mat-dialog-title>
+        <button mat-button (click)="voltar()">
+            <mat-icon aria-hidden="false" aria-label="edit icon">keyboard_backspace</mat-icon>
+        </button>
+        Solicitação de Atividade #{{ atividade.id }} - Cursos de Extensão
+    </h1>
+    <form name="form" [formGroup]="cursoForm">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nome do curso</mat-label>
+                    <input [(ngModel)]="atividade.nomeCurso" matInput placeholder="Nome do curso"
+                        formControlName="nomeCurso">
+                    <mat-error *ngIf="cursoForm.controls['nomeCurso'].hasError('required')">
+                        Nome do curso <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Instituição de Ensino</mat-label>
+                    <input [(ngModel)]="atividade.instituicaoVinculada" matInput placeholder="Instituição vinculada"
+                        formControlName="instituicaoVinculada">
+                    <mat-error *ngIf="cursoForm.controls['instituicaoVinculada'].hasError('required')">
+                        Nome da instituição <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Coordenador(a) </mat-label>
+                    <input [(ngModel)]="atividade.coordenador" matInput placeholder="Coordenador(a)"
+                        formControlName="coordenador">
+                    <mat-error *ngIf="cursoForm.controls['coordenador'].hasError('required')">
+                        Nome do coordenador(a) <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <mat-label style="margin-right: 20px;">Participação em: </mat-label>
+            <mat-radio-group [(ngModel)]="atividade.participacao" aria-label="Select an option"
+                formControlName="participacao">
+                <mat-radio-button value="DISCIPLINA">Disciplina</mat-radio-button>
+                <mat-radio-button value="COORDENACAO">Coordenação</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="row" style="margin-top: 5px;">
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Disciplina de participação</mat-label>
+                    <input [(ngModel)]="atividade.disciplinas" matInput placeholder="Disciplina"
+                        formControlName="disciplina">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Carga horária total de aulas ministradas</mat-label>
+                    <input [(ngModel)]="atividade.cargaHorariaTotal" matInput maxlength="5" min="1"
+                        placeholder="Carga horária total" type="number" formControlName="totalHorasMinistradas">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas semanais dedicadas (aulas + preparação e outras atividades)</mat-label>
+                    <input [(ngModel)]="atividade.horaSemanal" matInput maxlength="5" min="1"
+                        placeholder="Carga horária semanal" type="number" formControlName="horaSemanal">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas mensais dedicadas (aulas + preparação e outras atividades)</mat-label>
+                    <input matInput [(ngModel)]="atividade.horaMensal" maxlength="5" min="1"
+                        placeholder="Carga horária mensal" type="number" formControlName="horaMensal">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto por hora-aula (R$)</mat-label>
+                    <input [(ngModel)]="atividade.valorBrutoHoraAula" matInput maxlength="5"
+                        placeholder="Valor bruto hora-aula" type="number" formControlName="valorBrutoHoraAula">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto pelo total de aulas (R$)</mat-label>
+                    <input [(ngModel)]="atividade.valorBrutoTotalAula" matInput maxlength="5"
+                        placeholder="Valor bruto total aulas" type="number" formControlName="valorBrutoTotalAula">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Valor bruto de outras atividades (R$)</mat-label>
+                    <input matInput [(ngModel)]="atividade.valorBrutoOutrasAtividade" maxlength="5"
+                        placeholder="Valor bruto de outras atividades" type="number"
+                        formControlName="valorBrutoOutraAtividade">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Inicio</mat-label>
+                    <input [(ngModel)]="atividade.dataInicio" matInput [matDatepicker]="picker2"
+                        formControlName="dataInicio" placeholder="Selecionar data" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Data Fim</mat-label>
+                    <input [(ngModel)]="atividade.dataFim" matInput [matDatepicker]="picker3" formControlName="dataFim"
+                        placeholder="Selecionar data" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <h1 mat-dialog-title>Docente</h1>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Nome</mat-label>
+                    <input matInput [(ngModel)]="atividade.docente" formControlName="docente" placeholder="Nome Docente"
+                        readonly />
+                </mat-form-field>
+            </div>
+        </div>
+        <h1 mat-dialog-title>Observações</h1>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Comentário docente</mat-label>
+                    <textarea matInput [(ngModel)]="atividade.observacao" formControlName="observacao"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Itens a revisar</mat-label>
+                    <textarea matInput [(ngModel)]="atividade.revisao" formControlName="revisao" readonly></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" *ngIf="(fileInfos$ | async)?.length > 0;">
+            <div class="col">
+                <div class="card">
+                    <h1 mat-dialog-title>Anexos</h1>
+                    <ul class="list-group list-group-flush" *ngFor="let file of fileInfos$ | async">
+                        <li class="list-group-item">
+                            {{ file.nome }} <button mat-button (click)="downloadArquivo(file, atividade)" *ngIf="admin">
+                                <mat-icon aria-hidden="false" aria-label="download">download</mat-icon>
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div mat-dialog-actions style="float: right">
+                    <button [disabled]="atividade.autorizado || !cursoForm.valid" mat-button
+                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar os dados da atividade?', true)">
+                        <mat-icon aria-hidden="false" aria-label="edit icon">update</mat-icon>
+                        Atualizar
+                    </button>
+                    <button [disabled]="atividade.autorizado" mat-button
+                        (click)="openConfirmationDialog(atividade, 'Deseja confirmar autorização?', true)"
+                        *ngIf="admin">
+                        <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
+                        Aceitar
+                    </button>
+                    <button mat-button (click)="devolverAtividade(atividade.id)" color="warn" *ngIf="admin">
+                        <mat-icon aria-hidden="false" aria-label="edit icon">cancel</mat-icon>
+                        Devolver
+                    </button>
+                    <button mat-button (click)="extrairRelatorioPDF(atividade)" *ngIf="admin">
+                        <mat-icon aria-hidden="false" aria-label="edit icon">save</mat-icon>
+                        PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
