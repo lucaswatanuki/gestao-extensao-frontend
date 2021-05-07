@@ -5,7 +5,7 @@
         </button>
         Solicitação de Atividade #{{ atividade.id }} - Cursos de Extensão
     </h1>
-    <form name="form" [formGroup]="cursoForm">
+    <form name="form" [formGroup]="cursoForm" #f="ngForm">
         <div class="row">
             <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
@@ -169,13 +169,13 @@
         <div class="row">
             <div class="col">
                 <div mat-dialog-actions style="float: right">
-                    <button [disabled]="atividade.autorizado || !cursoForm.valid" mat-button
-                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar os dados da atividade?', true)">
+                    <button [disabled]="atividade.autorizado && !cursoForm.valid" mat-button
+                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar os dados da atividade?', true, 'update')">
                         <mat-icon aria-hidden="false" aria-label="edit icon">update</mat-icon>
                         Atualizar
                     </button>
                     <button [disabled]="atividade.autorizado" mat-button
-                        (click)="openConfirmationDialog(atividade, 'Deseja confirmar autorização?', true)"
+                        (click)="openConfirmationDialog(atividade, 'Deseja confirmar autorização?', true, 'aceitar')"
                         *ngIf="admin">
                         <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
                         Aceitar

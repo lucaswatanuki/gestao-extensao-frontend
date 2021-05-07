@@ -5,7 +5,7 @@
         </button>
         Solicitação de Atividade #{{ atividade.id }} - Convênios
     </h1>
-    <form name="form" [formGroup]="convenioForm">
+    <form name="form" [formGroup]="convenioForm" #f="ngForm">
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="outline" style="width: 100%">
@@ -47,16 +47,20 @@
             </div>
             <div class="col">
                 <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Data Inicio</mat-label>
-                    <input matInput [(ngModel)]="atividade.dataInicio" formControlName="dataInicio"
-                        placeholder="dd/MM/yyyy" />
+                        <mat-label>Data Inicio</mat-label>
+                        <input [(ngModel)]="atividade.dataInicio" matInput [matDatepicker]="picker" formControlName="dataInicio" placeholder="Selecionar data" 
+                          required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Data Fim</mat-label>
-                    <input matInput [(ngModel)]="atividade.dataFim" formControlName="dataFim"
-                        placeholder="dd/MM/yyyy" />
+                    <input [(ngModel)]="atividade.dataFim" matInput [matDatepicker]="picker1" formControlName="dataFim" placeholder="Selecionar data" 
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
             </div>
         </div>
@@ -76,12 +80,6 @@
                         placeholder="instituicao" />
                 </mat-form-field>
             </div>
-            <div class="col">
-                <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Data Fim</mat-label>
-                    <input matInput formControlName="dataFim" placeholder="dd/MM/yyyy" />
-                </mat-form-field>
-            </div>
         </div>
 
         <div class="row">
@@ -94,6 +92,8 @@
             </mat-radio-group>
         </div>
 
+        <br>
+        
         <h1 mat-dialog-title>Docente</h1>
         <div class="row">
             <div class="col">
@@ -139,13 +139,13 @@
         <div class="row">
             <div class="col">
                 <div mat-dialog-actions style="float: right">
-                    <button [disabled]="atividade.autorizado || !convenioForm.valid" mat-button
-                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar os dados da atividade?', true)">
+                    <button [disabled]="atividade.autorizado && !convenioForm.valid" mat-button
+                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar dados de atividade?', true, 'update')">
                         <mat-icon aria-hidden="false" aria-label="edit icon">update</mat-icon>
                         Atualizar
                     </button>
                     <button [disabled]="atividade.autorizado" mat-button
-                        (click)="openConfirmationDialog(atividade, 'Deseja confirmar autorização?', true)"
+                        (click)="openConfirmationDialog(atividade, 'Deseja confirmar autorização?', true, 'aceitar')"
                         *ngIf="admin">
                         <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
                         Aceitar
