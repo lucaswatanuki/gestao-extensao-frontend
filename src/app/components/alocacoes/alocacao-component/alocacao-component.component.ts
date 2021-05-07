@@ -1,36 +1,31 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Alocacao } from 'src/app/models/alocacao.model';
-import { Docente } from 'src/app/models/docente.model';
 import { DocenteService } from 'src/app/services/docente/docente.service';
 
 @Component({
-  selector: 'app-docente-detalhe',
-  templateUrl: './docente-detalhe.component.html',
-  styleUrls: ['./docente-detalhe.component.scss']
+  selector: 'app-alocacao-component',
+  templateUrl: './alocacao-component.component.html',
+  styleUrls: ['./alocacao-component.component.scss']
 })
-export class DocenteDetalheComponent implements OnInit {
+export class AlocacaoComponentComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   id: number;
-  docente: Docente;
   alocacao: Alocacao[];
   alocacoes: MatTableDataSource<Alocacao>;
   errorMsg: string;
   displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasAprovadas'];
 
-  constructor(private docenteService: DocenteService, @Inject(MAT_DIALOG_DATA) public data, private cdRef : ChangeDetectorRef) { }
+  constructor(private docenteService: DocenteService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.getAlocacoes(this.data.id);
-    })
+      this.getAlocacoes();
   }
 
-  getAlocacoes(id: number): void {
-    this.docenteService.consultarAlocacoesDocente(id).subscribe(
+  getAlocacoes(): void {
+    this.docenteService.consultarAlocacoes().subscribe(
       data => {
         this.alocacoes = new MatTableDataSource(data);
         this.alocacoes.paginator = this.paginator;

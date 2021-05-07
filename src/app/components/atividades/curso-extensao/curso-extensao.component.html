@@ -98,7 +98,7 @@
             <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto de outras atividades (R$)</mat-label>
-                    <input matInput [(ngModel)]="atividade.valorBrutoOutrasAtividade" maxlength="5"
+                    <input matInput [(ngModel)]="atividade.valorBrutoOutraAtividade" maxlength="5"
                         placeholder="Valor bruto de outras atividades" type="number"
                         formControlName="valorBrutoOutraAtividade">
                 </mat-form-field>
@@ -137,7 +137,7 @@
         <h1 mat-dialog-title>Observações</h1>
         <div class="row">
             <div class="col">
-                <mat-form-field appearance="outline" class="example-full-width">
+                <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Comentário docente</mat-label>
                     <textarea matInput [(ngModel)]="atividade.observacao" formControlName="observacao"></textarea>
                 </mat-form-field>
@@ -145,7 +145,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <mat-form-field appearance="outline" class="example-full-width">
+                <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Itens a revisar</mat-label>
                     <textarea matInput [(ngModel)]="atividade.revisao" formControlName="revisao" readonly></textarea>
                 </mat-form-field>

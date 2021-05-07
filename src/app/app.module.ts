@@ -36,6 +36,7 @@ import { UpdateSenhaComponent } from './components/senha/update/update-senha/upd
 import { CursoExtensaoComponent } from './components/atividades/curso-extensao/curso-extensao.component';
 import { RegenciaComponent } from './components/atividades/regencia/regencia.component';
 import { ConvenioComponent } from './components/atividades/convenio/convenio.component';
+import { AlocacaoComponentComponent } from './components/alocacoes/alocacao-component/alocacao-component.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ConvenioComponent } from './components/atividades/convenio/convenio.com
     ConvenioComponent,
     CursoExtensaoComponent,
     RegenciaComponent,
+    AlocacaoComponentComponent,
   ],
   imports: [
     CommonModule,

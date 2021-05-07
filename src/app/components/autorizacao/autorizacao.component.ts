@@ -48,7 +48,7 @@ export class AutorizacaoComponent implements OnInit {
       this.router.navigate(['atividade/convenio', element.id])
     }
 
-    if (element.tipoAtividade === 'CURSO_EXTENSAO') {
+    if (element.tipoAtividade === 'CURSO') {
       this.router.navigate(['atividade/curso-extensao', element.id])
     }
 

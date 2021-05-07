@@ -31,6 +31,9 @@
         <mat-icon>assignment_turned_in</mat-icon>
         Autorizações
       </a>
+      <a mat-list-item routerLink='/alocacoes' *ngIf="user || admin">
+        <mat-icon>schedule</mat-icon>Alocacões
+      </a>
       <a mat-list-item routerLink='/docentes' *ngIf="admin">
         <mat-icon>account_circle</mat-icon>Docentes
       </a>

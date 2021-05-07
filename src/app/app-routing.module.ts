@@ -14,6 +14,8 @@ import { UpdateSenhaComponent } from './components/senha/update/update-senha/upd
 import { ConvenioComponent } from './components/atividades/convenio/convenio.component';
 import { RegenciaComponent } from './components/atividades/regencia/regencia.component';
 import { CursoExtensao } from './models/curso.model';
+import { CursoExtensaoComponent } from './components/atividades/curso-extensao/curso-extensao.component';
+import { AlocacaoComponentComponent } from './components/alocacoes/alocacao-component/alocacao-component.component';
 
 
 const routes: Routes = [
@@ -51,7 +53,10 @@ const routes: Routes = [
     path: 'atividade/regencia/:id', component: RegenciaComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'atividade/curso-extensao/:id', component: CursoExtensao, canActivate: [AuthGuardService]
+    path: 'atividade/curso-extensao/:id', component: CursoExtensaoComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'alocacoes', component: AlocacaoComponentComponent, canActivate: [AuthGuardService]
   },
   {
     path: 'senha/alterarSenha/:token', component: UpdateSenhaComponent
