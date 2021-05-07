@@ -47,4 +47,16 @@ export class AtividadeService {
   consultarRegencia(id: number): Observable<Regencia> {
     return this.http.get<Regencia>(this.baseUrl + '/regencia/' + id);
   }
+
+  updateConvenio(atividade: Convenio): Observable<any> {
+    return this.http.put<any>(this.baseUrl + '/convenio', atividade);
+  }
+
+  updateCurso(atividade: CursoExtensao): Observable<any> {
+    return this.http.put<any>(this.baseUrl + '/curso-extensao', atividade);
+  }
+
+  updateRegencia(atividade: Regencia): Observable<any> {
+    return this.http.put<any>(this.baseUrl + '/regencia', atividade);
+  }
 }

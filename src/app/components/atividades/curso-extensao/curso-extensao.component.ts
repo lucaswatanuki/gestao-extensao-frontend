@@ -48,6 +48,35 @@ export class CursoExtensaoComponent implements OnInit {
       this.user = this.roles.includes('ROLE_USER');
     }
 
+    this.getCursos();
+
+    this.cursoForm = this.fbuilder.group({
+      instituicaoVinculada: [null, Validators.required],
+      nomeCurso: [null, Validators.required],
+      coordenador: [null, Validators.required],
+      participacao: [null, Validators.required],
+      disciplina: [null],
+      totalHorasMinistradas: [null, Validators.required],
+      horaSemanal: [null, Validators.required],
+      horaMensal: [null, Validators.required],
+      valorBrutoHoraAula: [null],
+      valorBrutoTotalAula: [null],
+      valorBrutoOutraAtividade: [null],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
+      observacao: [null],
+      ano: [null],
+      semestre: [null],
+      horasSolicitadas: [null],
+      ano2: [null],
+      semestre2: [null],
+      horasSolicitadas2: [null],
+      revisao: [null],
+      docente: [null]
+    });
+  }
+
+  getCursos(): void {
     this.atividadeService.consultarCurso(this.route.snapshot.params['id']).subscribe(
       response => {
         console.log(response);
@@ -58,37 +87,23 @@ export class CursoExtensaoComponent implements OnInit {
       error => {
         console.log(error);
       });
-
-      this.cursoForm = this.fbuilder.group({
-        instituicaoVinculada: [null, Validators.required],
-        nomeCurso: [null, Validators.required],
-        coordenador: [null, Validators.required],
-        participacao: [null, Validators.required],
-        disciplina: [null],
-        totalHorasMinistradas: [null, Validators.required],
-        horaSemanal: [null, Validators.required],
-        horaMensal: [null, Validators.required],
-        valorBrutoHoraAula: [null],
-        valorBrutoTotalAula: [null],
-        valorBrutoOutraAtividade: [null],
-        dataInicio: [null, Validators.required],
-        dataFim: [null, Validators.required],
-        observacao: [null],
-        ano: [null],
-        semestre: [null],
-        horasSolicitadas: [null],
-        ano2: [null],
-        semestre2: [null],
-        horasSolicitadas2: [null],
-        revisao: [null],
-        docente: [null]
-      });
   }
 
   autorizarAtividade(atividade: Atividade): void {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
-        console.log("Atividade autorizada com sucesso");
+        this.openSnackBar('Atividade autorizada com sucesso', 'OK');
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  updateCurso(): void {
+    this.atividadeService.updateCurso(this.atividade).subscribe(
+      res => {
+        this.getCursos();
+        this.openSnackBar('Dados de atividade atualizados com sucesso', 'OK');
       },
       error => {
         console.log(error);
@@ -99,19 +114,29 @@ export class CursoExtensaoComponent implements OnInit {
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
-  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean) {
+
+  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean, operacao: string) {
     this.confirmacaoDialogueRef = this.dialog.open(ConfirmacaoDialogueComponent, {
       disableClose: false
     });
     this.confirmacaoDialogueRef.componentInstance.mensagem = mensagem;
 
-    this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
-      if (result && aceitar) {
-        atividade.autorizado = true;
-        this.autorizarAtividade(atividade);
-        this.openSnackBar('Atividade aceita com sucesso!', 'OK')
-      }
-    });
+    if (operacao === 'aceitar') {
+      this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+        if (result && aceitar) {
+          atividade.autorizado = true;
+          this.autorizarAtividade(atividade);
+        }
+      });
+    }
+
+    if (operacao === 'update') {
+      this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+        if (result && aceitar) {
+          this.updateCurso();
+        }
+      });
+    }
   }
 
   devolverAtividade(id: number): void {

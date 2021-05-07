@@ -30,7 +30,6 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { AngularValidateBrLibModule } from 'angular-validate-br';
 import { ConfirmacaoDialogueComponent } from './shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from './components/autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
-import { AtividadeDetalheComponent } from './components/atividades/atividade-detalhe/atividade-detalhe.component';
 import { DocenteDetalheComponent } from './components/docente/docente-detalhe/docente-detalhe.component';
 import { ResetSenhaComponent } from './components/senha/reset-senha/reset-senha.component';
 import { UpdateSenhaComponent } from './components/senha/update/update-senha/update-senha.component';
@@ -52,7 +51,6 @@ import { ConvenioComponent } from './components/atividades/convenio/convenio.com
     RelatorioDocenteSearchDialogueComponent,
     ConfirmacaoDialogueComponent,
     DevolucaoDialogueComponent,
-    AtividadeDetalheComponent,
     DocenteDetalheComponent,
     ResetSenhaComponent,
     UpdateSenhaComponent,

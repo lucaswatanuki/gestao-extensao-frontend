@@ -48,6 +48,36 @@ export class ConvenioComponent implements OnInit {
       this.user = this.roles.includes('ROLE_USER');
     }
 
+    this.getConvenios();
+
+    this.convenioForm = this.fbuilder.group({
+      instituicao: [null, Validators.required],
+      projeto: [null, Validators.required],
+      coordenador: [null, Validators.required],
+      horaSemanal: [null, Validators.required],
+      horaMensal: [null, Validators.required],
+      descricao: [null, Validators.required],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
+      valorBruto: [null, Validators.required],
+      prazo: [null, Validators.required],
+      valor: [null, Validators.required],
+      docente: [null, Validators.required],
+      observacao: [null],
+      revisao: [null],
+      ano: [null],
+      semestre: [null],
+      horasSolicitadas: [null],
+      ano2: [null],
+      semestre2: [null],
+      horasSolicitadas2: [null],
+      tipoAtividadeSimultanea: [null, Validators.required]
+    });
+
+
+  }
+
+  getConvenios(): void {
     this.atividadeService.consultarConvenio(this.route.snapshot.params['id']).subscribe(
       response => {
         console.log(response);
@@ -58,38 +88,24 @@ export class ConvenioComponent implements OnInit {
       error => {
         console.log(error);
       });
-
-      this.convenioForm = this.fbuilder.group({
-        instituicao: [null, Validators.required],
-        projeto: [null, Validators.required],
-        coordenador: [null, Validators.required],
-        horaSemanal: [null, Validators.required],
-        horaMensal: [null, Validators.required],
-        descricao: [null, Validators.required],
-        dataInicio: [null, Validators.required],
-        dataFim: [null, Validators.required],
-        valorBruto: [null, Validators.required],
-        prazo: [null, Validators.required],
-        valor: [null, Validators.required],
-        docente: [null, Validators.required],
-        observacao: [null],
-        revisao: [null],
-        ano: [null],
-        semestre: [null],
-        horasSolicitadas: [null],
-        ano2: [null],
-        semestre2: [null],
-        horasSolicitadas2: [null],
-        tipoAtividadeSimultanea: [null, Validators.required]
-      });
-  
-
   }
 
   autorizarAtividade(atividade: Atividade): void {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
-        console.log("Atividade autorizada com sucesso");
+        this.getConvenios();
+        this.openSnackBar('Atividade aceita com sucesso!', 'OK')
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  updateConvenio(atividade: Convenio): void {
+    this.atividadeService.updateConvenio(atividade).subscribe(
+      res => {
+        this.getConvenios();
+        this.openSnackBar('Dados de atividade atualizados com sucesso', 'OK');
       },
       error => {
         console.log(error);
@@ -100,19 +116,28 @@ export class ConvenioComponent implements OnInit {
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
-  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean) {
+  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean, operacao: string) {
     this.confirmacaoDialogueRef = this.dialog.open(ConfirmacaoDialogueComponent, {
       disableClose: false
     });
     this.confirmacaoDialogueRef.componentInstance.mensagem = mensagem;
 
-    this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
-      if (result && aceitar) {
-        atividade.autorizado = true;
-        this.autorizarAtividade(atividade);
-        this.openSnackBar('Atividade aceita com sucesso!', 'OK')
-      }
-    });
+    if (operacao === 'aceitar') {
+      this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+        if (result && aceitar) {
+          atividade.autorizado = true;
+          this.autorizarAtividade(atividade);
+        }
+      });
+    }
+
+    if (operacao === 'update') {
+      this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+        if (result && aceitar) {
+          this.updateConvenio(this.atividade);
+        }
+      });
+    }
   }
 
   devolverAtividade(id: number): void {

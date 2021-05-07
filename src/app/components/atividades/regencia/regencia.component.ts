@@ -48,46 +48,37 @@ export class RegenciaComponent implements OnInit {
       this.user = this.roles.includes('ROLE_USER');
     }
 
-    this.atividadeService.consultarRegencia(this.route.snapshot.params['id']).subscribe(
-      response => {
-        console.log(response);
-        this.atividade = response;
+    this.getRegencias();
 
-        this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
-      },
-      error => {
-        console.log(error);
-      });
-
-      this.regenciaForm = this.fbuilder.group({
-        nivel: [null, Validators.required],
-        curso: [null, Validators.required],
-        coordenador: [null, Validators.required],
-        disciplinaParticipacao: [null],
-        cargaHoraTotalMinistrada: [null, Validators.required],
-        cargaHorariaTotalDedicada: [null],
-        valorBrutoHoraAula: [null, Validators.required],
-        valorBrutoTotalAula: [null, Validators.required],
-        valorBrutoOutraAtividade: [null, Validators.required],
-        instituicao: [null, Validators.required],
-        diasTrabalhadosUnicamp: [null, Validators.required],
-        diasTrabalhadosOutraInstituicao: [null, Validators.required],
-        responsavel: [null, Validators.required],
-        unicoDocente: [null, Validators.required],
-        dataInicio: [null, Validators.required],
-        dataFim: [null, Validators.required],
-        horaSemanal: [null, Validators.required],
-        horaMensal: [null, Validators.required],
-        observacao: [null],
-        ano: [null],
-        semestre: [null],
-        horasSolicitadas: [null],
-        ano2: [null],
-        semestre2: [null],
-        horasSolicitadas2: [null],
-        revisao: [null],
-        docente: [null]
-      });
+    this.regenciaForm = this.fbuilder.group({
+      nivel: [null, Validators.required],
+      curso: [null, Validators.required],
+      coordenador: [null, Validators.required],
+      disciplinaParticipacao: [null],
+      cargaHoraTotalMinistrada: [null, Validators.required],
+      cargaHorariaTotalDedicada: [null],
+      valorBrutoHoraAula: [null, Validators.required],
+      valorBrutoTotalAula: [null, Validators.required],
+      valorBrutoOutraAtividade: [null, Validators.required],
+      instituicao: [null, Validators.required],
+      diasTrabalhadosUnicamp: [null, Validators.required],
+      diasTrabalhadosOutraInstituicao: [null, Validators.required],
+      responsavel: [null, Validators.required],
+      unicoDocente: [null, Validators.required],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
+      horaSemanal: [null, Validators.required],
+      horaMensal: [null, Validators.required],
+      observacao: [null],
+      ano: [null],
+      semestre: [null],
+      horasSolicitadas: [null],
+      ano2: [null],
+      semestre2: [null],
+      horasSolicitadas2: [null],
+      revisao: [null],
+      docente: [null]
+    });
   }
 
   autorizarAtividade(atividade: Atividade): void {
@@ -100,23 +91,56 @@ export class RegenciaComponent implements OnInit {
       });
   }
 
+  getRegencias(): void {
+    this.atividadeService.consultarRegencia(this.route.snapshot.params['id']).subscribe(
+      response => {
+        console.log(response);
+        this.atividade = response;
+
+        this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  updateRegencia(): void {
+    this.atividadeService.updateRegencia(this.atividade).subscribe(
+      res => {
+        this.getRegencias();
+        this.openSnackBar('Dados de atividade atualizados com sucesso', 'OK');
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
   extrairRelatorioPDF(atividade: Atividade): void {
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
-  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean) {
+  openConfirmationDialog(atividade: Atividade, mensagem: string, aceitar: boolean, operacao: string) {
     this.confirmacaoDialogueRef = this.dialog.open(ConfirmacaoDialogueComponent, {
       disableClose: false
     });
     this.confirmacaoDialogueRef.componentInstance.mensagem = mensagem;
 
-    this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
-      if (result && aceitar) {
-        atividade.autorizado = true;
-        this.autorizarAtividade(atividade);
-        this.openSnackBar('Atividade aceita com sucesso!', 'OK')
-      }
-    });
+    if (operacao === 'aceitar') {
+      this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+        if (result && aceitar) {
+          atividade.autorizado = true;
+          this.autorizarAtividade(atividade);
+        }
+      });
+    }
+
+    if (operacao === 'update') {
+      this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
+        if (result && aceitar) {
+          this.updateRegencia();
+        }
+      });
+    }
   }
 
   devolverAtividade(id: number): void {
