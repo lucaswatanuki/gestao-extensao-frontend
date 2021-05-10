@@ -7,9 +7,9 @@
 </div>
 
 <mat-sidenav-container class="sidenav-container" *ngIf="isLoggedIn$">
-  <mat-sidenav *ngIf="isLoggedIn$" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-nav-list *ngIf="isLoggedIn$">
+    <mat-nav-list>
       <div class="profile-card">
         <img src="../assets/user-profile.jpg" alt="Soufiane FADIL">
         <div class="header">
@@ -51,11 +51,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-
-    <div *ngIf="loaderService.isLoading | async" class="loader-container">
-      <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
-    </div>
-    
     <mat-toolbar color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
@@ -70,7 +65,9 @@
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet>
-
+      <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+      </div>
     </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

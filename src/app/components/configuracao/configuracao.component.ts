@@ -64,7 +64,7 @@ export class ConfiguracaoComponent implements OnInit {
     this.senhaModel.senha = this.senhaForm.get('senha').value;
     this.senhaModel.senhaAtual = this.senhaForm.get('oldPassword').value;
     
-    this.docenteService.alterarSenha(this.senhaModel, this.userId).subscribe(
+    this.docenteService.alterarSenha(this.senhaModel).subscribe(
       data => {
          this.openSnackBar('Senha alterada com sucesso!', 'OK');
       },

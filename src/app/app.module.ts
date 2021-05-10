@@ -37,6 +37,7 @@ import { CursoExtensaoComponent } from './components/atividades/curso-extensao/c
 import { RegenciaComponent } from './components/atividades/regencia/regencia.component';
 import { ConvenioComponent } from './components/atividades/convenio/convenio.component';
 import { AlocacaoComponentComponent } from './components/alocacoes/alocacao-component/alocacao-component.component';
+import { AlocacaoDialogueComponent } from './components/alocacoes/alocacao-dialogue/alocacao-dialogue.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AlocacaoComponentComponent } from './components/alocacoes/alocacao-comp
     CursoExtensaoComponent,
     RegenciaComponent,
     AlocacaoComponentComponent,
+    AlocacaoDialogueComponent,
   ],
   imports: [
     CommonModule,

@@ -88,7 +88,7 @@
         <div class="row">
             <div class="col">
                 <div mat-dialog-actions>
-                    <button mat-raised-button color="warn" (click)="alterarSenha()">
+                    <button [disabled]="!senhaForm.valid" mat-raised-button color="warn" (click)="alterarSenha(); senhaForm.reset()">
                         <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
                         Atualizar senha
                     </button>

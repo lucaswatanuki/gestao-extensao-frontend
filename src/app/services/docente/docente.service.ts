@@ -30,6 +30,10 @@ export class DocenteService {
     return this.http.get<Alocacao[]>(`${this.baseUrl}/alocacoes`);
   }
 
+  updateAlocacao(alocacao: Alocacao): Observable<any> {
+    return this.http.put(`${this.baseUrl}/alocacoes`, alocacao);
+  }
+
   getDadosUsuario(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
@@ -38,7 +42,7 @@ export class DocenteService {
     return this.http.put(`${this.baseUrl}/${id}`, usuario);
   }
 
-  alterarSenha(request: Senha, userId: number): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${userId}/alterarSenha`, request);
+  alterarSenha(request: Senha): Observable<any> {
+    return this.http.put<any>(this.baseUrl + '/alterarSenha', request);
   }
 }
