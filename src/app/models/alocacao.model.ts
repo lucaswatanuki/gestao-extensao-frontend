@@ -5,4 +5,5 @@ export class Alocacao {
     horasAprovadas: number;
     horasSolicitadas: number;
     tipoAtividade: string;
+    status: string;
 }
