@@ -7,4 +7,5 @@ export class Autorizacao {
     horas: number;
     urgente: boolean;
     tipoAtividade: string;
+    atividadeId: number;
 }

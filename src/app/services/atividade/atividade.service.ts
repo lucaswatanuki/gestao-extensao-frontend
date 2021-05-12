@@ -20,8 +20,8 @@ export class AtividadeService {
     return this.http.get<Atividade[]>(this.baseUrl + '/listar');
   }
 
-  excluirAtividade(id: number): void {
-    this.http.delete(this.baseUrl + '/' + id);
+  excluirAtividade(id: number): Observable<any> {
+    return this.http.delete<any>(this.baseUrl + '/' + id);
   }
 
   consultarAtividade(id: number): Observable<Atividade> {
