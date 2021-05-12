@@ -5,7 +5,7 @@ export class CursoExtensao extends Atividade {
     cargaHorariaTotal: number;
     valorBrutoHoraAula: number;
     valorBrutoTotalAula: number;
-    valorBrutoOutrasAtividade: number;
+    valorBrutoOutraAtividade: number;
     periodo: number;
     nomeCurso: string;
     instituicaoVinculada: string;

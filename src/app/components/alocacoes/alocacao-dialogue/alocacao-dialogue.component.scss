@@ -1,0 +1,30 @@
+
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .col {
+    flex: 1;
+  }
+  
+  .col:last-child {
+    margin-right: 0;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+
+  
+  #content {
+    width: auto;
+    height: auto;
+  }
+
+  .grid-container {
+    margin-top: 5px;
+  }
+
+  

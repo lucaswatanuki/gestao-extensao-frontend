@@ -30,7 +30,7 @@ export class DocenteDetalheComponent implements OnInit {
   }
 
   getAlocacoes(id: number): void {
-    this.docenteService.consultarAlocacoes(id).subscribe(
+    this.docenteService.consultarAlocacoesDocente(id).subscribe(
       data => {
         this.alocacoes = new MatTableDataSource(data);
         this.alocacoes.paginator = this.paginator;

@@ -176,7 +176,7 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.horaMensal = this.cursoForm.get('horaMensal').value;
     this.cursoModel.valorBrutoHoraAula = this.cursoForm.get('valorBrutoHoraAula').value;
     this.cursoModel.valorBrutoTotalAula = this.cursoForm.get('valorBrutoTotalAula').value;
-    this.cursoModel.valorBrutoOutrasAtividade = this.cursoForm.get('valorBrutoOutraAtividade').value;
+    this.cursoModel.valorBrutoOutraAtividade = this.cursoForm.get('valorBrutoOutraAtividade').value;
     this.cursoModel.dataInicio = this.cursoForm.get('dataInicio').value;
     this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
     this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
