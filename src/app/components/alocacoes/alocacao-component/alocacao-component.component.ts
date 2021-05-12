@@ -19,7 +19,7 @@ export class AlocacaoComponentComponent implements OnInit {
   alocacao: Alocacao[];
   alocacoes: MatTableDataSource<Alocacao>;
   errorMsg: string;
-  displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'horasAprovadas', 'abrir'];
+  displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status', 'abrir'];
 
   constructor(private docenteService: DocenteService, public dialog: MatDialog) { }
 
