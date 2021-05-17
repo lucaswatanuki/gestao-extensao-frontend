@@ -127,7 +127,7 @@
                     <h1 mat-dialog-title>Anexos</h1>
                     <ul class="list-group list-group-flush" *ngFor="let file of fileInfos$ | async">
                         <li class="list-group-item">
-                            {{ file.nome }} <button mat-button (click)="downloadArquivo(file, atividade)" *ngIf="admin">
+                            {{ file.nome }} <button mat-button (click)="downloadArquivo(file, atividade)">
                                 <mat-icon aria-hidden="false" aria-label="download">download</mat-icon>
                             </button>
                         </li>
