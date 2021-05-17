@@ -2,11 +2,12 @@
   <h1 class="mat-h1">Submeter atividade</h1>
   <mat-card class="shipping-card">
     <mat-accordion class="expand">
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Convênios
-          </mat-panel-title>
+          <mat-panel-title> Convênios </mat-panel-title>
           <mat-panel-description>
             Submeter atividades de convênios
           </mat-panel-description>
@@ -18,8 +19,16 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Titulo do Projeto</mat-label>
-                    <input matInput placeholder="Titulo do Projeto" formControlName="projeto">
-                    <mat-error *ngIf="convenioForm.controls['projeto'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Titulo do Projeto"
+                      formControlName="projeto"
+                    />
+                    <mat-error
+                      *ngIf="
+                        convenioForm.controls['projeto'].hasError('required')
+                      "
+                    >
                       Nome ou titulo do projeto <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -29,8 +38,18 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Instituição de Ensino</mat-label>
-                    <input matInput placeholder="Instituição de Ensino" formControlName="instituicao">
-                    <mat-error *ngIf="convenioForm.controls['instituicao'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Instituição de Ensino"
+                      formControlName="instituicao"
+                    />
+                    <mat-error
+                      *ngIf="
+                        convenioForm.controls['instituicao'].hasError(
+                          'required'
+                        )
+                      "
+                    >
                       Nome da instituição <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -38,16 +57,31 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Coordenador(a) </mat-label>
-                    <input matInput placeholder="Coordenador(a)" formControlName="coordenador">
-                    <mat-error *ngIf="convenioForm.controls['coordenador'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Coordenador(a)"
+                      formControlName="coordenador"
+                    />
+                    <mat-error
+                      *ngIf="
+                        convenioForm.controls['coordenador'].hasError(
+                          'required'
+                        )
+                      "
+                    >
                       Nome do coordenador(a) <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <mat-label style="margin-right: 20px;">Participação em: </mat-label>
-                <mat-radio-group aria-label="Select an option" formControlName="tipoAtividadeSimultanea">
+                <mat-label style="margin-right: 20px"
+                  >Participação em:
+                </mat-label>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="tipoAtividadeSimultanea"
+                >
                   <mat-radio-button value="PESQUISA">Pesquisa</mat-radio-button>
                   <mat-radio-button value="ENSINO">Ensino</mat-radio-button>
                   <mat-radio-button value="EXTENSAO">Extensão</mat-radio-button>
@@ -57,8 +91,11 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Descrição</mat-label>
-                    <input matInput placeholder="A participação no projeto consistirá de..."
-                      formControlName="descricao">
+                    <input
+                      matInput
+                      placeholder="A participação no projeto consistirá de..."
+                      formControlName="descricao"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -66,27 +103,49 @@
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data Inicio</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dataInicio" placeholder="Selecionar data" 
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="dataInicio"
+                      placeholder="Selecionar data"
+                      required
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data Fim</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="dataFim" placeholder="Selecionar data"
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      [matDatepicker]="picker1"
+                      formControlName="dataFim"
+                      placeholder="Selecionar data"
+                      required
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker1"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
                 </div>
-                
+
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto (R$)</mat-label>
-                    <input matInput maxlength="5" min='0' placeholder="Valor bruto" type="number"
-                      formControlName="valorBruto">
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="0"
+                      placeholder="Valor bruto"
+                      type="number"
+                      formControlName="valorBruto"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -94,15 +153,27 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Qtd Horas semanais</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária semanal" type="number"
-                      formControlName="horaSemanal">
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária semanal"
+                      type="number"
+                      formControlName="horaSemanal"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Qtd Horas mensais</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
-                      formControlName="horaMensal">
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária mensal"
+                      type="number"
+                      formControlName="horaMensal"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -111,28 +182,48 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
-                    <input matInput placeholder="semestre" min="1" max="2" type="number"
-                      formControlName="semestre">
+                    <input
+                      matInput
+                      placeholder="semestre"
+                      min="1"
+                      max="2"
+                      type="number"
+                      formControlName="semestre"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input matInput min="1" placeholder="ano" type="number"
-                      formControlName="ano">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="ano"
+                      type="number"
+                      formControlName="ano"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Horas</mat-label>
-                    <input matInput min="1" placeholder="horasSolicitadas" type="number"
-                      formControlName="horasSolicitadas">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="horasSolicitadas"
+                      type="number"
+                      formControlName="horasSolicitadas"
+                    />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row" *ngIf="!hasUnitNumber">
                 <div class="col">
-                  <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+                  <button
+                    mat-button
+                    type="button"
+                    (click)="hasUnitNumber = !hasUnitNumber"
+                  >
                     + Adicionar alocação de horas
                   </button>
                 </div>
@@ -141,28 +232,44 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
-                    <input matInput placeholder="semestre2" min="1" max="2" type="number"
-                      formControlName="semestre2">
+                    <input
+                      matInput
+                      placeholder="semestre2"
+                      min="1"
+                      max="2"
+                      type="number"
+                      formControlName="semestre2"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input matInput min="1" placeholder="ano2" type="number"
-                      formControlName="ano2">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="ano2"
+                      type="number"
+                      formControlName="ano2"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Horas</mat-label>
-                    <input matInput min="1" placeholder="horasSolicitadas2" type="number"
-                      formControlName="horasSolicitadas2">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="horasSolicitadas2"
+                      type="number"
+                      formControlName="horasSolicitadas2"
+                    />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-form-field  appearance="outline" class="full-width">
+                  <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Incluir observação</mat-label>
                     <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
@@ -177,19 +284,25 @@
               </div>
             </mat-card-content>
             <mat-card-actions>
-              <button [disabled]="!convenioForm.valid" mat-raised-button color="primary"
-                (click)="submeterConvenio(); convenioForm.reset()">Enviar</button>
+              <button
+                [disabled]="!convenioForm.valid"
+                mat-raised-button
+                color="primary"
+                (click)="submeterConvenio(); convenioForm.reset()"
+              >
+                Enviar
+              </button>
             </mat-card-actions>
           </mat-card>
         </form>
       </mat-expansion-panel>
 
-
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Cursos
-          </mat-panel-title>
+          <mat-panel-title> Cursos </mat-panel-title>
           <mat-panel-description>
             Submeter atividades relacionadas ao cursos de extensão universitária
           </mat-panel-description>
@@ -201,8 +314,16 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Nome do curso</mat-label>
-                    <input matInput placeholder="Nome do curso" formControlName="nomeCurso">
-                    <mat-error *ngIf="cursoForm.controls['nomeCurso'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Nome do curso"
+                      formControlName="nomeCurso"
+                    />
+                    <mat-error
+                      *ngIf="
+                        cursoForm.controls['nomeCurso'].hasError('required')
+                      "
+                    >
                       Nome do curso <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -212,8 +333,18 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Instituição de Ensino</mat-label>
-                    <input matInput placeholder="Instituição vinculada" formControlName="instituicaoVinculada">
-                    <mat-error *ngIf="cursoForm.controls['instituicaoVinculada'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Instituição vinculada"
+                      formControlName="instituicaoVinculada"
+                    />
+                    <mat-error
+                      *ngIf="
+                        cursoForm.controls['instituicaoVinculada'].hasError(
+                          'required'
+                        )
+                      "
+                    >
                       Nome da instituição <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -221,48 +352,95 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Coordenador(a) </mat-label>
-                    <input matInput placeholder="Coordenador(a)" formControlName="coordenador">
-                    <mat-error *ngIf="cursoForm.controls['coordenador'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Coordenador(a)"
+                      formControlName="coordenador"
+                    />
+                    <mat-error
+                      *ngIf="
+                        cursoForm.controls['coordenador'].hasError('required')
+                      "
+                    >
                       Nome do coordenador(a) <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <mat-label style="margin-right: 20px;">Participação em: </mat-label>
-                <mat-radio-group aria-label="Select an option" formControlName="participacao">
-                  <mat-radio-button value="DISCIPLINA">Disciplina</mat-radio-button>
-                  <mat-radio-button value="COORDENACAO">Coordenação</mat-radio-button>
+                <mat-label style="margin-right: 20px"
+                  >Participação em:
+                </mat-label>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="participacao"
+                >
+                  <mat-radio-button value="DISCIPLINA"
+                    >Disciplina</mat-radio-button
+                  >
+                  <mat-radio-button value="COORDENACAO"
+                    >Coordenação</mat-radio-button
+                  >
                 </mat-radio-group>
               </div>
-              <div class="row" style="margin-top: 5px;">
+              <div class="row" style="margin-top: 5px">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Disciplina de participação</mat-label>
-                    <input matInput placeholder="Disciplina" formControlName="disciplina">
+                    <input
+                      matInput
+                      placeholder="Disciplina"
+                      formControlName="disciplina"
+                    />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Carga horária total de aulas ministradas</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária total" type="number"
-                      formControlName="totalHorasMinistradas">
+                    <mat-label
+                      >Carga horária total de aulas ministradas</mat-label
+                    >
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária total"
+                      type="number"
+                      formControlName="totalHorasMinistradas"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas semanais dedicadas (aulas + preparação e outras atividades)</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária semanal" type="number"
-                      formControlName="horaSemanal">
+                    <mat-label
+                      >Horas semanais dedicadas (aulas + preparação e outras
+                      atividades)</mat-label
+                    >
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária semanal"
+                      type="number"
+                      formControlName="horaSemanal"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas mensais dedicadas (aulas + preparação e outras atividades)</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
-                      formControlName="horaMensal">
+                    <mat-label
+                      >Horas mensais dedicadas (aulas + preparação e outras
+                      atividades)</mat-label
+                    >
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária mensal"
+                      type="number"
+                      formControlName="horaMensal"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -270,22 +448,37 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto por hora-aula (R$)</mat-label>
-                    <input matInput maxlength="5" placeholder="Valor bruto hora-aula" type="number"
-                      formControlName="valorBrutoHoraAula">
+                    <input
+                      matInput
+                      maxlength="5"
+                      placeholder="Valor bruto hora-aula"
+                      type="number"
+                      formControlName="valorBrutoHoraAula"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto pelo total de aulas (R$)</mat-label>
-                    <input matInput maxlength="5" placeholder="Valor bruto total aulas" type="number"
-                      formControlName="valorBrutoTotalAula">
+                    <input
+                      matInput
+                      maxlength="5"
+                      placeholder="Valor bruto total aulas"
+                      type="number"
+                      formControlName="valorBrutoTotalAula"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto de outras atividades (R$)</mat-label>
-                    <input matInput maxlength="5" placeholder="Valor bruto de outras atividades" type="number"
-                      formControlName="valorBrutoOutraAtividade">
+                    <input
+                      matInput
+                      maxlength="5"
+                      placeholder="Valor bruto de outras atividades"
+                      type="number"
+                      formControlName="valorBrutoOutraAtividade"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -293,25 +486,131 @@
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data Inicio</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="dataInicio" placeholder="Selecionar data" 
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      [matDatepicker]="picker2"
+                      formControlName="dataInicio"
+                      placeholder="Selecionar data"
+                      required
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker2"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data Fim</mat-label>
-                    <input matInput [matDatepicker]="picker3" formControlName="dataFim" placeholder="Selecionar data"
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      [matDatepicker]="picker3"
+                      formControlName="dataFim"
+                      placeholder="Selecionar data"
+                      required
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker3"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <h3>Alocação</h3>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input
+                      matInput
+                      placeholder="semestre"
+                      min="1"
+                      max="2"
+                      type="number"
+                      formControlName="semestre"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="ano"
+                      type="number"
+                      formControlName="ano"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="horasSolicitadas"
+                      type="number"
+                      formControlName="horasSolicitadas"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="!hasUnitNumber">
+                <div class="col">
+                  <button
+                    mat-button
+                    type="button"
+                    (click)="hasUnitNumber = !hasUnitNumber"
+                  >
+                    + Adicionar alocação de horas
+                  </button>
+                </div>
+              </div>
+              <div class="row" *ngIf="hasUnitNumber">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input
+                      matInput
+                      placeholder="semestre2"
+                      min="1"
+                      max="2"
+                      type="number"
+                      formControlName="semestre2"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="ano2"
+                      type="number"
+                      formControlName="ano2"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="horasSolicitadas2"
+                      type="number"
+                      formControlName="horasSolicitadas2"
+                    />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-form-field  appearance="outline" class="full-width">
+                  <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Incluir observação</mat-label>
                     <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
@@ -326,19 +625,25 @@
               </div>
             </mat-card-content>
             <mat-card-actions>
-              <button [disabled]="!cursoForm.valid" mat-raised-button color="primary"
-                (click)="submeterCurso(); cursoForm.reset()">Enviar</button>
+              <button
+                [disabled]="!cursoForm.valid"
+                mat-raised-button
+                color="primary"
+                (click)="submeterCurso(); cursoForm.reset()"
+              >
+                Enviar
+              </button>
             </mat-card-actions>
           </mat-card>
         </form>
       </mat-expansion-panel>
 
-
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Regência Concomitante
-          </mat-panel-title>
+          <mat-panel-title> Regência Concomitante </mat-panel-title>
           <mat-panel-description>
             Submeter atividades relacionadas a Regência Concomitante
           </mat-panel-description>
@@ -350,8 +655,16 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Nome do curso</mat-label>
-                    <input matInput placeholder="Nome do curso" formControlName="curso">
-                    <mat-error *ngIf="regenciaForm.controls['curso'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Nome do curso"
+                      formControlName="curso"
+                    />
+                    <mat-error
+                      *ngIf="
+                        regenciaForm.controls['curso'].hasError('required')
+                      "
+                    >
                       Nome do curso <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -361,8 +674,18 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Instituição de Ensino Vinculada</mat-label>
-                    <input matInput placeholder="Instituição vinculada" formControlName="instituicao">
-                    <mat-error *ngIf="regenciaForm.controls['instituicao'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Instituição vinculada"
+                      formControlName="instituicao"
+                    />
+                    <mat-error
+                      *ngIf="
+                        regenciaForm.controls['instituicao'].hasError(
+                          'required'
+                        )
+                      "
+                    >
                       Nome da instituição <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
@@ -370,62 +693,119 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Coordenador(a) </mat-label>
-                    <input matInput placeholder="Coordenador(a)" formControlName="coordenador">
-                    <mat-error *ngIf="regenciaForm.controls['coordenador'].hasError('required')">
+                    <input
+                      matInput
+                      placeholder="Coordenador(a)"
+                      formControlName="coordenador"
+                    />
+                    <mat-error
+                      *ngIf="
+                        regenciaForm.controls['coordenador'].hasError(
+                          'required'
+                        )
+                      "
+                    >
                       Nome do coordenador(a) <strong>obrigatório</strong>
                     </mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <mat-label style="margin-right: 20px;">Nível: </mat-label>
-                <mat-radio-group aria-label="Select an option" formControlName="nivel">
-                  <mat-radio-button value="GRADUACAO">Graduação</mat-radio-button>
-                  <mat-radio-button value="POS_GRADUACAO">Pós-Graduação</mat-radio-button>
+                <mat-label style="margin-right: 20px">Nível: </mat-label>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="nivel"
+                >
+                  <mat-radio-button value="GRADUACAO"
+                    >Graduação</mat-radio-button
+                  >
+                  <mat-radio-button value="POS_GRADUACAO"
+                    >Pós-Graduação</mat-radio-button
+                  >
                 </mat-radio-group>
               </div>
               <div class="row">
-                <mat-label style="margin-right: 20px;">Será o responsável pela disciplina: </mat-label>
-                <mat-radio-group aria-label="Select an option" formControlName="responsavel">
+                <mat-label style="margin-right: 20px"
+                  >Será o responsável pela disciplina:
+                </mat-label>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="responsavel"
+                >
                   <mat-radio-button [value]="true">Sim</mat-radio-button>
                   <mat-radio-button [value]="false">Não</mat-radio-button>
                 </mat-radio-group>
               </div>
               <div class="row">
-                <mat-label style="margin-right: 20px;">Será o único docente da disciplina: </mat-label>
-                <mat-radio-group aria-label="Select an option" formControlName="unicoDocente">
+                <mat-label style="margin-right: 20px"
+                  >Será o único docente da disciplina:
+                </mat-label>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="unicoDocente"
+                >
                   <mat-radio-button [value]="true">Sim</mat-radio-button>
                   <mat-radio-button [value]="false">Não</mat-radio-button>
                 </mat-radio-group>
               </div>
-              <div class="row" style="margin-top: 5px;">
+              <div class="row" style="margin-top: 5px">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Disciplina de participação</mat-label>
-                    <input matInput placeholder="Disciplina" formControlName="disciplinaParticipacao">
+                    <input
+                      matInput
+                      placeholder="Disciplina"
+                      formControlName="disciplinaParticipacao"
+                    />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Carga horária total de aulas ministradas</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária total" type="number"
-                      formControlName="cargaHoraTotalMinistrada">
+                    <mat-label
+                      >Carga horária total de aulas ministradas</mat-label
+                    >
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária total"
+                      type="number"
+                      formControlName="cargaHoraTotalMinistrada"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas semanais dedicadas (aulas + preparação e outras atividades)</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária semanal" type="number"
-                      formControlName="horaSemanal">
+                    <mat-label
+                      >Horas semanais dedicadas (aulas + preparação e outras
+                      atividades)</mat-label
+                    >
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária semanal"
+                      type="number"
+                      formControlName="horaSemanal"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas mensais dedicadas (aulas + preparação e outras atividades)</mat-label>
-                    <input matInput maxlength="5" min="1" placeholder="Carga horária mensal" type="number"
-                      formControlName="horaMensal">
+                    <mat-label
+                      >Horas mensais dedicadas (aulas + preparação e outras
+                      atividades)</mat-label
+                    >
+                    <input
+                      matInput
+                      maxlength="5"
+                      min="1"
+                      placeholder="Carga horária mensal"
+                      type="number"
+                      formControlName="horaMensal"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -433,22 +813,37 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto por hora-aula (R$)</mat-label>
-                    <input matInput maxlength="5" placeholder="Valor bruto hora-aula" type="number"
-                      formControlName="valorBrutoHoraAula">
+                    <input
+                      matInput
+                      maxlength="5"
+                      placeholder="Valor bruto hora-aula"
+                      type="number"
+                      formControlName="valorBrutoHoraAula"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto pelo total de aulas (R$)</mat-label>
-                    <input matInput maxlength="5" placeholder="Valor bruto total aulas" type="number"
-                      formControlName="valorBrutoTotalAula">
+                    <input
+                      matInput
+                      maxlength="5"
+                      placeholder="Valor bruto total aulas"
+                      type="number"
+                      formControlName="valorBrutoTotalAula"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Valor bruto de outras atividades (R$)</mat-label>
-                    <input matInput maxlength="5" placeholder="Valor bruto de outras atividades" type="number"
-                      formControlName="valorBrutoOutraAtividade">
+                    <input
+                      matInput
+                      maxlength="5"
+                      placeholder="Valor bruto de outras atividades"
+                      type="number"
+                      formControlName="valorBrutoOutraAtividade"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -456,25 +851,41 @@
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data Inicio</mat-label>
-                    <input matInput [matDatepicker]="picker4" formControlName="dataInicio" placeholder="Selecionar data" 
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      [matDatepicker]="picker4"
+                      formControlName="dataInicio"
+                      placeholder="Selecionar data"
+                      required
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker4"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #picker4></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Data Fim</mat-label>
-                    <input matInput [matDatepicker]="picker5" formControlName="dataFim" placeholder="Selecionar data"
-                      required>
-                    <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                    <input
+                      matInput
+                      [matDatepicker]="picker5"
+                      formControlName="dataFim"
+                      placeholder="Selecionar data"
+                      required
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker5"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #picker5></mat-datepicker>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-form-field  appearance="outline" class="full-width">
+                  <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Incluir observação</mat-label>
                     <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
@@ -482,15 +893,23 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-form-field  appearance="outline" class="full-width">
+                  <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Dias Trabalhados Unicamp</mat-label>
-                    <input matInput placeholder="Dias Trabalhados Unicamp" formControlName="diasTrabalhadosUnicamp">
+                    <input
+                      matInput
+                      placeholder="Dias Trabalhados Unicamp"
+                      formControlName="diasTrabalhadosUnicamp"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field  appearance="outline" class="full-width">
+                  <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Dias trabalhados em outra instituicao</mat-label>
-                    <input matInput placeholder="Dias trabalhados em outra instituicao" formControlName="diasTrabalhadosOutraInstituicao">
+                    <input
+                      matInput
+                      placeholder="Dias trabalhados em outra instituicao"
+                      formControlName="diasTrabalhadosOutraInstituicao"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -499,28 +918,48 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
-                    <input matInput placeholder="semestre" min="1" max="2" type="number"
-                      formControlName="semestre">
+                    <input
+                      matInput
+                      placeholder="semestre"
+                      min="1"
+                      max="2"
+                      type="number"
+                      formControlName="semestre"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input matInput min="1" placeholder="ano" type="number"
-                      formControlName="ano">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="ano"
+                      type="number"
+                      formControlName="ano"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Horas</mat-label>
-                    <input matInput min="1" placeholder="horasSolicitadas" type="number"
-                      formControlName="horasSolicitadas">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="horasSolicitadas"
+                      type="number"
+                      formControlName="horasSolicitadas"
+                    />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row" *ngIf="!hasUnitNumber">
                 <div class="col">
-                  <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+                  <button
+                    mat-button
+                    type="button"
+                    (click)="hasUnitNumber = !hasUnitNumber"
+                  >
                     + Adicionar alocação de horas
                   </button>
                 </div>
@@ -529,22 +968,38 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
-                    <input matInput placeholder="semestre2" min="1" max="2" type="number"
-                      formControlName="semestre2">
+                    <input
+                      matInput
+                      placeholder="semestre2"
+                      min="1"
+                      max="2"
+                      type="number"
+                      formControlName="semestre2"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input matInput min="1" placeholder="ano2" type="number"
-                      formControlName="ano2">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="ano2"
+                      type="number"
+                      formControlName="ano2"
+                    />
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Horas</mat-label>
-                    <input matInput min="1" placeholder="horasSolicitadas2" type="number"
-                      formControlName="horasSolicitadas2">
+                    <input
+                      matInput
+                      min="1"
+                      placeholder="horasSolicitadas2"
+                      type="number"
+                      formControlName="horasSolicitadas2"
+                    />
                   </mat-form-field>
                 </div>
               </div>
@@ -557,13 +1012,18 @@
               </div>
             </mat-card-content>
             <mat-card-actions>
-              <button [disabled]="!regenciaForm.valid" mat-raised-button color="primary"
-                (click)="submeterRegencia(); regenciaForm.reset()">Enviar</button>
+              <button
+                [disabled]="!regenciaForm.valid"
+                mat-raised-button
+                color="primary"
+                (click)="submeterRegencia(); regenciaForm.reset()"
+              >
+                Enviar
+              </button>
             </mat-card-actions>
           </mat-card>
         </form>
       </mat-expansion-panel>
-
     </mat-accordion>
   </mat-card>
 </div>
