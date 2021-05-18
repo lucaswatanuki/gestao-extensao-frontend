@@ -8,6 +8,7 @@ import { ValidateBrService } from 'angular-validate-br';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { SignUpInfo } from 'src/app/core/auth/signup-info';
 import { CustomValidators } from 'ng2-validation';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +19,7 @@ import { CustomValidators } from 'ng2-validation';
   }]
 })
 export class CadastroComponent implements OnInit {
-
+  loading$ = this.loader.loading$;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   cadastro = false;
   formularioCadastro: FormGroup;
@@ -29,7 +30,9 @@ export class CadastroComponent implements OnInit {
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService, private toast: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, 
+    private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService, 
+    private toast: ToastrService, private loader: LoaderService) { }
 
   ngOnInit(): void {
     let senha = new FormControl('', [Validators.required, Validators.minLength(6)]);

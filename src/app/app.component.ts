@@ -5,6 +5,11 @@ import { map, shareReplay } from 'rxjs/operators';
 import { TokenStorageService } from './core/auth/token-storage.service';
 import { environment } from 'src/environments/environment';
 import { LoaderService } from './services/loader.service';
+import {
+  Router, NavigationStart, NavigationEnd,
+  NavigationCancel, NavigationError, Event
+} from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +17,6 @@ import { LoaderService } from './services/loader.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewChecked{
-
   title = 'Gestão Extensão';
   private roles: string[];
   public authority = false;
@@ -20,6 +24,7 @@ export class AppComponent implements OnInit, AfterViewChecked{
   admin = false;
   user = false;
   isLoggedIn$ = false;
+  loading$ = this.loader.loading$;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -28,7 +33,8 @@ export class AppComponent implements OnInit, AfterViewChecked{
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private tokenStorage: TokenStorageService, 
-    public loaderService: LoaderService, private cdRef : ChangeDetectorRef) { }
+    public loader: LoaderService, private cdRef : ChangeDetectorRef) {
+    }
  
   ngAfterViewChecked(): void {
       this.cdRef.detectChanges();
