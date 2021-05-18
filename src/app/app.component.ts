@@ -27,7 +27,8 @@ export class AppComponent implements OnInit, AfterViewChecked{
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private tokenStorage: TokenStorageService, public loaderService: LoaderService, private cdRef : ChangeDetectorRef) { }
+  constructor(private breakpointObserver: BreakpointObserver, private tokenStorage: TokenStorageService, 
+    public loaderService: LoaderService, private cdRef : ChangeDetectorRef) { }
  
   ngAfterViewChecked(): void {
       this.cdRef.detectChanges();
