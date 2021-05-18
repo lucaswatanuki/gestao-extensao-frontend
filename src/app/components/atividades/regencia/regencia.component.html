@@ -197,11 +197,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" *ngIf="loading$ | async">
+            <div class="col">
+                <mat-progress-bar
+                [mode]="'query'"
+                [color]="'warn'"
+                *ngIf="loading$ | async"
+              >
+              </mat-progress-bar>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col">
                 <div mat-dialog-actions style="float: right">
                     <button [disabled]="atividade.autorizado && !regenciaForm.valid" mat-button
-                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar os dados da atividade?', true, 'update')">
+                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar os dados da atividade?', true, 'update')" *ngIf="!admin">
                         <mat-icon aria-hidden="false" aria-label="edit icon">cached</mat-icon>
                         Atualizar dados
                     </button>

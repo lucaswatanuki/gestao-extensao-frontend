@@ -1,20 +1,22 @@
 <div *ngIf="!isLoggedIn$">
-  <router-outlet>
-    <div *ngIf="loaderService.isLoading | async" class="loader-container">
-      <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
-    </div>
-  </router-outlet>
+  <router-outlet> </router-outlet>
 </div>
 
 <mat-sidenav-container class="sidenav-container" *ngIf="isLoggedIn$">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     <mat-nav-list>
       <div class="profile-card">
-        <img src="../assets/user-profile.jpg" alt="Soufiane FADIL">
+        <img src="../assets/user-profile.jpg" alt="Soufiane FADIL" />
         <div class="header">
-          <h2> {{ info.username }} </h2>
-          <h4> {{ info.email }} </h4>
+          <h2>{{ info.username }}</h2>
+          <h4>{{ info.email }}</h4>
         </div>
       </div>
 
@@ -31,29 +33,32 @@
         <mat-icon>assignment_turned_in</mat-icon>
         Autorizações
       </a>
-      <a mat-list-item routerLink='/alocacoes' *ngIf="user || admin">
+      <a mat-list-item routerLink="/alocacoes" *ngIf="user || admin">
         <mat-icon>schedule</mat-icon>Alocacões
       </a>
-      <a mat-list-item routerLink='/docentes' *ngIf="admin">
+      <a mat-list-item routerLink="/docentes" *ngIf="admin">
         <mat-icon>account_circle</mat-icon>Docentes
       </a>
-      <a mat-list-item routerLink='/relatorio' *ngIf="admin">
+      <a mat-list-item routerLink="/relatorio" *ngIf="admin">
         <mat-icon>assessment</mat-icon>Relatórios
       </a>
 
       <mat-divider></mat-divider>
 
-      <a mat-list-item routerLink='/configuracao' *ngIf="admin || user">
+      <a mat-list-item routerLink="/configuracao" *ngIf="admin || user">
         <mat-icon>settings</mat-icon>Minha conta
       </a>
-
-
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{ title }}</span>
@@ -63,11 +68,15 @@
         Logout
       </button>
     </mat-toolbar>
+
+    <mat-progress-bar
+      [mode]="'indeterminate'"
+      [color]="'warn'"
+      *ngIf="loading$ | async"
+    >
+    </mat-progress-bar>
+
     <!-- Add Content Here -->
-    <router-outlet>
-      <div *ngIf="loaderService.isLoading | async" class="loader-container">
-        <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
-      </div>
-    </router-outlet>
+    <router-outlet> </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

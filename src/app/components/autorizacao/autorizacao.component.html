@@ -40,14 +40,21 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let element"> 
-          <button mat-raised-button color="warn" (click)="consultarDetalheAutorizacao(element)">
-            <mat-icon aria-hidden="false" aria-label="edit icon">visibility</mat-icon>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-
-          <button style="margin-left: 20px;" mat-raised-button color="warn" (click)="openConfirmationDialog(element.atividadeId, 'Deseja excluir a atividade?')">
-            <mat-icon aria-hidden="false" aria-label="delete icon">delete</mat-icon>
-          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="consultarDetalheAutorizacao(element)">
+              <mat-icon>visibility</mat-icon>
+              <span>Detalhes</span>
+            </button>
+            <button mat-menu-item (click)="openConfirmationDialog(element.atividadeId, 'Deseja excluir a atividade?')">
+              <mat-icon>delete</mat-icon>
+              <span>Excluir atividade</span>
+            </button>
+          </mat-menu>
         </td>
+
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

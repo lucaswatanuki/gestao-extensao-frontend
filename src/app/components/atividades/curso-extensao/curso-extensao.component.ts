@@ -12,6 +12,7 @@ import { CursoExtensao } from 'src/app/models/curso.model';
 import { ExportService } from 'src/app/services/arquivo.service';
 import { AtividadeService } from 'src/app/services/atividade/atividade.service';
 import { AutorizacaoService } from 'src/app/services/autorizacao/autorizacao.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
@@ -33,11 +34,13 @@ export class CursoExtensaoComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   fileInfos$: Observable<Arquivo[]>;
   autorizacao: Autorizacao;
+  loading$ = this.loader.loading$;
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
     private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private snackBar: MatSnackBar,
-    private uploadService: UploadArquivoService, private router: Router, private arquivoService: ExportService) { }
+    private uploadService: UploadArquivoService, private router: Router, private arquivoService: ExportService,
+    private loader: LoaderService) { }
 
   ngOnInit(): void {
     this.atividade = new CursoExtensao();

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AuthLoginInfo } from 'src/app/core/auth/login-info';
 import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
+  loading$ = this.loader.loading$;
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
      private tokenStorage: TokenStorageService, 
     public router: Router,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private loader: LoaderService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
