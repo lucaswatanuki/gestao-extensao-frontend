@@ -191,7 +191,7 @@
             <div class="col">
                 <div mat-dialog-actions style="float: right">
                     <button [disabled]="atividade.autorizado && !convenioForm.valid" mat-button
-                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar dados de atividade?', true, 'update')">
+                        (click)="openConfirmationDialog(atividade, 'Deseja atualizar dados de atividade?', true, 'update')" *ngIf="!admin">
                         <mat-icon aria-hidden="false" aria-label="edit icon">cached</mat-icon>
                         Atualizar
                     </button>
@@ -214,3 +214,9 @@
         </div>
     </form>
 </div>
+<mat-progress-bar
+[mode]="'indeterminate'"
+[color]="'warn'"
+*ngIf="loading$ | async"
+>
+</mat-progress-bar>
