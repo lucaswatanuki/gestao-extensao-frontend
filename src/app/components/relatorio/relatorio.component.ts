@@ -100,6 +100,7 @@ export class RelatorioComponent implements OnInit {
       console.log(result);
       if (result === 'Todos') {
         this.formRelatorio.get('nomeDocente').setValue(result);
+        this.request.idDocente = null;
       } else {
         this.formRelatorio.get('nomeDocente').setValue(result.nome);
         this.request.idDocente = result.id;
