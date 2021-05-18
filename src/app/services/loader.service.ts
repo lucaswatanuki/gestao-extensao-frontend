@@ -7,7 +7,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoaderService {
 
-  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  private _loading = new BehaviorSubject<boolean>(false);
+  public readonly loading$ = this._loading.asObservable();
+  
   constructor() { }
+
+  show() {
+    this._loading.next(true);
+  }
+
+  hide() {
+    this._loading.next(false);
+  }
 }
