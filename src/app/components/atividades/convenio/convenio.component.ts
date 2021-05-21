@@ -43,7 +43,6 @@ export class ConvenioComponent implements OnInit {
   alocacoes: MatTableDataSource<Alocacao>;
   displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
 
-
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
     private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private snackBar: MatSnackBar,

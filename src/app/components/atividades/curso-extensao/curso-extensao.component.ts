@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
+import { Alocacao } from 'src/app/models/alocacao.model';
 import { Arquivo } from 'src/app/models/arquivo.model';
 import { Atividade } from 'src/app/models/atividade.model';
 import { Autorizacao } from 'src/app/models/autorizacao.model';
@@ -23,6 +26,7 @@ import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalh
   styleUrls: ['./curso-extensao.component.scss']
 })
 export class CursoExtensaoComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   atividade: CursoExtensao;
   cursoForm: FormGroup;
@@ -35,6 +39,8 @@ export class CursoExtensaoComponent implements OnInit {
   fileInfos$: Observable<Arquivo[]>;
   autorizacao: Autorizacao;
   loading$ = this.loader.loading$;
+  alocacoes: MatTableDataSource<Alocacao>;
+  displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
@@ -84,6 +90,8 @@ export class CursoExtensaoComponent implements OnInit {
       response => {
         console.log(response);
         this.atividade = response;
+        this.alocacoes = new MatTableDataSource(response.alocacoes);
+        this.alocacoes.paginator = this.paginator;
 
         this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
       },
