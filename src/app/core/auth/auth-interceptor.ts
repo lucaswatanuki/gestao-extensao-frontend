@@ -22,7 +22,6 @@ export class AuthInterceptor implements HttpInterceptor  {
         }
 
         return next.handle(authReq).pipe(
-            delay(2000),
             finalize(() => {
                 this.loaderService.hide();
             })
