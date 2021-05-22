@@ -7,4 +7,7 @@ export class Alocacao {
     horasSolicitadas: number;
     tipoAtividade: string;
     status: string;
+    horasAprovadasConvenio: number;
+    horasAprovadasRegencia: number;
+    horasAprovadasCurso: number;
 }
