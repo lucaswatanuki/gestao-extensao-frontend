@@ -40,6 +40,7 @@ export class ConvenioComponent implements OnInit {
   loading$ = this.loader.loading$;
   pdf$ = false;
   arquivo$ = false;
+  aceitar$ = false;
   atividade: Convenio;
   convenioForm: FormGroup;
   admin = false;
@@ -50,8 +51,8 @@ export class ConvenioComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   fileInfos$: Observable<Arquivo[]>;
   autorizacao: Autorizacao;
-  alocacoes: MatTableDataSource<Alocacao>;
-  columnsToDisplay: string[] = ['atividadeId', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
+  tabelaAlocacoes: MatTableDataSource<Alocacao>;
+  columnsToDisplay: string[] = ['semestre', 'ano', 'horasSolicitadas', 'status'];
   expandedElement: PeriodicElement | null;
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
@@ -93,7 +94,10 @@ export class ConvenioComponent implements OnInit {
       ano2: [null],
       semestre2: [null],
       horasSolicitadas2: [null],
-      tipoAtividadeSimultanea: [null, Validators.required]
+      tipoAtividadeSimultanea: [null, Validators.required],
+      horasAprovadasConvenio: [null],
+      horasAprovadasCurso: [null],
+      horasAprovadasRegencia: [null]
     });
 
 
@@ -102,15 +106,15 @@ export class ConvenioComponent implements OnInit {
   getConvenios(): void {
     this.atividadeService.consultarConvenio(this.route.snapshot.params['id']).subscribe(
       response => {
+        console.log(response);
         this.atividade = response;
 
         if (this.atividade.excedido) {
           this.convenioForm.get("excedido").setValue('Limite de horas já comprometido para este semestre.');
         } else this.convenioForm.get('excedido').setValue('Sem restrições');
 
-        this.alocacoes = new MatTableDataSource(response.alocacoes);
+        this.tabelaAlocacoes = new MatTableDataSource(this.atividade.alocacoes);
         console.log(this.atividade);
-        this.alocacoes.paginator = this.paginator;
 
         this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
       },
@@ -144,6 +148,7 @@ export class ConvenioComponent implements OnInit {
   extrairRelatorioPDF(atividade: Atividade): void {
     this.pdf$ = true;
     this.arquivo$ = false;
+    this.aceitar$ = false;
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
@@ -157,6 +162,7 @@ export class ConvenioComponent implements OnInit {
       this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
         if (result && aceitar) {
           atividade.autorizado = true;
+          this.aceitar$ = true;
           this.autorizarAtividade(atividade);
         }
       });
@@ -198,6 +204,7 @@ export class ConvenioComponent implements OnInit {
   downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
     this.arquivo$ = true;
     this.pdf$ = false;
+    this.aceitar$ = false;
     this.arquivoService.downloadArquivo(arquivo, atividade);
   }
 

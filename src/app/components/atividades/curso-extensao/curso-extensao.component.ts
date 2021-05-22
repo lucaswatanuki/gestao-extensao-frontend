@@ -19,11 +19,19 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.service';
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-curso-extensao',
   templateUrl: './curso-extensao.component.html',
-  styleUrls: ['./curso-extensao.component.scss']
+  styleUrls: ['./curso-extensao.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class CursoExtensaoComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -42,7 +50,7 @@ export class CursoExtensaoComponent implements OnInit {
   pdf$ = false;
   arquivo$ = false;
   alocacoes: MatTableDataSource<Alocacao>;
-  displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
+  columnsToDisplay: string[] = ['semestre', 'ano', 'horasSolicitadas', 'status'];
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
