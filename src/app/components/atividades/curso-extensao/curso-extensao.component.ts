@@ -39,6 +39,8 @@ export class CursoExtensaoComponent implements OnInit {
   fileInfos$: Observable<Arquivo[]>;
   autorizacao: Autorizacao;
   loading$ = this.loader.loading$;
+  pdf$ = false;
+  arquivo$ = false;
   alocacoes: MatTableDataSource<Alocacao>;
   displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
 
@@ -122,6 +124,8 @@ export class CursoExtensaoComponent implements OnInit {
   }
 
   extrairRelatorioPDF(atividade: Atividade): void {
+    this.pdf$ = true;
+    this.arquivo$ = false;
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
@@ -175,6 +179,8 @@ export class CursoExtensaoComponent implements OnInit {
   }
 
   downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
+    this.arquivo$ = true;
+    this.pdf$ = false;
     this.arquivoService.downloadArquivo(arquivo, atividade);
   }
 

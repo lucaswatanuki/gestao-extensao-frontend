@@ -155,7 +155,9 @@ export class ActivityFormComponent implements OnInit{
 
     this.convenioService.salvarConvenio(this.convenioModel).subscribe(
       data => {
-        this.upload(data.id);
+        if (this.selectedFiles != null) {
+          this.upload(data.id);
+        }
         this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {
@@ -183,22 +185,24 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.alocacoes = [];
 
     this.alocacao = new Alocacao();
-    this.alocacao.ano = this.convenioForm.get('ano').value;
-    this.alocacao.semestre = this.convenioForm.get('semestre').value;
-    this.alocacao.horasSolicitadas = this.convenioForm.get('horasSolicitadas').value;
+    this.alocacao.ano = this.cursoForm.get('ano').value;
+    this.alocacao.semestre = this.cursoForm.get('semestre').value;
+    this.alocacao.horasSolicitadas = this.cursoForm.get('horasSolicitadas').value;
     this.cursoModel.alocacoes.push(this.alocacao);
 
     if(this.hasUnitNumber) {
       this.alocacao2 = new Alocacao();
-      this.alocacao2.ano = this.convenioForm.get('ano2').value;
-      this.alocacao2.semestre = this.convenioForm.get('semestre2').value;
-      this.alocacao2.horasSolicitadas = this.convenioForm.get('horasSolicitadas2').value;
+      this.alocacao2.ano = this.cursoForm.get('ano2').value;
+      this.alocacao2.semestre = this.cursoForm.get('semestre2').value;
+      this.alocacao2.horasSolicitadas = this.cursoForm.get('horasSolicitadas2').value;
       this.cursoModel.alocacoes.push(this.alocacao2);
     }
 
     this.cursoService.salvarCurso(this.cursoModel).subscribe(
       data => {
-        this.upload(data.id);
+        if (this.selectedFiles != null) {
+          this.upload(data.id);
+        }
         this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {
@@ -246,7 +250,9 @@ export class ActivityFormComponent implements OnInit{
 
     this.atividadeService.salvarRegencia(this.regenciaModel).subscribe(
       data => {
-        this.upload(data.id);
+        if (this.selectedFiles != null) {
+          this.upload(data.id);
+        }
         this.openSnackBar(this.mensagemSucesso, 'OK');
       },
       erro => {

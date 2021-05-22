@@ -30,6 +30,8 @@ export class ConvenioComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   loading$ = this.loader.loading$;
+  pdf$ = false;
+  arquivo$ = false;
   atividade: Convenio;
   convenioForm: FormGroup;
   admin = false;
@@ -41,7 +43,7 @@ export class ConvenioComponent implements OnInit {
   fileInfos$: Observable<Arquivo[]>;
   autorizacao: Autorizacao;
   alocacoes: MatTableDataSource<Alocacao>;
-  displayedColumns: string[] = ['id', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
+  displayedColumns: string[] = ['atividadeId', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
@@ -75,6 +77,7 @@ export class ConvenioComponent implements OnInit {
       docente: [null, Validators.required],
       observacao: [null],
       revisao: [null],
+      excedido: [null],
       ano: [null],
       semestre: [null],
       horasSolicitadas: [null],
@@ -92,6 +95,11 @@ export class ConvenioComponent implements OnInit {
       response => {
         console.log(response);
         this.atividade = response;
+
+        if (this.atividade.excedido) {
+          this.convenioForm.get("excedido").setValue('Limite de horas já comprometido para este semestre.');
+        } else this.convenioForm.get('excedido').setValue('Sem restrições');
+
         this.alocacoes = new MatTableDataSource(response.alocacoes);
         this.alocacoes.paginator = this.paginator;
 
@@ -125,6 +133,8 @@ export class ConvenioComponent implements OnInit {
   }
 
   extrairRelatorioPDF(atividade: Atividade): void {
+    this.pdf$ = true;
+    this.arquivo$ = false;
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
@@ -177,6 +187,8 @@ export class ConvenioComponent implements OnInit {
   }
 
   downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
+    this.arquivo$ = true;
+    this.pdf$ = false;
     this.arquivoService.downloadArquivo(arquivo, atividade);
   }
 

@@ -327,7 +327,7 @@
                 </div>
               </div>
               <h3>Alocação</h3>
-              <div class="row">
+              <div class="alocacao-row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
@@ -341,20 +341,17 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="full-width" appearance="outline">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
                     <mat-label>Horas</mat-label>
                     <input matInput min="1" placeholder="horasSolicitadas" type="number"
                       formControlName="horasSolicitadas" />
                   </mat-form-field>
-                </div>
-              </div>
-              <div class="row" *ngIf="!hasUnitNumber">
-                <div class="col">
-                  <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
-                    + Adicionar alocação de horas
+                  <button mat-button type="button" mat-icon-button (click)="hasUnitNumber = !hasUnitNumber">
+                    <mat-icon>add_circle</mat-icon>
                   </button>
                 </div>
               </div>
+
               <div class="row" *ngIf="hasUnitNumber">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
@@ -369,13 +366,18 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="full-width" appearance="outline">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
                     <mat-label>Horas</mat-label>
                     <input matInput min="1" placeholder="horasSolicitadas2" type="number"
                       formControlName="horasSolicitadas2" />
                   </mat-form-field>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="hasUnitNumber = !hasUnitNumber">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
                 </div>
               </div>
+              <h3>Observações</h3>
               <div class="row">
                 <div class="col">
                   <mat-form-field appearance="outline" class="full-width">
@@ -576,7 +578,7 @@
                 </div>
               </div>
               <h3>Alocação</h3>
-              <div class="row">
+              <div class="alocacao-row">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
@@ -590,20 +592,17 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="full-width" appearance="outline">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
                     <mat-label>Horas</mat-label>
                     <input matInput min="1" placeholder="horasSolicitadas" type="number"
                       formControlName="horasSolicitadas" />
                   </mat-form-field>
-                </div>
-              </div>
-              <div class="row" *ngIf="!hasUnitNumber">
-                <div class="col">
-                  <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
-                    + Adicionar alocação de horas
+                  <button mat-button type="button" mat-icon-button (click)="hasUnitNumber = !hasUnitNumber">
+                    <mat-icon>add_circle</mat-icon>
                   </button>
                 </div>
               </div>
+
               <div class="row" *ngIf="hasUnitNumber">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
@@ -618,10 +617,23 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="full-width" appearance="outline">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
                     <mat-label>Horas</mat-label>
                     <input matInput min="1" placeholder="horasSolicitadas2" type="number"
                       formControlName="horasSolicitadas2" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="hasUnitNumber = !hasUnitNumber">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <h3>Observações</h3>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Incluir observação</mat-label>
+                    <textarea matInput formControlName="observacao"></textarea>
                   </mat-form-field>
                 </div>
               </div>

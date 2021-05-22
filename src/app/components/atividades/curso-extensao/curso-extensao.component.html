@@ -220,7 +220,7 @@
                         <li class="list-group-item">
                             {{ file.nome }} <button mat-button (click)="downloadArquivo(file, atividade)" *ngIf="admin">
                                 <mat-icon aria-hidden="false" aria-label="download">download</mat-icon>
-                                <mat-icon *ngIf="loading$ | async">
+                                <mat-icon *ngIf="arquivo$  && loading$ | async">
                                     <mat-spinner color="accent" diameter="20"> </mat-spinner>
                                 </mat-icon>
                             </button>
@@ -252,7 +252,7 @@
                     <button mat-button (click)="extrairRelatorioPDF(atividade)" *ngIf="admin">
                         <mat-icon aria-hidden="false" aria-label="edit icon">save</mat-icon>
                         PDF
-                        <mat-icon *ngIf="loading$ | async">
+                        <mat-icon *ngIf="pdf$ && loading$ | async">
                             <mat-spinner color="accent" diameter="20"> </mat-spinner>
                         </mat-icon>
                     </button>
