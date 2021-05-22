@@ -40,6 +40,7 @@ export class ConvenioComponent implements OnInit {
   loading$ = this.loader.loading$;
   pdf$ = false;
   arquivo$ = false;
+  aceitar$ = false;
   atividade: Convenio;
   convenioForm: FormGroup;
   admin = false;
@@ -50,9 +51,9 @@ export class ConvenioComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   fileInfos$: Observable<Arquivo[]>;
   autorizacao: Autorizacao;
-  alocacoes: MatTableDataSource<Alocacao>;
-  columnsToDisplay: string[] = ['atividadeId', 'tipoAtividade', 'semestre', 'ano', 'horasSolicitadas', 'status'];
-  expandedElement: PeriodicElement | null;
+  tabelaAlocacoes: MatTableDataSource<Alocacao>;
+  columnsToDisplay: string[] = ['semestre', 'ano', 'horasSolicitadas', 'status'];
+  expandedElement: Alocacao | null;
 
   constructor(private route: ActivatedRoute, private fbuilder: FormBuilder,
     private atividadeService: AtividadeService, private tokenStorage: TokenStorageService,
@@ -93,7 +94,10 @@ export class ConvenioComponent implements OnInit {
       ano2: [null],
       semestre2: [null],
       horasSolicitadas2: [null],
-      tipoAtividadeSimultanea: [null, Validators.required]
+      tipoAtividadeSimultanea: [null, Validators.required],
+      horasAprovadasConvenio: [null],
+      horasAprovadasCurso: [null],
+      horasAprovadasRegencia: [null]
     });
 
 
@@ -102,15 +106,15 @@ export class ConvenioComponent implements OnInit {
   getConvenios(): void {
     this.atividadeService.consultarConvenio(this.route.snapshot.params['id']).subscribe(
       response => {
+        console.log(response);
         this.atividade = response;
 
         if (this.atividade.excedido) {
           this.convenioForm.get("excedido").setValue('Limite de horas já comprometido para este semestre.');
         } else this.convenioForm.get('excedido').setValue('Sem restrições');
 
-        this.alocacoes = new MatTableDataSource(response.alocacoes);
+        this.tabelaAlocacoes = new MatTableDataSource(this.atividade.alocacoes);
         console.log(this.atividade);
-        this.alocacoes.paginator = this.paginator;
 
         this.fileInfos$ = this.uploadService.getArquivos(this.atividade.id);
       },
@@ -122,8 +126,8 @@ export class ConvenioComponent implements OnInit {
   autorizarAtividade(atividade: Atividade): void {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
+        this.openSnackBar('Atividade aceita com sucesso!', 'OK');
         this.getConvenios();
-        this.openSnackBar('Atividade aceita com sucesso!', 'OK')
       },
       error => {
         console.log(error);
@@ -144,6 +148,7 @@ export class ConvenioComponent implements OnInit {
   extrairRelatorioPDF(atividade: Atividade): void {
     this.pdf$ = true;
     this.arquivo$ = false;
+    this.aceitar$ = false;
     this.arquivoService.extrairRelatorioPDF(atividade);
   }
 
@@ -157,6 +162,9 @@ export class ConvenioComponent implements OnInit {
       this.confirmacaoDialogueRef.afterClosed().subscribe(result => {
         if (result && aceitar) {
           atividade.autorizado = true;
+          this.aceitar$ = true;
+          this.arquivo$ = false;
+          this.pdf$ = false;
           this.autorizarAtividade(atividade);
         }
       });
@@ -198,6 +206,7 @@ export class ConvenioComponent implements OnInit {
   downloadArquivo(arquivo: Arquivo, atividade: Atividade): void {
     this.arquivo$ = true;
     this.pdf$ = false;
+    this.aceitar$ = false;
     this.arquivoService.downloadArquivo(arquivo, atividade);
   }
 
@@ -206,93 +215,3 @@ export class ConvenioComponent implements OnInit {
   }
 
 }
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    position: 1,
-    name: 'Hydrogen',
-    weight: 1.0079,
-    symbol: 'H',
-    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`
-  }, {
-    position: 2,
-    name: 'Helium',
-    weight: 4.0026,
-    symbol: 'He',
-    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`
-  }, {
-    position: 3,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  }, {
-    position: 4,
-    name: 'Beryllium',
-    weight: 9.0122,
-    symbol: 'Be',
-    description: `Beryllium is a chemical element with symbol Be and atomic number 4. It is a
-        relatively rare element in the universe, usually occurring as a product of the spallation of
-        larger atomic nuclei that have collided with cosmic rays.`
-  }, {
-    position: 5,
-    name: 'Boron',
-    weight: 10.811,
-    symbol: 'B',
-    description: `Boron is a chemical element with symbol B and atomic number 5. Produced entirely
-        by cosmic ray spallation and supernovae and not by stellar nucleosynthesis, it is a
-        low-abundance element in the Solar system and in the Earth's crust.`
-  }, {
-    position: 6,
-    name: 'Carbon',
-    weight: 12.0107,
-    symbol: 'C',
-    description: `Carbon is a chemical element with symbol C and atomic number 6. It is nonmetallic
-        and tetravalent—making four electrons available to form covalent chemical bonds. It belongs
-        to group 14 of the periodic table.`
-  }, {
-    position: 7,
-    name: 'Nitrogen',
-    weight: 14.0067,
-    symbol: 'N',
-    description: `Nitrogen is a chemical element with symbol N and atomic number 7. It was first
-        discovered and isolated by Scottish physician Daniel Rutherford in 1772.`
-  }, {
-    position: 8,
-    name: 'Oxygen',
-    weight: 15.9994,
-    symbol: 'O',
-    description: `Oxygen is a chemical element with symbol O and atomic number 8. It is a member of
-         the chalcogen group on the periodic table, a highly reactive nonmetal, and an oxidizing
-         agent that readily forms oxides with most elements as well as with other compounds.`
-  }, {
-    position: 9,
-    name: 'Fluorine',
-    weight: 18.9984,
-    symbol: 'F',
-    description: `Fluorine is a chemical element with symbol F and atomic number 9. It is the
-        lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard
-        conditions.`
-  }, {
-    position: 10,
-    name: 'Neon',
-    weight: 20.1797,
-    symbol: 'Ne',
-    description: `Neon is a chemical element with symbol Ne and atomic number 10. It is a noble gas.
-        Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about
-        two-thirds the density of air.`
-  },
-];
