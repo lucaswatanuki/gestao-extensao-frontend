@@ -186,7 +186,7 @@
                                                 <input matInput [(value)]="element.horasAprovadasCurso" name="element.horasAprovadasCurso" placeholder="Horas aprovadas cursos" readonly />
                                             </mat-form-field>
                                         </div>
-                                        <button [disabled]="element.status=='APROVADO'" mat-icon-button color="warn" (click)="openDialog(element)" *ngIf="admin">
+                                        <button [disabled]="element.status=='APROVADO'" mat-icon-button color="warn" (click)="openDialog(element)" *ngIf="!admin">
                                             <mat-icon aria-label="edit icon">edit</mat-icon>
                                           </button>
                                     </div>

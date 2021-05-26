@@ -20,7 +20,7 @@ export class AutorizacaoService {
   }
 
   autorizar(atividade: Atividade): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/autorizar/' + atividade.id, atividade).pipe(delay(5000));
+    return this.http.post<any>(this.baseUrl + '/autorizar/' + atividade.id, atividade);
   }
 
 }
