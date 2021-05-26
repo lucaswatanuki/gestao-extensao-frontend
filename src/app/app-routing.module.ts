@@ -56,9 +56,6 @@ const routes: Routes = [
     path: 'atividade/curso-extensao/:id', component: CursoExtensaoComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'alocacoes', component: AlocacaoComponentComponent, canActivate: [AuthGuardService]
-  },
-  {
     path: 'senha/alterarSenha/:token', component: UpdateSenhaComponent
   },
   {

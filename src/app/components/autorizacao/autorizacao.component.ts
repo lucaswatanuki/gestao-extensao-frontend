@@ -28,9 +28,12 @@ export class AutorizacaoComponent implements OnInit {
   autorizacoes: MatTableDataSource<Autorizacao>;
   errorMsg: string;
   displayedColumns = ['id', 'status', 'dataCriacao', 'docente', 'urgente', 'tipoAtividade', 'acoes'];
+  dataGrid: Autorizacao[];
 
   constructor(private autorizacaoService: AutorizacaoService, public dialog: MatDialog, private router: Router, private atividadeService: AtividadeService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) {
+      this.autorizacoes = new MatTableDataSource(this.dataGrid);
+     }
 
   ngOnInit(): void {
     this.getAutorizacoes();
@@ -48,6 +51,10 @@ export class AutorizacaoComponent implements OnInit {
         console.error(this.errorMsg);
       }
     );
+  }
+
+  applyFilter(value: string) {
+    this.autorizacoes.filter = value.trim().toLowerCase();
   }
 
   consultarDetalheAutorizacao(element: Autorizacao): void {

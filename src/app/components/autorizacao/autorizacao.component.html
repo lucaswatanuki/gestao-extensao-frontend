@@ -1,6 +1,13 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Autorizações</h1>
+  <h1 class="mat-h1">Atividades</h1>
+
+  <mat-form-field style="width: 100%;" appearance="outline">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+  </mat-form-field>
+
   <div class="mat-elevation-z8">
+  
     <table mat-table [dataSource]="autorizacoes" matSort class="full-width-table">
       <!-- Position Column -->
       <ng-container matColumnDef="id">
@@ -17,7 +24,7 @@
       <!-- Weight Column -->
       <ng-container matColumnDef="dataCriacao">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Criado em</th>
-        <td mat-cell *matCellDef="let element"> {{element.dataCriacao }} </td>
+        <td mat-cell *matCellDef="let element"> {{element.dataCriacao | date:"dd/MM/yyyy" }} </td>
       </ng-container>
 
       <ng-container matColumnDef="docente">

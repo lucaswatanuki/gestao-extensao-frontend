@@ -20,8 +20,11 @@ export class DocenteComponent implements OnInit {
   errorMsg: string;
   displayedColumns: string[] = ['matricula', 'nome', 'email', 'totalHorasEmAndamento', 'totalHorasFuturas', 'alocacoes'];
   currentYear: number;
+  dataGrid: Docente[];
 
-  constructor(private docenteService: DocenteService, public dialog: MatDialog) {}
+  constructor(private docenteService: DocenteService, public dialog: MatDialog) {
+    this.docentes = new MatTableDataSource(this.dataGrid);
+  }
   
   ngOnInit() {
     this.getDocentes();
@@ -49,6 +52,10 @@ export class DocenteComponent implements OnInit {
         id
       }
     });
+  }
+
+  applyFilter(value: string) {
+    this.docentes.filter = value.trim().toLowerCase();
   }
 
 }

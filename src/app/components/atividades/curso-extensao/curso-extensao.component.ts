@@ -20,6 +20,7 @@ import { UploadArquivoService } from 'src/app/services/upload/upload-arquivo.ser
 import { ConfirmacaoDialogueComponent } from 'src/app/shared/confirmacao-dialogue/confirmacao-dialogue.component';
 import { DevolucaoDialogueComponent } from '../../autorizacao/autorizacao-detalhes/devolucao-dialogue/devolucao-dialogue.component';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AlocacaoDialogueComponent } from '../../alocacoes/alocacao-dialogue/alocacao-dialogue.component';
 
 @Component({
   selector: 'app-curso-extensao',
@@ -160,6 +161,15 @@ export class CursoExtensaoComponent implements OnInit {
         }
       });
     }
+  }
+
+  openDialog(element): void {
+    const dialogRef = this.dialog.open(AlocacaoDialogueComponent, {
+      width: '300px',
+      data: {
+        element
+      }
+    });
   }
 
   devolverAtividade(id: number): void {

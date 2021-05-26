@@ -115,6 +115,7 @@
                   </mat-form-field>
                 </div>
               </div>
+
               <h3>Alocação</h3>
               <div class="alocacao-row">
                 <div class="col">
@@ -135,13 +136,42 @@
                     <input matInput min="1" placeholder="horasSolicitadas" type="number"
                       formControlName="horasSolicitadas" />
                   </mat-form-field>
-                  <button mat-button type="button" mat-icon-button (click)="hasUnitNumber = !hasUnitNumber">
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra = !alocacaoExtra" *ngIf="!alocacaoExtra">
                     <mat-icon>add_circle</mat-icon>
                   </button>
                 </div>
               </div>
 
-              <div class="row" *ngIf="hasUnitNumber">
+              <div class="row" *ngIf="alocacaoExtra">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre1" min="1" max="2" type="number" formControlName="semestre1" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano1" type="number" formControlName="ano1" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas1" type="number"
+                      formControlName="horasSolicitadas1" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra2 = !alocacaoExtra2" *ngIf="!alocacaoExtra2">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra = !alocacaoExtra">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra2">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
@@ -160,12 +190,101 @@
                     <input matInput min="1" placeholder="horasSolicitadas2" type="number"
                       formControlName="horasSolicitadas2" />
                   </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra3 = !alocacaoExtra3" *ngIf="!alocacaoExtra3">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
                   <button mat-button type="button" mat-icon-button aria-label="Clear"
-                    (click)="hasUnitNumber = !hasUnitNumber">
+                    (click)="alocacaoExtra2 = !alocacaoExtra2">
                     <mat-icon>remove_circle_outline</mat-icon>
                   </button>
                 </div>
               </div>
+
+              <div class="row" *ngIf="alocacaoExtra3">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre3" min="1" max="2" type="number" formControlName="semestre3" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano3" type="number" formControlName="ano3" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas3" type="number"
+                      formControlName="horasSolicitadas3" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra4 = !alocacaoExtra4" *ngIf="!alocacaoExtra4">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra3 = !alocacaoExtra3">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra4">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre4" min="1" max="2" type="number" formControlName="semestre4" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano4" type="number" formControlName="ano4" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas4" type="number"
+                      formControlName="horasSolicitadas4" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra5 = !alocacaoExtra5" *ngIf="!alocacaoExtra5">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra4 = !alocacaoExtra4">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra5">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre5" min="1" max="2" type="number" formControlName="semestre5" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano5" type="number" formControlName="ano5" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas5" type="number"
+                      formControlName="horasSolicitadas5" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra5 = !alocacaoExtra5">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+
               <h3>Observações</h3>
               <div class="row">
                 <div class="col">
@@ -326,6 +445,7 @@
                   </mat-form-field>
                 </div>
               </div>
+
               <h3>Alocação</h3>
               <div class="alocacao-row">
                 <div class="col">
@@ -346,13 +466,42 @@
                     <input matInput min="1" placeholder="horasSolicitadas" type="number"
                       formControlName="horasSolicitadas" />
                   </mat-form-field>
-                  <button mat-button type="button" mat-icon-button (click)="hasUnitNumber = !hasUnitNumber">
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra = !alocacaoExtra" *ngIf="!alocacaoExtra">
                     <mat-icon>add_circle</mat-icon>
                   </button>
                 </div>
               </div>
 
-              <div class="row" *ngIf="hasUnitNumber">
+              <div class="row" *ngIf="alocacaoExtra">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre1" min="1" max="2" type="number" formControlName="semestre1" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano1" type="number" formControlName="ano1" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas1" type="number"
+                      formControlName="horasSolicitadas1" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra2 = !alocacaoExtra2" *ngIf="!alocacaoExtra2">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra = !alocacaoExtra">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra2">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
@@ -371,12 +520,100 @@
                     <input matInput min="1" placeholder="horasSolicitadas2" type="number"
                       formControlName="horasSolicitadas2" />
                   </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra3 = !alocacaoExtra3" *ngIf="!alocacaoExtra3">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
                   <button mat-button type="button" mat-icon-button aria-label="Clear"
-                    (click)="hasUnitNumber = !hasUnitNumber">
+                    (click)="alocacaoExtra2 = !alocacaoExtra2">
                     <mat-icon>remove_circle_outline</mat-icon>
                   </button>
                 </div>
               </div>
+
+              <div class="row" *ngIf="alocacaoExtra3">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre3" min="1" max="2" type="number" formControlName="semestre3" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano3" type="number" formControlName="ano3" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas3" type="number"
+                      formControlName="horasSolicitadas3" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra4 = !alocacaoExtra4" *ngIf="!alocacaoExtra4">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra3 = !alocacaoExtra3">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra4">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre4" min="1" max="2" type="number" formControlName="semestre4" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano4" type="number" formControlName="ano4" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas4" type="number"
+                      formControlName="horasSolicitadas4" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra5 = !alocacaoExtra5" *ngIf="!alocacaoExtra5">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra4 = !alocacaoExtra4">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra5">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre5" min="1" max="2" type="number" formControlName="semestre5" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano5" type="number" formControlName="ano5" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas5" type="number"
+                      formControlName="horasSolicitadas5" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra5 = !alocacaoExtra5">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
               <h3>Observações</h3>
               <div class="row">
                 <div class="col">
@@ -577,6 +814,7 @@
                   </mat-form-field>
                 </div>
               </div>
+
               <h3>Alocação</h3>
               <div class="alocacao-row">
                 <div class="col">
@@ -597,13 +835,42 @@
                     <input matInput min="1" placeholder="horasSolicitadas" type="number"
                       formControlName="horasSolicitadas" />
                   </mat-form-field>
-                  <button mat-button type="button" mat-icon-button (click)="hasUnitNumber = !hasUnitNumber">
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra = !alocacaoExtra" *ngIf="!alocacaoExtra">
                     <mat-icon>add_circle</mat-icon>
                   </button>
                 </div>
               </div>
 
-              <div class="row" *ngIf="hasUnitNumber">
+              <div class="row" *ngIf="alocacaoExtra">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre1" min="1" max="2" type="number" formControlName="semestre1" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano1" type="number" formControlName="ano1" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas1" type="number"
+                      formControlName="horasSolicitadas1" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra2 = !alocacaoExtra2" *ngIf="!alocacaoExtra2">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra = !alocacaoExtra">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra2">
                 <div class="col">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Semestre</mat-label>
@@ -622,12 +889,101 @@
                     <input matInput min="1" placeholder="horasSolicitadas2" type="number"
                       formControlName="horasSolicitadas2" />
                   </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra3 = !alocacaoExtra3" *ngIf="!alocacaoExtra3">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
                   <button mat-button type="button" mat-icon-button aria-label="Clear"
-                    (click)="hasUnitNumber = !hasUnitNumber">
+                    (click)="alocacaoExtra2 = !alocacaoExtra2">
                     <mat-icon>remove_circle_outline</mat-icon>
                   </button>
                 </div>
               </div>
+
+              <div class="row" *ngIf="alocacaoExtra3">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre3" min="1" max="2" type="number" formControlName="semestre3" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano3" type="number" formControlName="ano3" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas3" type="number"
+                      formControlName="horasSolicitadas3" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra4 = !alocacaoExtra4" *ngIf="!alocacaoExtra4">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra3 = !alocacaoExtra3">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra4">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre4" min="1" max="2" type="number" formControlName="semestre4" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano4" type="number" formControlName="ano4" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas4" type="number"
+                      formControlName="horasSolicitadas4" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button (click)="alocacaoExtra5 = !alocacaoExtra5" *ngIf="!alocacaoExtra5">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra4 = !alocacaoExtra4">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="alocacaoExtra5">
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Semestre</mat-label>
+                    <input matInput placeholder="semestre5" min="1" max="2" type="number" formControlName="semestre5" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput min="1" placeholder="ano5" type="number" formControlName="ano5" />
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="full-width" style="width: 80%; margin-right: 5px;" appearance="outline">
+                    <mat-label>Horas</mat-label>
+                    <input matInput min="1" placeholder="horasSolicitadas5" type="number"
+                      formControlName="horasSolicitadas5" />
+                  </mat-form-field>
+                  <button mat-button type="button" mat-icon-button aria-label="Clear"
+                    (click)="alocacaoExtra5 = !alocacaoExtra5">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+
               <h3>Observações</h3>
               <div class="row">
                 <div class="col">

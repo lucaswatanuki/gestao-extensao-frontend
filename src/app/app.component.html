@@ -26,15 +26,12 @@
         <mat-icon>dashboard</mat-icon>
         Dashboard
       </a>
-      <a mat-list-item routerLink="/criar-atividade" *ngIf="user || admin">
-        <mat-icon>assignment</mat-icon>Atividades
+      <a mat-list-item routerLink="/criar-atividade" *ngIf="user && !admin">
+        <mat-icon>assignment</mat-icon>Submeter atividade
       </a>
       <a mat-list-item routerLink="/autorizacoes" *ngIf="user || admin">
         <mat-icon>assignment_turned_in</mat-icon>
-        Autorizações
-      </a>
-      <a mat-list-item routerLink="/alocacoes" *ngIf="user || admin">
-        <mat-icon>schedule</mat-icon>Alocacões
+        Atividades
       </a>
       <a mat-list-item routerLink="/docentes" *ngIf="admin">
         <mat-icon>account_circle</mat-icon>Docentes

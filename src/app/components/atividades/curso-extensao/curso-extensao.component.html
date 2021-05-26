@@ -1,6 +1,6 @@
 <div class="grid-container">
     <h1 mat-dialog-title>
-        <button mat-button (click)="voltar()">
+        <button mat-icon-button (click)="voltar()">
             <mat-icon aria-hidden="false" aria-label="edit icon">keyboard_backspace</mat-icon>
         </button>
         Solicitação de Atividade #{{ atividade.id }} - Cursos de Extensão
@@ -186,6 +186,9 @@
                                                 <input matInput [(value)]="element.horasAprovadasCurso" name="element.horasAprovadasCurso" placeholder="Horas aprovadas cursos" readonly />
                                             </mat-form-field>
                                         </div>
+                                        <button [disabled]="element.status=='APROVADO'" mat-icon-button color="warn" (click)="openDialog(element)" *ngIf="admin">
+                                            <mat-icon aria-label="edit icon">edit</mat-icon>
+                                          </button>
                                     </div>
                                 </div>
                             </td>
@@ -257,7 +260,7 @@
                         <mat-icon aria-hidden="false" aria-label="edit icon">cancel</mat-icon>
                         Devolver
                     </button>
-                    <button mat-button (click)="extrairRelatorioPDF(atividade)" *ngIf="admin">
+                    <button mat-button (click)="extrairRelatorioPDF(atividade)">
                         <mat-icon aria-hidden="false" aria-label="edit icon">save</mat-icon>
                         PDF
                         <mat-icon *ngIf="pdf$ && loading$ | async">
