@@ -105,6 +105,7 @@ export class RegenciaComponent implements OnInit {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
         console.log("Atividade autorizada com sucesso");
+        this.getRegencias();
       },
       error => {
         console.log(error);
@@ -129,8 +130,8 @@ export class RegenciaComponent implements OnInit {
   updateRegencia(): void {
     this.atividadeService.updateRegencia(this.atividade).subscribe(
       res => {
-        this.getRegencias();
         this.openSnackBar('Dados de atividade atualizados com sucesso', 'OK');
+        this.getRegencias();
       },
       error => {
         console.log(error);

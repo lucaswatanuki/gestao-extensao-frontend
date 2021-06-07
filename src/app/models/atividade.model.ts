@@ -20,4 +20,5 @@ export class Atividade {
     revisao: string;
     alocacoes: Alocacao[];
     excedido: boolean;
+    urgente: boolean;
 }

@@ -115,6 +115,7 @@ export class CursoExtensaoComponent implements OnInit {
     this.autorizacaoService.autorizar(atividade).subscribe(
       res => {
         this.openSnackBar('Atividade autorizada com sucesso', 'OK');
+        this.getCursos();
       },
       error => {
         console.log(error);
@@ -124,8 +125,8 @@ export class CursoExtensaoComponent implements OnInit {
   updateCurso(): void {
     this.atividadeService.updateCurso(this.atividade).subscribe(
       res => {
-        this.getCursos();
         this.openSnackBar('Dados de atividade atualizados com sucesso', 'OK');
+        this.getCursos();
       },
       error => {
         console.log(error);

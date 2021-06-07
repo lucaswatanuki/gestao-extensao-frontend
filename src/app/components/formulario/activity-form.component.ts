@@ -79,7 +79,8 @@ export class ActivityFormComponent implements OnInit{
       ano5: [null],
       semestre5: [null],
       horasSolicitadas5: [null],
-      tipoAtividadeSimultanea: [null, Validators.required]
+      tipoAtividadeSimultanea: [null, Validators.required],
+      urgente: ['']
     });
 
     this.cursoForm = this.fb.group({
@@ -115,6 +116,7 @@ export class ActivityFormComponent implements OnInit{
       ano5: [null],
       semestre5: [null],
       horasSolicitadas5: [null],
+      urgente: ['']
     });
 
     this.regenciaForm = this.fb.group({
@@ -155,6 +157,7 @@ export class ActivityFormComponent implements OnInit{
       ano5: [null],
       semestre5: [null],
       horasSolicitadas5: [null],
+      urgente: ['']
     });
   }
 
@@ -183,6 +186,7 @@ export class ActivityFormComponent implements OnInit{
     this.convenioModel.dataFim = this.convenioForm.get('dataFim').value;
     this.convenioModel.observacao = this.convenioForm.get('observacao').value;
     this.convenioModel.tipoAtividadeSimultanea = this.convenioForm.get('tipoAtividadeSimultanea').value;
+    this.convenioModel.urgente = this.convenioForm.get('urgente').value;
     this.convenioModel.alocacoes = [];
     this.alocacao = new Alocacao();
     this.alocacao.ano = this.convenioForm.get('ano').value;
@@ -259,6 +263,8 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.dataInicio = this.cursoForm.get('dataInicio').value;
     this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
     this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
+    this.cursoModel.urgente = this.cursoForm.get('urgente').value;
+
     this.cursoModel.alocacoes = [];
 
     this.alocacao = new Alocacao();
@@ -341,6 +347,7 @@ export class ActivityFormComponent implements OnInit{
     this.regenciaModel.unicoDocente = this.regenciaForm.get('unicoDocente').value;
     this.regenciaModel.horaSemanal = this.regenciaForm.get('horaSemanal').value;
     this.regenciaModel.horaMensal = this.regenciaForm.get('horaMensal').value;
+    this.regenciaModel.urgente = this.regenciaForm.get('urgente').value;
     this.regenciaModel.alocacoes = [];
 
     this.alocacao = new Alocacao();

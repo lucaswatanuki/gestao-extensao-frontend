@@ -138,8 +138,8 @@ export class ConvenioComponent implements OnInit {
   updateConvenio(atividade: Convenio): void {
     this.atividadeService.updateConvenio(atividade).subscribe(
       res => {
-        this.getConvenios();
         this.openSnackBar('Dados de atividade atualizados com sucesso', 'OK');
+        this.getConvenios();
       },
       error => {
         console.log(error);
