@@ -3,11 +3,10 @@ export class Regencia extends Atividade {
     nivel: string;
     curso: string;
     disciplinaParticipacao: string;
-    cargaHoraTotalMinistrada: number;
-    cargaHorariaTotalDedicada: number;
-    valorBrutoHoraAula: number;
-    valorBrutoTotalAula: number;
-    valorBrutoOutraAtividade: number;
+    totalHorasMinistradas: number;
+    totalHorasOutrasAtividades: number;
+    valorBrutoHora: number;
+    valorBrutoTotal: number;
     instituicao: string;
     diasTrabalhadosUnicamp: string;
     diasTrabalhadosOutraInstituicao: string;

@@ -90,11 +90,9 @@ export class ActivityFormComponent implements OnInit{
       participacao: [null, Validators.required],
       disciplina: [null],
       totalHorasMinistradas: [null, Validators.required],
-      horaSemanal: [null, Validators.required],
-      horaMensal: [null, Validators.required],
-      valorBrutoHoraAula: [null],
-      valorBrutoTotalAula: [null],
-      valorBrutoOutraAtividade: [null],
+      valorBrutoHora: [null],
+      valorBrutoTotal: [null],
+      totalHorasOutrasAtividades: [null],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
       observacao: [null],
@@ -124,11 +122,10 @@ export class ActivityFormComponent implements OnInit{
       curso: [null, Validators.required],
       coordenador: [null, Validators.required],
       disciplinaParticipacao: [null],
-      cargaHoraTotalMinistrada: [null, Validators.required],
-      cargaHorariaTotalDedicada: [null],
-      valorBrutoHoraAula: [null, Validators.required],
-      valorBrutoTotalAula: [null, Validators.required],
-      valorBrutoOutraAtividade: [null, Validators.required],
+      totalHorasMinistradas: [null],
+      totalHorasOutrasAtividades: [null, Validators.required],
+      valorBrutoHora: [null, Validators.required],
+      valorBrutoTotal: [null, Validators.required],
       instituicao: [null, Validators.required],
       diasTrabalhadosUnicamp: [null, Validators.required],
       diasTrabalhadosOutraInstituicao: [null, Validators.required],
@@ -136,8 +133,6 @@ export class ActivityFormComponent implements OnInit{
       unicoDocente: [null, Validators.required],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required],
-      horaSemanal: [null, Validators.required],
-      horaMensal: [null, Validators.required],
       observacao: [null],
       ano: [null, Validators.required],
       semestre: [null, Validators.required],
@@ -254,12 +249,10 @@ export class ActivityFormComponent implements OnInit{
     this.cursoModel.participacao = this.cursoForm.get('participacao').value;
     this.cursoModel.observacao = this.cursoForm.get('observacao').value;
     this.cursoModel.disciplinas = this.cursoForm.get('disciplina').value;
-    this.cursoModel.cargaHorariaTotal = this.cursoForm.get('totalHorasMinistradas').value;
-    this.cursoModel.horaSemanal = this.cursoForm.get('horaSemanal').value;
-    this.cursoModel.horaMensal = this.cursoForm.get('horaMensal').value;
-    this.cursoModel.valorBrutoHoraAula = this.cursoForm.get('valorBrutoHoraAula').value;
-    this.cursoModel.valorBrutoTotalAula = this.cursoForm.get('valorBrutoTotalAula').value;
-    this.cursoModel.valorBrutoOutraAtividade = this.cursoForm.get('valorBrutoOutraAtividade').value;
+    this.cursoModel.totalHorasMinistradas = this.cursoForm.get('totalHorasMinistradas').value;
+    this.cursoModel.totalHorasOutrasAtividades = this.cursoForm.get('totalHorasOutrasAtividades').value;
+    this.cursoModel.valorBrutoHora = this.cursoForm.get('valorBrutoHora').value;
+    this.cursoModel.valorBrutoTotal = this.cursoForm.get('valorBrutoTotal').value;
     this.cursoModel.dataInicio = this.cursoForm.get('dataInicio').value;
     this.cursoModel.dataFim = this.cursoForm.get('dataFim').value;
     this.cursoModel.instituicaoVinculada = this.cursoForm.get('instituicaoVinculada').value;
@@ -333,11 +326,10 @@ export class ActivityFormComponent implements OnInit{
     this.regenciaModel.curso = this.regenciaForm.get('curso').value;
     this.regenciaModel.observacao = this.regenciaForm.get('observacao').value;
     this.regenciaModel.disciplinaParticipacao = this.regenciaForm.get('disciplinaParticipacao').value;
-    this.regenciaModel.cargaHoraTotalMinistrada = this.regenciaForm.get('cargaHoraTotalMinistrada').value;
-    this.regenciaModel.cargaHorariaTotalDedicada = this.regenciaForm.get('cargaHorariaTotalDedicada').value;
-    this.regenciaModel.valorBrutoHoraAula = this.regenciaForm.get('valorBrutoHoraAula').value;
-    this.regenciaModel.valorBrutoTotalAula = this.regenciaForm.get('valorBrutoTotalAula').value;
-    this.regenciaModel.valorBrutoOutraAtividade = this.regenciaForm.get('valorBrutoOutraAtividade').value;
+    this.regenciaModel.totalHorasMinistradas = this.regenciaForm.get('totalHorasMinistradas').value;
+    this.regenciaModel.totalHorasOutrasAtividades = this.regenciaForm.get('totalHorasOutrasAtividades').value;
+    this.regenciaModel.valorBrutoHora = this.regenciaForm.get('valorBrutoHora').value;
+    this.regenciaModel.valorBrutoTotal = this.regenciaForm.get('valorBrutoTotal').value;
     this.regenciaModel.dataInicio = this.regenciaForm.get('dataInicio').value;
     this.regenciaModel.dataFim = this.regenciaForm.get('dataFim').value;
     this.regenciaModel.instituicao = this.regenciaForm.get('instituicao').value;
@@ -345,8 +337,6 @@ export class ActivityFormComponent implements OnInit{
     this.regenciaModel.diasTrabalhadosUnicamp = this.regenciaForm.get('diasTrabalhadosUnicamp').value;
     this.regenciaModel.responsavel = this.regenciaForm.get('responsavel').value;
     this.regenciaModel.unicoDocente = this.regenciaForm.get('unicoDocente').value;
-    this.regenciaModel.horaSemanal = this.regenciaForm.get('horaSemanal').value;
-    this.regenciaModel.horaMensal = this.regenciaForm.get('horaMensal').value;
     this.regenciaModel.urgente = this.regenciaForm.get('urgente').value;
     this.regenciaModel.alocacoes = [];
 

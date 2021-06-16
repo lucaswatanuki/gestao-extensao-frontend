@@ -74,46 +74,32 @@
         <div class="row">
             <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Carga horária total de aulas ministradas</mat-label>
-                    <input [(ngModel)]="atividade.cargaHoraTotalMinistrada" formControlName="cargaHoraTotalMinistrada"
-                        matInput maxlength="5" min="1" placeholder="Carga horária total" type="number">
+                    <mat-label>Carga horária total de aulas</mat-label>
+                    <input [(ngModel)]="atividade.totalHorasMinistradas" matInput maxlength="5" min="1"
+                        placeholder="Carga horária total ministrada" type="number" formControlName="totalHorasMinistradas">
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas semanais dedicadas (aulas + preparação e outras atividades)</mat-label>
-                    <input [(ngModel)]="atividade.horaSemanal" formControlName="horaSemanal" matInput maxlength="5"
-                        min="1" placeholder="Carga horária semanal" type="number">
-                </mat-form-field>
-            </div>
-            <div class="col">
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Horas mensais dedicadas (aulas + preparação e outras atividades)</mat-label>
-                    <input [(ngModel)]="atividade.horaMensal" formControlName="horaMensal" matInput maxlength="5"
-                        min="1" placeholder="Carga horária mensal" type="number">
+                    <mat-label>Carga horária de outras atividades (preparação)</mat-label>
+                    <input [(ngModel)]="atividade.totalHorasOutrasAtividades" matInput maxlength="5" min="1"
+                        placeholder="Carga horária outras atividades" type="number" formControlName="totalHorasOutrasAtividades">
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Valor bruto por hora-aula (R$)</mat-label>
-                    <input [(ngModel)]="atividade.valorBrutoHoraAula" formControlName="valorBrutoHoraAula" matInput
-                        maxlength="5" placeholder="Valor bruto hora-aula" type="number">
+                    <mat-label>Valor bruto por hora (R$)</mat-label>
+                    <input [(ngModel)]="atividade.valorBrutoHora" matInput maxlength="5"
+                        placeholder="Valor bruto hora-aula" type="number" formControlName="valorBrutoHora">
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Valor bruto pelo total de aulas (R$)</mat-label>
-                    <input [(ngModel)]="atividade.valorBrutoTotalAula" formControlName="valorBrutoTotalAula" matInput
-                        maxlength="5" placeholder="Valor bruto total aulas" type="number">
-                </mat-form-field>
-            </div>
-            <div class="col">
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Valor bruto de outras atividades (R$)</mat-label>
-                    <input [(ngModel)]="atividade.valorBrutoOutraAtividade" formControlName="valorBrutoOutraAtividade"
-                        matInput maxlength="5" placeholder="Valor bruto de outras atividades" type="number">
+                    <mat-label>Valor bruto total (R$)</mat-label>
+                    <input [(ngModel)]="atividade.valorBrutoTotal" matInput maxlength="5"
+                        placeholder="Valor bruto total aulas" type="number" formControlName="valorBrutoTotal">
                 </mat-form-field>
             </div>
         </div>
