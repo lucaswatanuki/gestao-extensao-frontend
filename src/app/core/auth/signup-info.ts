@@ -8,9 +8,10 @@ export class SignUpInfo {
     rf: string;
     endereco: string;
     telefone: string;
+    titulo: string;
 
     // tslint:disable-next-line: max-line-length
-    constructor(nome: string, username: string, email: string, password: string, cpf: string, rf: string, endereco: string, telefone: string) {
+    constructor(nome: string, username: string, email: string, password: string, cpf: string, rf: string, endereco: string, telefone: string, titulo: string) {
         this.nome = nome;
         this.username = username;
         this.email = email;
@@ -19,5 +20,6 @@ export class SignUpInfo {
         this.rf = rf;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.titulo = titulo;
     }
 }

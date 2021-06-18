@@ -82,6 +82,19 @@
               Matricula <strong>obrigatória</strong>
             </mat-error>
           </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline">
+            <mat-label>Título</mat-label>
+            <mat-select formControlName="titulo">
+                <mat-option value="Nenhum">Nenhum</mat-option>
+                <mat-option value="MS-3.1">MS-3.1</mat-option>
+                <mat-option value="MS-3.2">MS-3.2</mat-option>
+                <mat-option value="MS-5.1">MS-5.1</mat-option>
+                <mat-option value="MS-5.2">MS-5.2</mat-option>
+                <mat-option value="MS-5.3">MS-5.3</mat-option>
+                <mat-option value="MS-6">MS-6</mat-option>
+            </mat-select>
+        </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Voltar</button>
             <button mat-button matStepperNext>Próximo</button>

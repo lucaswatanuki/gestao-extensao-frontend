@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { CustomValidators } from 'ng2-validation';
 import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
+import { Docente } from 'src/app/models/docente.model';
 import { Senha } from 'src/app/models/senha.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { DocenteService } from 'src/app/services/docente/docente.service';
@@ -17,23 +18,24 @@ export class ConfiguracaoComponent implements OnInit {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   userId: number;
-  usuario: Usuario;
+  usuario: Docente;
   userForm: FormGroup;
   senhaForm: FormGroup;
   senhaModel: Senha;
 
-  constructor(private docenteService: DocenteService, private tokenService: TokenStorageService, private fbuilder: FormBuilder, private senhaService: SenhaService,
+  constructor(private docenteService: DocenteService, private tokenService: TokenStorageService, private fbuilder: FormBuilder,
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.usuario = new Usuario();
+    this.usuario = new Docente();
 
     this.userForm = this.fbuilder.group({
       nome: new FormControl(''),
       email: new FormControl(''),
       telefone: new FormControl(''),
       matricula: new FormControl(''),
-      endereco: new FormControl('')
+      endereco: new FormControl(''),
+      titulo: new FormControl('')
     });
 
     let senha = new FormControl('', [Validators.required, Validators.minLength(6)]);
@@ -72,6 +74,21 @@ export class ConfiguracaoComponent implements OnInit {
          this.openSnackBar('Não foi possível alterar a senha', 'OK');
       }
     )
+  }
+
+  alterarDadosDocente() {
+    this.usuario.titulo = this.userForm.get('titulo').value;
+    this.usuario.nome = this.userForm.get('nome').value;
+    this.usuario.telefone = this.userForm.get('telefone').value;
+
+    this.docenteService.alterarDadosUsuario(this.userId, this.usuario).subscribe(
+      data => {
+         this.openSnackBar('Dados alterados com sucesso!', 'OK');
+      },
+      error => {
+         this.openSnackBar('Não foi possível alterar a senha', 'OK');
+      }
+    );
   }
 
   openSnackBar(message: string, action: string): void{

@@ -50,7 +50,8 @@ export class CadastroComponent implements OnInit {
       endereco: new FormControl(''),
       rf: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
       cpf: new FormControl('', [Validators.required, this.validateBrService.cpf]),
-      telefone: new FormControl('', [Validators.minLength(11)])
+      telefone: new FormControl('', [Validators.minLength(11)]),
+      titulo: new FormControl('')
     });
   }
 
@@ -77,6 +78,7 @@ export class CadastroComponent implements OnInit {
       this.formularioCadastro.get('rf').value,
       this.formularioCadastro.get('endereco').value,
       this.formularioCadastro.get('telefone').value,
+      this.formularioCadastro.get('titulo').value,
     );
 
 

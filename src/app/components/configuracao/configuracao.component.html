@@ -31,6 +31,20 @@
                     <input [(ngModel)]="usuario.telefone" formControlName="telefone" matInput placeholder="Telefone" />
                 </mat-form-field>
             </div>
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Título</mat-label>
+                    <mat-select [(ngModel)]="usuario.titulo" formControlName="titulo">
+                        <mat-option value="Nenhum">Nenhum</mat-option>
+                        <mat-option value="MS-3.1">MS-3.1</mat-option>
+                        <mat-option value="MS-3.2">MS-3.2</mat-option>
+                        <mat-option value="MS-5.1">MS-5.1</mat-option>
+                        <mat-option value="MS-5.2">MS-5.2</mat-option>
+                        <mat-option value="MS-5.3">MS-5.3</mat-option>
+                        <mat-option value="MS-6">MS-6</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -43,7 +57,7 @@
         <div class="row">
             <div class="col">
                 <div mat-dialog-actions>
-                    <button mat-raised-button color="warn">
+                    <button mat-raised-button color="warn" (click)="alterarDadosDocente(); senhaForm.reset()">
                         <mat-icon aria-hidden="false" aria-label="edit icon">check</mat-icon>
                         Atualizar dados
                     </button>
