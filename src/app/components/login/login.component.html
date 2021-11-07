@@ -25,8 +25,7 @@
                     <mat-label>Password</mat-label>
                     <input matInput type="password" placeholder="Password" [(ngModel)]="form.password" name="password"
                         #password="ngModel" required minlength="6" required>
-                </mat-form-field>
-                <button mat-button (click)="loadResetSenha()" style="margin-bottom: 20px;"> Esqueci minha senha</button>
+                </mat-form-field>                
             </div>
             <div class="form-group">
                 <button mat-raised-button color="primary" (click)="onSubmit()" style="margin-right: 20px;"> Login
@@ -36,6 +35,7 @@
                 </button>
                 <button mat-raised-button color="warn" (click)="loadSignUp()"> Criar Conta </button>
             </div>
+            <button mat-button (click)="loadResetSenha()" style="margin-bottom: 20px;"> Esqueci minha senha</button>
         </form>
     </mat-card>
 </div>
