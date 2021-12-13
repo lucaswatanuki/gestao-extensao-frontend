@@ -16,7 +16,7 @@
           <ng-template matStepLabel>Username, email e senha</ng-template>
           <mat-form-field class="input-label" appearance="outline">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="Username" formControlName="usuario" required>
+            <input matInput placeholder="Username" formControlName="usuario" id="username" required>
             <mat-error *ngIf="formularioCadastro.controls['usuario'].hasError('required')">
               Username <strong>obrigatório</strong>
             </mat-error>
@@ -68,6 +68,14 @@
           </mat-form-field>
           <br>
           <mat-form-field appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone" placeholder="Ex. (DDD) 9XXXX-XXXX" [textMask] = "{mask: telefoneMascara}" required>
+            <mat-error *ngIf="formularioCadastro.controls['telefone'].hasError('required')">
+              Telefone <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline">
             <mat-label>CPF</mat-label>
             <input matInput [textMask] = "{mask: cpfMascara}" formControlName="cpf" placeholder="Ex. XXX.XXX.XXX-XX" required>
             <mat-error *ngIf="formularioCadastro.get('cpf').errors">
@@ -95,36 +103,27 @@
                 <mat-option value="MS-6">MS-6</mat-option>
             </mat-select>
         </mat-form-field>
+        <br>
+        
           <div>
             <button mat-button matStepperPrevious>Voltar</button>
             <button mat-button matStepperNext>Próximo</button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="formularioCadastro">
-        <form [formGroup]="formularioCadastro" name="form" #f="ngForm">
-          <ng-template matStepLabel>Endereço e telefone</ng-template>
-          <mat-form-field class="input-label" appearance="outline">
-            <mat-label>Endereço</mat-label>
-            <input matInput formControlName="endereco" placeholder="Ex. 1 Main St, New York, NY">
-          </mat-form-field>
-          <br>
-          <mat-form-field appearance="outline">
-            <mat-label>Telefone</mat-label>
-            <input matInput formControlName="telefone" placeholder="Ex. (DDD) 9XXXX-XXXX" [textMask] = "{mask: telefoneMascara}" required>
-            <mat-error *ngIf="formularioCadastro.controls['telefone'].hasError('required')">
-              Matricula <strong>obrigatória</strong>
-            </mat-error>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
-      </mat-step>
+     
       <mat-step>
         <ng-template matStepLabel>Finalizar</ng-template>
-        <p>Tudo pronto!</p>
+        <mat-error *ngIf="formularioCadastro.controls['usuario'].hasError('required')">Username <strong>obrigatório</strong> <button mat-button (click)="move(0)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls['email'].hasError('required')">Email <strong>obrigatório</strong> <button mat-button (click)="move(0)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls.emailConfirmacao.errors?.equalTo">Erro ao confirmar email <button mat-button (click)="move(0)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls['senha'].hasError('required')">Senha <strong>obrigatório</strong> <button mat-button (click)="move(0)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls.confirmarSenha.errors?.equalTo">Erro ao confirmar senha <button mat-button (click)="move(0)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls['nome_completo'].hasError('required')">Nome completo <strong>obrigatório</strong> <button mat-button (click)="move(1)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls['telefone'].hasError('required')">Telefone <strong>obrigatório</strong> <button mat-button (click)="move(1)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.get('cpf').errors">CPF <strong>inválido</strong> <button mat-button (click)="move(1)">Corrigir</button></mat-error>
+        <mat-error *ngIf="formularioCadastro.controls['rf'].hasError('required')">Matricula <strong>obrigatória</strong> <button mat-button (click)="move(1)">Corrigir</button></mat-error>   
+        <br>      
         <div>
           <button mat-button matStepperPrevious>Voltar</button>
           <button [disabled]="!formularioCadastro.valid" style="margin-left: 20px;" mat-raised-button color="warn" (click)="onSubmit(form)">Confirmar</button>

@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { SignUpInfo } from 'src/app/core/auth/signup-info';
 import { CustomValidators } from 'ng2-validation';
 import { LoaderService } from 'src/app/services/loader.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-cadastro',
@@ -29,7 +30,7 @@ export class CadastroComponent implements OnInit {
 
 
   @ViewChild(FormGroupDirective, { static: true }) form: FormGroupDirective;
-
+  @ViewChild('stepper') stepper: MatStepper;
   constructor(private formBuilder: FormBuilder, private authService: AuthService, 
     private router: Router, private snackBar: MatSnackBar, private validateBrService: ValidateBrService, 
     private toast: ToastrService, private loader: LoaderService) { }
@@ -53,6 +54,10 @@ export class CadastroComponent implements OnInit {
       telefone: new FormControl('', [Validators.minLength(11)]),
       titulo: new FormControl('')
     });
+  }
+
+  move(index: number) {
+    this.stepper.selectedIndex = index;
   }
 
   login(): void {
